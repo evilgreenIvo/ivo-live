@@ -7,6 +7,8 @@
 
 O **IVO LIVE** transforma o celular num estúdio de transmissão: você monta **cenas** com o jogo, a sua câmera, imagens, textos e alertas, mistura o som e **grava** ou faz **live** no YouTube, Twitch ou Kick, tudo do próprio celular. É a ideia do OBS do PC, feita para o Android, em português.
 
+<table align="center"><tr><td align="center"><img src="docs/tela-principal.png" width="250"><br><sub>Cenas e prévia</sub></td><td align="center"><img src="docs/controle.png" width="250"><br><sub>Controle remoto mostrando a live</sub></td><td align="center"><img src="docs/fontes-mixer.png" width="250"><br><sub>Fontes e mixer</sub></td></tr></table>
+
 ## Índice
 
 - [Gravar e fazer live](#-gravar-e-fazer-live)
@@ -19,6 +21,7 @@ O **IVO LIVE** transforma o celular num estúdio de transmissão: você monta **
 - [Efeitos sonoros](#-efeitos-sonoros)
 - [Desempenho e estatísticas](#-desempenho-e-estatísticas)
 - [Mais coisas](#-mais-coisas)
+- [Configurações](#configurações)
 - [Como instalar](#como-instalar)
 - [Privacidade](#privacidade)
 
@@ -37,6 +40,8 @@ O **IVO LIVE** transforma o celular num estúdio de transmissão: você monta **
 - **Tela de Gravações**: seus vídeos com miniatura, duração e tamanho, para assistir, compartilhar ou apagar (um ou vários de uma vez).
 
 ## 🎬 Cenas e fontes
+
+<table align="center"><tr><td align="center"><img src="docs/tela-principal.png" width="250"><br><sub>Prévia com jogo, câmera, logo e texto</sub></td><td align="center"><img src="docs/fonte-camera.png" width="250"><br><sub>Ajustes de uma fonte: câmera e recorte</sub></td></tr></table>
 
 Uma **cena** é uma montagem da tela: por exemplo "Jogando" (jogo + câmera no canto), "Já volto" (imagem + texto) e "Conversando" (câmera grande). Na live, você troca de cena com um toque.
 
@@ -59,6 +64,8 @@ As **transições** entre cenas podem ser corte seco, esmaecer ou passar pelo pr
 
 ## ✨ Filtros
 
+<table align="center"><tr><td align="center"><img src="docs/filtros.png" width="250"><br><sub>Correção de cor numa fonte</sub></td></tr></table>
+
 Iguais aos do OBS, em qualquer fonte, e mais de um ao mesmo tempo:
 
 - **Color Key**: tira uma cor (tela verde ou azul), com similaridade, suavidade, opacidade, contraste, brilho e gama.
@@ -70,6 +77,8 @@ Os filtros rodam na placa de vídeo do celular, junto com o desenho da cena, ent
 
 ## 🎚️ Som: mixer e IA no microfone
 
+<table align="center"><tr><td align="center"><img src="docs/fontes-mixer.png" width="250"><br><sub>Mixer com medidores</sub></td><td align="center"><img src="docs/ia-microfone.png" width="250"><br><sub>Redução de ruído com IA</sub></td></tr></table>
+
 - **Mixer** com uma barra para cada som: **jogo**, **microfone**, **cada celular** que manda som e os **efeitos sonoros**. Cada um tem volume (até 200%), mudo e medidor.
 - **Cada cena guarda os seus volumes**. Por exemplo, na cena "Já volto" o jogo fica mudo e a música toca.
 - **Redução de ruído com IA** no microfone: tira ventilador, teclado, ar-condicionado e barulho da rua, e deixa só a sua voz. Tem três forças (Suave, Média e Máxima) e uma versão leve para celulares mais simples.
@@ -78,6 +87,8 @@ Os filtros rodam na placa de vídeo do celular, junto com o desenho da cena, ent
 - O som do jogo é capturado direto, sem passar pelo microfone.
 
 ## 📱 Outro celular como fonte
+
+<table align="center"><tr><td align="center"><img src="docs/enviar.png" width="250"><br><sub>No celular que manda: tela, som, microfone ou câmera</sub></td></tr></table>
 
 Um segundo celular vira uma câmera ou uma tela extra da sua live, **sem fio** pela rede Wi-Fi ou **por cabo** USB:
 
@@ -99,6 +110,8 @@ Quando um celular manda a câmera (Enviar › Câmera), ele mesmo aplica os efei
 Tudo isso é feito por IA no próprio celular, sem internet.
 
 ## 🎛️ Controle remoto estilo Stream Deck
+
+<table align="center"><tr><td align="center"><img src="docs/controle.png" width="250"><br><sub>Gravando, com a imagem da live</sub></td><td align="center"><img src="docs/controle-botoes.png" width="250"><br><sub>Botões coloridos, do seu jeito</sub></td><td align="center"><img src="docs/controle-mixer.png" width="250"><br><sub>Página do mixer</sub></td></tr></table>
 
 Um segundo celular vira um **painel de botões grandes** para controlar a live, como um Stream Deck:
 
@@ -134,6 +147,10 @@ No controle remoto, toque em **Adicionar som**: abre o site **MyInstants** dentr
 - **Relatório de erro** com um toque, para ajudar a corrigir problemas.
 
 ---
+
+## Configurações
+
+<table align="center"><tr><td align="center"><img src="docs/config-live.png" width="250"><br><sub>Onde transmitir e qualidade automática</sub></td></tr></table>
 
 ## Como instalar
 
