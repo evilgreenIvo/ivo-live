@@ -173,7 +173,7 @@ O IVO LIVE fica melhor a cada versão graças a quem usa de verdade, em live, e 
 <table>
 <tr>
 <td align="center" width="140"><a href="https://github.com/Dantiano"><img src="https://github.com/Dantiano.png?size=120" width="80" alt="Dantiano"><br><b>Dantiano</b></a></td>
-<td>Testa o app nas suas lives de jogos com vários celulares (Galaxy S20 FE enviando a tela e a câmera para o celular da live), descobre problemas antes de todo mundo e manda os relatórios que viraram várias correções: o espelhamento que caía, o som picotado com mais de um celular, o contorno verde do Sem fundo…<br><br>
+<td>Testa o app nas suas lives de jogos com vários celulares (Galaxy S20 FE enviando a tela e a câmera para o celular da live), descobre problemas antes de todo mundo e manda os relatórios que viraram várias correções, como o espelhamento que caía e o contorno verde do Sem fundo.<br><br>
 📺 <a href="https://www.youtube.com/@Dantiano">youtube.com/@Dantiano</a> · 💻 <a href="https://github.com/Dantiano">github.com/Dantiano</a></td>
 </tr>
 </table>
