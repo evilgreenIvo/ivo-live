@@ -24,7 +24,6 @@ O **IVO LIVE** transforma o celular num estúdio de transmissão: você monta **
 - [Configurações](#configurações)
 - [Como instalar](#como-instalar)
 - [Privacidade](#privacidade)
-- [Quem ajuda a testar](#-quem-ajuda-a-testar)
 
 ---
 
@@ -165,18 +164,6 @@ No controle remoto, toque em **Adicionar som**: abre o site **MyInstants** dentr
 - Gravações, cenas e chaves de live ficam **só no seu celular**.
 - O relatório de erro só sai do celular se **você** tocar em Enviar no e-mail, e ele **não leva** sua chave de live, senhas, fotos nem vídeos.
 - O app só consulta esta página para saber se tem versão nova. Ele não manda nada sobre você.
-
-## 🙌 Quem ajuda a testar
-
-O IVO LIVE fica melhor a cada versão graças a quem usa de verdade, em live, e manda os relatórios de erro. Muito obrigado!
-
-<table>
-<tr>
-<td align="center" width="140"><a href="https://github.com/Dantiano"><img src="https://github.com/Dantiano.png?size=120" width="80" alt="Dantiano"><br><b>Dantiano</b></a></td>
-<td>Testa o app nas suas lives de jogos com vários celulares (Galaxy S20 FE enviando a tela e a câmera para o celular da live), descobre problemas antes de todo mundo e manda os relatórios que viraram várias correções, como o espelhamento que caía e o contorno verde do Sem fundo.<br><br>
-📺 <a href="https://www.youtube.com/@Dantiano">youtube.com/@Dantiano</a> · 💻 <a href="https://github.com/Dantiano">github.com/Dantiano</a></td>
-</tr>
-</table>
 
 ## Encontrou um problema?
 
