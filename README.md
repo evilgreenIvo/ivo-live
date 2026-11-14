@@ -172,3 +172,4 @@ No app: **Configurações › Sobre › Enviar relatório agora**. Ou abra uma [
 ---
 
 <sub>O IVO LIVE usa partes feitas por outras pessoas, com licenças que permitem isso. Os créditos estão em [NOTICE.md](NOTICE.md). "OBS" e "Stream Deck" são marcas dos seus donos. O IVO LIVE não tem ligação com eles.</sub>
+<sub><b>👾 Dantiano</b></sub>
