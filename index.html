@@ -1,0 +1,533 @@
+---
+layout: null
+---
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>IVO LIVE: estúdio de live e gravação no Android, grátis</title>
+<meta name="description" content="Grave e faça live dos seus jogos no Android (YouTube, Twitch, Kick), com cenas, fontes, mixer e filtros como no OBS. Grátis, sem anúncios, em português.">
+<link rel="canonical" href="https://evilgreenivo.github.io/ivo-live/">
+<meta name="theme-color" content="#000000">
+<link rel="icon" type="image/png" href="assets/logo.png">
+<link rel="apple-touch-icon" href="assets/logo.png">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="IVO LIVE">
+<meta property="og:title" content="IVO LIVE: o estúdio de live inteiro no seu celular">
+<meta property="og:description" content="Grave e faça live dos seus jogos no Android (YouTube, Twitch, Kick), com cenas, fontes, mixer e filtros como no OBS. Grátis, sem anúncios, em português.">
+<meta property="og:url" content="https://evilgreenivo.github.io/ivo-live/">
+<meta property="og:image" content="https://evilgreenivo.github.io/ivo-live/docs/capa.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"IVO LIVE","operatingSystem":"Android 10+","applicationCategory":"MultimediaApplication","description":"Grave e faça live dos seus jogos no Android (YouTube, Twitch, Kick), com cenas, fontes, mixer e filtros como no OBS. Grátis, sem anúncios, em português.","url":"https://evilgreenivo.github.io/ivo-live/","downloadUrl":"https://github.com/evilgreenIvo/ivo-live/releases/latest","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"},"inLanguage":["pt-BR","en","es"]}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@400;500;700&display=swap">
+<style>
+/* Layout: acid poster stack. Black void, giant stretched chrome type, blob cards drifting off-axis, marquees at both ends. Mobile first. */
+:root {
+  --void: #000000;
+  --onyx: #0A0A0A;
+  --acid: #CCFF00;
+  --pink: #FF00FF;
+  --cyan: #00F0FF;
+  --fg: #F4F4F0;
+  --muted: #A3A3A8;
+  --line: rgba(255,255,255,.14);
+  --chrome: linear-gradient(180deg, #FFFFFF 0%, #DADADA 30%, #7E7E7E 48%, #F0F0F0 56%, #9A9A9A 78%, #E6E6E6 100%);
+  --iris: linear-gradient(120deg, var(--acid), #FFFFFF 45%, var(--pink) 75%, var(--cyan));
+  --display: "Syne", "Arial Black", "Helvetica Neue", sans-serif;
+  --body: "Space Grotesk", "Segoe UI", Roboto, sans-serif;
+  --expo: cubic-bezier(0.19, 1, 0.22, 1);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { background: var(--void); }
+body {
+  background: var(--void); color: var(--fg);
+  font-family: var(--body); font-size: 16px; line-height: 1.55;
+  overflow-x: clip; -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+img, video { max-width: 100%; display: block; }
+:focus-visible { outline: 2px solid var(--acid); outline-offset: 3px; }
+
+/* film grain over everything */
+.grain {
+  position: fixed; inset: 0; pointer-events: none; z-index: 50; opacity: .09; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.wrap {
+  width: 100%; max-width: 1180px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* ---------- marquee ---------- */
+.marquee {
+  position: relative; overflow: hidden; white-space: nowrap;
+  background: var(--acid); color: #000; border-block: 2px solid #000;
+  font-family: var(--display); font-weight: 800; font-size: 15px; letter-spacing: .06em; text-transform: uppercase;
+  padding-block: 9px;
+}
+.marquee.alt { background: var(--void); color: var(--acid); border-block: 1px solid var(--line); transform: rotate(-2deg) scale(1.04); margin-block: 8px; }
+.marquee .track { display: inline-flex; gap: 28px; animation: slide 22s linear infinite; padding-right: 28px; }
+.marquee.alt .track { animation-direction: reverse; animation-duration: 30s; }
+.marquee span { display: inline-flex; align-items: center; gap: 28px; }
+.marquee span::after { content: "✶"; }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* ---------- drifting chrome blobs ---------- */
+.blobs { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+.blob { position: absolute; border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%; filter: blur(2px); animation: drift 20s ease-in-out infinite alternate; opacity: .9; }
+.blob.b1 { width: 62vw; max-width: 520px; aspect-ratio: 1; right: -18vw; top: 4%;
+  background: radial-gradient(circle at 32% 28%, #fff 0 6%, #cfcfcf 18%, #3a3a3a 46%, #0b0b0b 70%), #000;
+  box-shadow: inset -20px -30px 60px rgba(0,240,255,.35), inset 25px 20px 50px rgba(255,0,255,.25); }
+.blob.b2 { width: 34vw; max-width: 260px; aspect-ratio: 1; left: -10vw; top: 52%;
+  background: radial-gradient(circle at 60% 30%, #fff 0 5%, #bdbdbd 20%, #222 60%), #000;
+  box-shadow: inset 10px -16px 40px rgba(204,255,0,.45); animation-duration: 26s; }
+.blob.b3 { width: 18vw; max-width: 140px; aspect-ratio: 1; right: 8%; bottom: 6%;
+  background: radial-gradient(circle at 40% 35%, #fff 0 8%, #aaa 25%, #111 70%);
+  box-shadow: 0 0 40px rgba(255,0,255,.5); animation-duration: 17s; }
+@keyframes drift {
+  0% { transform: translate(0,0) rotate(0) scale(1); border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%; }
+  50% { transform: translate(-4vw, 3vh) rotate(25deg) scale(1.06); border-radius: 58% 42% 38% 62% / 55% 61% 39% 45%; }
+  100% { transform: translate(3vw, -2vh) rotate(-15deg) scale(.96); border-radius: 37% 63% 51% 49% / 63% 35% 65% 37%; }
+}
+
+/* ---------- chrome / split type ---------- */
+.chrome {
+  background: var(--chrome); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.split { position: relative; display: inline-block; isolation: isolate; }
+.split::before, .split::after {
+  content: attr(data-text); position: absolute; inset: 0; z-index: -1; mix-blend-mode: screen; pointer-events: none;
+}
+.split::before { color: var(--pink); transform: translate(-3px, 1px); }
+.split::after { color: var(--cyan); transform: translate(3px, -1px); }
+
+/* ---------- hero ---------- */
+.hero { position: relative; padding-block: 28px 56px; }
+.hero .wrap { position: relative; z-index: 1; }
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.brand { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 800; letter-spacing: .04em; text-decoration: none; }
+.brand img { width: 40px; height: 40px; filter: drop-shadow(0 0 12px rgba(57,255,106,.55)); }
+.chip {
+  font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  border: 1px solid var(--acid); color: var(--acid); border-radius: 999px; padding: 5px 11px; white-space: nowrap;
+}
+.mega {
+  margin: 26px 0 0; font-family: var(--display); font-weight: 800; text-transform: uppercase;
+  line-height: .8; letter-spacing: -0.05em; font-size: clamp(5rem, 25vw, 14rem);
+}
+.mega .row { display: block; transform-origin: left center; }
+.mega .r1 { transform: scaleX(1.12) skewX(-8deg); }
+.mega .r2 { transform: scaleX(1.2) skewX(-8deg); padding-left: .14em; }
+.mega .r2 .chrome { background: linear-gradient(180deg, #F4FFB8 0%, var(--acid) 38%, #4E6300 52%, #E8FF7A 64%, var(--acid) 100%); -webkit-background-clip: text; background-clip: text; }
+.vert {
+  position: absolute; right: -34px; top: 10%; z-index: 3;
+  writing-mode: vertical-rl; transform: rotate(180deg);
+  font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: var(--muted);
+}
+.lede { max-width: 30ch; margin: 30px 0 0; font-size: clamp(1.15rem, 4.6vw, 1.6rem); line-height: 1.3; font-weight: 500; text-wrap: balance; }
+.lede b { color: var(--acid); font-weight: 700; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; align-items: center; }
+.btn-chrome {
+  position: relative; display: inline-flex; align-items: center; gap: 10px;
+  padding: 18px 28px; border-radius: 999px; text-decoration: none;
+  background: linear-gradient(180deg, #FFFFFF 0%, #9C9C9C 46%, #E9E9E9 54%, #FFFFFF 100%);
+  color: #000; font-family: var(--display); font-weight: 800; font-size: 18px; letter-spacing: .04em; text-transform: uppercase;
+  box-shadow: inset 0 -3px 0 rgba(0,0,0,.35), inset 0 2px 0 #fff, 0 0 0 2px #000, 0 0 0 3px rgba(255,255,255,.35);
+  transition: transform .5s var(--expo), box-shadow .5s var(--expo);
+}
+.btn-chrome:hover, .btn-chrome:focus-visible { transform: scale(1.08) rotate(2deg); box-shadow: inset 0 -3px 0 rgba(0,0,0,.35), inset 0 2px 0 #fff, 0 0 30px rgba(204,255,0,.6), 0 0 0 2px #000; }
+.btn-chrome svg { width: 22px; height: 22px; }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px; padding: 16px 22px; border-radius: 999px; text-decoration: none;
+  border: 1px solid var(--line); font-weight: 700; font-size: 15px;
+  transition: border-color .4s var(--expo), color .4s var(--expo);
+}
+.btn-ghost:hover { border-color: var(--pink); color: var(--pink); }
+.meta { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px 16px; color: var(--muted); font-size: 13px; }
+.meta span::before { content: "✶ "; color: var(--acid); }
+
+/* phone with the promo video */
+.stage { position: relative; margin: 46px auto 0; width: min(78vw, 330px); }
+.phone {
+  position: relative; aspect-ratio: 9 / 16; border-radius: 44px; padding: 10px;
+  background: linear-gradient(145deg, #FFFFFF, #6F6F6F 30%, #EDEDED 52%, #4A4A4A 76%, #D9D9D9);
+  transform: rotate(-6deg); box-shadow: 0 0 0 2px #000, 0 30px 80px rgba(255,0,255,.25), -20px 0 60px rgba(0,240,255,.2);
+}
+.phone video { width: 100%; height: 100%; object-fit: cover; border-radius: 35px; background: #000; }
+.sound {
+  position: absolute; right: -6px; bottom: 34px; z-index: 2;
+  display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 999px; cursor: pointer;
+  background: #000; color: var(--acid); border: 1px solid var(--acid); font: 700 13px var(--body); letter-spacing: .06em; text-transform: uppercase;
+  transition: transform .4s var(--expo);
+}
+.sound:hover { transform: scale(1.06); }
+.sticker {
+  position: absolute; left: -18px; top: 14%; z-index: 2; width: 112px; height: 112px; display: grid; place-items: center; text-align: center;
+  font-family: var(--display); font-weight: 800; font-size: 12px; line-height: 1.05; text-transform: uppercase; color: #000;
+  background: var(--pink); clip-path: polygon(50% 0, 59% 17%, 75% 7%, 76% 25%, 93% 25%, 85% 41%, 100% 50%, 85% 59%, 93% 75%, 76% 75%, 75% 93%, 59% 83%, 50% 100%, 41% 83%, 25% 93%, 24% 75%, 7% 75%, 15% 59%, 0 50%, 15% 41%, 7% 25%, 24% 25%, 25% 7%, 41% 17%);
+  animation: spin 14s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------- outline strip ---------- */
+.outline-strip { overflow: hidden; padding-block: 34px 10px; }
+.outline-strip p {
+  margin: 0; white-space: nowrap; font-family: var(--display); font-weight: 800; text-transform: uppercase; letter-spacing: -0.04em;
+  font-size: clamp(3.4rem, 17vw, 9rem); line-height: .9; color: transparent; -webkit-text-stroke: 1.5px var(--acid);
+  transform: skewX(-10deg); animation: slide 26s linear infinite; display: inline-block;
+}
+.outline-strip p + p { -webkit-text-stroke-color: var(--pink); animation-direction: reverse; }
+
+/* ---------- section titles ---------- */
+.sec { position: relative; padding-block: 64px; }
+.kicker { display: inline-flex; align-items: center; gap: 8px; color: var(--acid); font-size: 12px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; }
+.kicker::before { content: ""; width: 14px; height: 14px; background: var(--acid); clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%); }
+.h2 {
+  margin: 10px 0 0; font-family: var(--display); font-weight: 800; text-transform: uppercase; letter-spacing: -0.05em;
+  font-size: clamp(2.8rem, 13vw, 6.6rem); line-height: .88; text-wrap: balance;
+}
+.h2 em { font-style: normal; display: inline-block; transform: scaleX(1.2) skewX(-10deg); transform-origin: left; }
+
+/* ---------- blob cards ---------- */
+.cards { display: grid; gap: 34px; margin-top: 40px; }
+.card {
+  position: relative; display: grid; gap: 18px; padding: 30px 24px 26px;
+  border: 2px solid transparent;
+  background: linear-gradient(var(--onyx), var(--onyx)) padding-box, var(--iris) border-box;
+  border-radius: 46px 120px 54px 140px / 70px 46px 110px 60px;
+  transition: transform .6s var(--expo), box-shadow .6s var(--expo);
+}
+.card:nth-child(even) { border-radius: 120px 46px 140px 54px / 46px 80px 60px 110px; margin-left: 4%; }
+.card:nth-child(odd) { margin-right: 4%; }
+.card:hover { transform: rotate(-1deg) scale(1.015); box-shadow: 0 0 40px rgba(204,255,0,.18); }
+.card .tag { font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--cyan); }
+.card:nth-child(3n+2) .tag { color: var(--pink); }
+.card:nth-child(3n) .tag { color: var(--acid); }
+.card h3 { margin: 4px 0 16px; font-family: var(--display); font-weight: 800; font-size: clamp(1.7rem, 7.4vw, 2.5rem); line-height: .98; letter-spacing: -0.03em; text-transform: uppercase; text-wrap: balance; }
+.card ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; color: #DCDCDC; }
+.card li { display: grid; grid-template-columns: 16px 1fr; gap: 10px; align-items: start; min-width: 0; }
+.card li::before { content: ""; width: 14px; height: 14px; margin-top: 5px; background: var(--acid); clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%); }
+.card .shot { justify-self: center; width: 50%; max-width: 220px; border-radius: 26px; border: 2px solid #1d1d1d; transform: rotate(3deg); box-shadow: -6px 6px 0 var(--pink), 6px -6px 0 var(--cyan); }
+.card:nth-child(even) .shot { transform: rotate(-3deg); }
+.card .text { min-width: 0; }
+
+/* ---------- specs ---------- */
+.specs { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1px; margin-top: 36px; background: var(--line); border: 1px solid var(--line); }
+.spec { background: var(--void); padding: 22px 16px; min-width: 0; }
+.spec b { display: block; font-family: var(--display); font-weight: 800; font-size: clamp(2.1rem, 10vw, 3.6rem); line-height: 1; letter-spacing: -0.04em; }
+.spec:nth-child(4n+1) b { color: var(--acid); }
+.spec:nth-child(4n+2) b { color: var(--pink); }
+.spec:nth-child(4n+3) b { color: var(--cyan); }
+.spec span { display: block; margin-top: 8px; color: var(--muted); font-size: 14px; line-height: 1.35; }
+
+/* ---------- gallery ---------- */
+.gallery { display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 34px 4px 22px; margin-top: 8px; scrollbar-width: thin; scrollbar-color: var(--acid) transparent; }
+.gallery figure { flex: 0 0 auto; width: 58vw; max-width: 250px; margin: 0; scroll-snap-align: center; }
+.gallery img { border-radius: 24px; border: 1px solid #222; transition: transform .5s var(--expo), box-shadow .5s var(--expo); }
+.gallery figure:hover img { transform: translateY(-6px) rotate(-1.5deg); box-shadow: -5px 0 0 var(--pink), 5px 0 0 var(--cyan); }
+.gallery figcaption { margin-top: 10px; font-size: 13px; color: var(--muted); }
+.gallery figcaption b { color: var(--fg); display: block; font-size: 15px; }
+.swipe { color: var(--muted); font-size: 13px; margin-top: 6px; }
+
+/* ---------- install ---------- */
+.steps { list-style: none; margin: 34px 0 0; padding: 0; display: grid; gap: 14px; counter-reset: s; }
+.steps li {
+  counter-increment: s; position: relative; display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: center;
+  padding: 18px 20px; border: 1px solid var(--line); border-radius: 22px 60px 22px 60px; background: var(--onyx); min-width: 0;
+}
+.steps li::before { content: counter(s); font-family: var(--display); font-weight: 800; font-size: 46px; line-height: 1; color: transparent; -webkit-text-stroke: 1.5px var(--acid); }
+.steps li:nth-child(2)::before { -webkit-text-stroke-color: var(--pink); }
+.steps li:nth-child(3)::before { -webkit-text-stroke-color: var(--cyan); }
+.steps b { display: block; font-size: 17px; }
+.steps span { color: var(--muted); font-size: 14px; }
+
+/* ---------- beta note ---------- */
+.beta {
+  margin-top: 46px; padding: 26px 22px; position: relative;
+  background: var(--acid); color: #000; border-radius: 30px 90px 30px 90px; transform: rotate(-1.5deg);
+}
+.beta h3 { margin: 0; font-family: var(--display); font-weight: 800; font-size: clamp(1.6rem, 7vw, 2.4rem); text-transform: uppercase; letter-spacing: -0.03em; line-height: 1; }
+.beta p { margin: 10px 0 0; font-weight: 500; max-width: 60ch; }
+.beta code { font-family: var(--body); font-weight: 700; background: #000; color: var(--acid); padding: 2px 7px; border-radius: 6px; }
+
+.privacy { margin-top: 40px; display: grid; gap: 10px; color: #CFCFCF; max-width: 62ch; }
+.privacy p { margin: 0; }
+.privacy p::before { content: "✶ "; color: var(--pink); }
+
+/* ---------- footer ---------- */
+footer { padding-block: 40px 30px; }
+.end { font-family: var(--display); font-weight: 800; text-transform: uppercase; letter-spacing: -0.05em; font-size: clamp(4rem, 24vw, 12rem); line-height: .8; margin: 0 0 28px; }
+.end .split { transform: scaleX(1.25) skewX(-8deg); transform-origin: left; }
+.foot { display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center; color: var(--muted); font-size: 13px; }
+.foot a { color: var(--fg); }
+.legal { margin-top: 16px; color: #6E6E74; font-size: 12px; max-width: 70ch; }
+
+/* ---------- wider screens ---------- */
+@media (min-width: 760px) {
+  .hero { padding-block: 34px 80px; }
+  .hero-grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: 30px; align-items: end; }
+  .stage { margin: 0 0 0 auto; width: min(100%, 330px); }
+  .vert { display: none; }
+  .cards { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 40px 34px; }
+  .card:nth-child(even) { margin: 70px 0 -70px; }
+  .card:nth-child(odd) { margin: 0; }
+  .specs { grid-template-columns: repeat(4, minmax(0,1fr)); }
+  .steps { grid-template-columns: repeat(3, minmax(0,1fr)); }
+  .gallery figure { width: 230px; }
+}
+@media (min-width: 1100px) {
+  .cards { grid-template-columns: repeat(3, minmax(0,1fr)); }
+  .card:nth-child(even) { margin: 0; }
+  .card:nth-child(3n+2) { margin: 80px 0 -80px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="marquee" aria-hidden="true"><div class="track">
+  <span>Grave</span><span>Transmita</span><span>YouTube</span><span>Twitch</span><span>Kick</span><span>1080p 60 fps</span><span>Grátis</span><span>Sem anúncios</span><span>Sem PC</span>
+  <span>Grave</span><span>Transmita</span><span>YouTube</span><span>Twitch</span><span>Kick</span><span>1080p 60 fps</span><span>Grátis</span><span>Sem anúncios</span><span>Sem PC</span>
+</div></div>
+
+<header class="hero">
+  <div class="blobs" aria-hidden="true"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+  <div class="wrap">
+    <div class="topbar">
+      <a class="brand" href="#topo" id="topo"><img src="assets/logo.png" alt="" width="40" height="40">IVO LIVE</a>
+      <span class="chip" id="ver">Android · grátis</span>
+    </div>
+    <div class="hero-grid">
+      <div>
+        <h1 class="mega" aria-label="IVO LIVE">
+          <span class="row r1"><span class="split" data-text="IVO"><span class="chrome">IVO</span></span></span>
+          <span class="row r2"><span class="split" data-text="LIVE"><span class="chrome">LIVE</span></span></span>
+        </h1>
+        <p class="lede">O estúdio de live inteiro <b>no seu celular</b>. Cenas, mixer, filtros e live no YouTube, Twitch e Kick, sem PC.</p>
+        <div class="cta">
+          <a class="btn-chrome" href="https://github.com/evilgreenIvo/ivo-live/releases/latest" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m6 10 6 6 6-6"/><path d="M4 20h16"/></svg>
+            Baixar grátis
+          </a>
+          <a class="btn-ghost" href="https://github.com/evilgreenIvo/ivo-live" target="_blank" rel="noopener">Ver no GitHub ↗</a>
+        </div>
+        <div class="meta"><span>Android 10 ou mais novo</span><span>Sem conta</span><span>Sem anúncios</span><span>Português, inglês e espanhol</span></div>
+      </div>
+      <div class="stage">
+        <span class="vert" aria-hidden="true">Estúdio de live no Android</span>
+        <div class="sticker" aria-hidden="true">Feito<br>pra<br>gamer</div>
+        <div class="phone">
+          <video id="promo" src="assets/promo.mp4" poster="assets/promo-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Vídeo mostrando o IVO LIVE"></video>
+        </div>
+        <button class="sound" id="sound" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M17 9a4 4 0 0 1 0 6"/></svg><span>Ligar som</span></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="marquee alt" aria-hidden="true"><div class="track">
+  <span>Cenas</span><span>Fontes</span><span>Mixer</span><span>Filtros</span><span>Controle remoto</span><span>IA no microfone</span><span>Outro celular como câmera</span>
+  <span>Cenas</span><span>Fontes</span><span>Mixer</span><span>Filtros</span><span>Controle remoto</span><span>IA no microfone</span><span>Outro celular como câmera</span>
+</div></div>
+
+<main>
+  <section class="sec" aria-labelledby="t-func">
+    <div class="wrap">
+      <span class="kicker">O que ele faz</span>
+      <h2 class="h2" id="t-func">Tudo do OBS, <em class="chrome">na palma</em></h2>
+      <div class="cards">
+        <article class="card">
+          <div class="text">
+            <span class="tag">Cenas e fontes</span>
+            <h3>Monte a tela da sua live</h3>
+            <ul>
+              <li>Jogo, câmera, imagem, texto, página da web e outro celular, tudo na mesma cena.</li>
+              <li>Arraste, gire, recorte e troque de cena com um toque.</li>
+              <li>Modelos prontos: jogo com câmera em cartão, já volto, encerramento.</li>
+            </ul>
+          </div>
+          <img class="shot" src="docs/tela-principal.png" alt="Tela principal do IVO LIVE com a prévia da cena" loading="lazy" width="540" height="1122">
+        </article>
+        <article class="card">
+          <div class="text">
+            <span class="tag">Som</span>
+            <h3>Mixer de estúdio</h3>
+            <ul>
+              <li>Uma barra para o jogo, o microfone, cada celular e os efeitos sonoros.</li>
+              <li>Redução de ruído com IA: some o ventilador, fica a voz.</li>
+              <li>Equalizador, compressor, abaixar quando você fala e medidor de volume em LUFS.</li>
+            </ul>
+          </div>
+          <img class="shot" src="docs/fontes-mixer.png" alt="Mixer com medidores de som" loading="lazy" width="540" height="1122">
+        </article>
+        <article class="card">
+          <div class="text">
+            <span class="tag">Outro celular</span>
+            <h3>Celular velho vira webcam</h3>
+            <ul>
+              <li>Mande a tela, a câmera ou o som de outro celular pelo Wi-Fi ou por cabo.</li>
+              <li>Chega em 1080p a 60 fps, com barra própria no mixer.</li>
+              <li>Câmera com IA: desfocar fundo, trocar o fundo, sem fundo e seguir o rosto.</li>
+            </ul>
+          </div>
+          <img class="shot" src="docs/enviar.png" alt="Tela de enviar tela, som ou câmera para outro celular" loading="lazy" width="540" height="1122">
+        </article>
+        <article class="card">
+          <div class="text">
+            <span class="tag">Controle remoto</span>
+            <h3>Stream Deck no bolso</h3>
+            <ul>
+              <li>Um segundo celular vira um painel de botões grandes para a live.</li>
+              <li>Cenas, mudo, pausa, textos da tela e a imagem da live ao vivo.</li>
+              <li>Efeitos sonoros do MyInstants direto na live, quantos quiser.</li>
+            </ul>
+          </div>
+          <img class="shot" src="docs/controle-botoes.png" alt="Controle remoto com botões de cena e som" loading="lazy" width="540" height="1122">
+        </article>
+        <article class="card">
+          <div class="text">
+            <span class="tag">Filtros</span>
+            <h3>Visual que chama atenção</h3>
+            <ul>
+              <li>Color Key, Luma Key, correção de cor e nitidez em qualquer fonte.</li>
+              <li>Máscara com borda neon, degradê ou arco-íris animado.</li>
+              <li>Perspectiva 3D para a câmera virar um cartão no canto.</li>
+            </ul>
+          </div>
+          <img class="shot" src="docs/filtros.png" alt="Tela de filtros de uma fonte" loading="lazy" width="540" height="1122">
+        </article>
+        <article class="card">
+          <div class="text">
+            <span class="tag">Desempenho</span>
+            <h3>Leve até no meio do jogo</h3>
+            <ul>
+              <li>Teste do celular na primeira abertura, já com a qualidade certa.</li>
+              <li>Teste de internet que escolhe o bitrate da live sozinho.</li>
+              <li>Estatísticas ao vivo: FPS, CPU, GPU, bateria e temperatura.</li>
+            </ul>
+          </div>
+          <img class="shot" src="docs/ia-microfone.png" alt="Configuração da redução de ruído com IA" loading="lazy" width="540" height="1122">
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="outline-strip" aria-hidden="true">
+    <p>Sem PC ✶ Sem OBS ✶ Só o celular ✶ Sem PC ✶ Sem OBS ✶ Só o celular ✶&nbsp;</p><br>
+    <p>Live ✶ Gravação ✶ Shorts ✶ Live ✶ Gravação ✶ Shorts ✶ Live ✶ Gravação ✶&nbsp;</p>
+  </div>
+
+  <section class="sec" aria-labelledby="t-num">
+    <div class="wrap">
+      <span class="kicker">Em números</span>
+      <h2 class="h2" id="t-num">Qualidade <em class="chrome">de verdade</em></h2>
+      <div class="specs">
+        <div class="spec"><b>1440p</b><span>Resolução máxima da gravação e da live</span></div>
+        <div class="spec"><b>120</b><span>Quadros por segundo na gravação, nos celulares que aguentam</span></div>
+        <div class="spec"><b>H.265</b><span>Codificador mais leve, além do H.264</span></div>
+        <div class="spec"><b>−14</b><span>LUFS: o volume que o YouTube usa, medido ao vivo</span></div>
+        <div class="spec"><b>9:16</b><span>Vídeo em pé para Shorts, Reels e TikTok</span></div>
+        <div class="spec"><b>RTMP</b><span>E SRT, para mandar a um servidor seu ou ao OBS do PC</span></div>
+        <div class="spec"><b>200%</b><span>Volume máximo de cada som no mixer</span></div>
+        <div class="spec"><b>0</b><span>Anúncios, contas e rastreamento</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="t-tela">
+    <div class="wrap">
+      <span class="kicker">Telas do app</span>
+      <h2 class="h2" id="t-tela">Por <em class="chrome">dentro</em></h2>
+      <div class="gallery" tabindex="0" aria-label="Telas do app, role para o lado">
+        <figure><img src="docs/tela-principal.png" alt="Tela principal com prévia e cenas" loading="lazy" width="540" height="1122"><figcaption><b>Cenas e prévia</b>Monte e troque de cena</figcaption></figure>
+        <figure><img src="docs/controle.png" alt="Controle remoto mostrando a live" loading="lazy" width="540" height="1122"><figcaption><b>Controle remoto</b>Com a imagem da live</figcaption></figure>
+        <figure><img src="docs/fontes-mixer.png" alt="Fontes e mixer" loading="lazy" width="540" height="1122"><figcaption><b>Fontes e mixer</b>Volume de cada som</figcaption></figure>
+        <figure><img src="docs/fonte-camera.png" alt="Ajustes da fonte câmera" loading="lazy" width="540" height="1122"><figcaption><b>Fonte câmera</b>Frontal ou traseira</figcaption></figure>
+        <figure><img src="docs/controle-mixer.png" alt="Mixer no controle remoto" loading="lazy" width="540" height="1122"><figcaption><b>Mixer no controle</b>Volume de longe</figcaption></figure>
+        <figure><img src="docs/ia-microfone.png" alt="Redução de ruído com IA" loading="lazy" width="540" height="1122"><figcaption><b>IA no microfone</b>Só a sua voz</figcaption></figure>
+        <figure><img src="docs/config-live.png" alt="Configuração de onde transmitir" loading="lazy" width="540" height="1122"><figcaption><b>Onde transmitir</b>YouTube, Twitch, Kick</figcaption></figure>
+      </div>
+      <p class="swipe">Arraste para o lado para ver mais →</p>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="t-inst">
+    <div class="wrap">
+      <span class="kicker">Como instalar</span>
+      <h2 class="h2" id="t-inst">Em 1 <em class="chrome">minuto</em></h2>
+      <ol class="steps">
+        <li><div><b>Baixe o APK</b><span>No botão "Baixar grátis", toque no arquivo IvoLive .apk da versão mais nova.</span></div></li>
+        <li><div><b>Abra o arquivo</b><span>Se o Android pedir, permita "instalar apps desta fonte".</span></div></li>
+        <li><div><b>Pronto</b><span>O app avisa quando sair versão nova e atualiza com um toque. Suas cenas continuam.</span></div></li>
+      </ol>
+      <div class="cta">
+        <a class="btn-chrome" href="https://github.com/evilgreenIvo/ivo-live/releases/latest" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m6 10 6 6 6-6"/><path d="M4 20h16"/></svg>
+          Baixar grátis
+        </a>
+      </div>
+
+      <div class="beta">
+        <h3>App em desenvolvimento</h3>
+        <p>Ele melhora toda semana com a ajuda de quem usa. Achou um problema? Mande o relatório em <code>Configurações › Sobre › Enviar relatório agora</code>.</p>
+      </div>
+
+      <div class="privacy">
+        <p>Gravações, cenas e chaves de live ficam só no seu celular.</p>
+        <p>O relatório de erro só sai se você mandar, e não leva sua chave de live, senhas, fotos nem vídeos.</p>
+        <p>O app só consulta a página do GitHub para saber se tem versão nova.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="end" aria-hidden="true"><span class="split" data-text="AO VIVO"><span class="chrome">AO VIVO</span></span></p>
+    <div class="foot">
+      <a href="https://github.com/evilgreenIvo/ivo-live" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/evilgreenIvo/ivo-live/releases" target="_blank" rel="noopener">Todas as versões</a>
+      <a href="https://github.com/evilgreenIvo/ivo-live/issues" target="_blank" rel="noopener">Relatar problema</a>
+      <a href="https://github.com/evilgreenIvo/ivo-live/blob/main/NOTICE.md" target="_blank" rel="noopener">Créditos</a>
+    </div>
+    <p class="legal">"OBS" e "Stream Deck" são marcas dos seus donos. O IVO LIVE não tem ligação com eles.</p>
+  </div>
+</footer>
+
+<div class="marquee" aria-hidden="true"><div class="track">
+  <span>Baixe grátis</span><span>IVO LIVE</span><span>Feito no Brasil</span><span>Android</span><span>Baixe grátis</span><span>IVO LIVE</span><span>Feito no Brasil</span><span>Android</span>
+  <span>Baixe grátis</span><span>IVO LIVE</span><span>Feito no Brasil</span><span>Android</span><span>Baixe grátis</span><span>IVO LIVE</span><span>Feito no Brasil</span><span>Android</span>
+</div></div>
+
+<script>
+(function () {
+  var v = document.getElementById('promo');
+  var b = document.getElementById('sound');
+  b.addEventListener('click', function () {
+    v.muted = !v.muted;
+    if (!v.muted) { try { v.currentTime = 0; } catch (e) {} v.play().catch(function () {}); }
+    b.querySelector('span').textContent = v.muted ? 'Ligar som' : 'Desligar som';
+    b.setAttribute('aria-pressed', String(!v.muted));
+  });
+  // The newest version's number, when the page can ask GitHub.
+  fetch('https://api.github.com/repos/evilgreenIvo/ivo-live/releases/latest')
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) { if (j && j.tag_name) document.getElementById('ver').textContent = j.tag_name + ' · grátis'; })
+    .catch(function () {});
+})();
+</script>
+</body>
+</html>
