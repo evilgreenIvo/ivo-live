@@ -13,6 +13,8 @@ O **IVO LIVE** transforma o celular num estúdio de transmissão: você monta **
 
 - [Gravar e fazer live](#-gravar-e-fazer-live)
 - [Cenas e fontes](#-cenas-e-fontes)
+- [Chat da live](#-chat-da-live)
+- [Cronômetro de speedrun](#-cronômetro-de-speedrun)
 - [Filtros](#-filtros)
 - [Som: mixer e IA no microfone](#-som-mixer-e-ia-no-microfone)
 - [Outro celular como fonte](#-outro-celular-como-fonte)
@@ -54,13 +56,38 @@ Cada cena tem as suas **fontes**:
 | 🖼️ **Imagem** | Logo, moldura, fundo, overlay |
 | 🔤 **Texto** | Avisos, placar, "Já volto", com contorno para ler em cima de qualquer jogo |
 | 🎨 **Cor** | Um bloco de cor (faixas, fundos) |
-| 🌐 **Navegador** | Uma página da web: alertas de doação e inscrição, chat, contador |
+| 💬 **Chat da live** | O chat da Twitch e do YouTube na tela, com as suas cores (veja abaixo) |
+| 🏁 **Cronômetro de speedrun** | Tempo e trechos da corrida, como o LiveSplit (veja abaixo) |
+| 🌐 **Navegador** | Uma página da web: alertas de doação e inscrição, contador |
 | 📱 **Outro celular** | A tela, a câmera ou o som de outro celular (veja abaixo) |
 | ⏱️ **Medidor de FPS** | Os quadros por segundo do jogo na tela (celular com root ou Shizuku) |
 
 Na **prévia**, você arrasta, muda o tamanho com o canto ou com dois dedos, **gira** em qualquer ângulo e **recorta** as bordas. As fontes "grudam" nas bordas e no centro com um toquezinho de vibração. Dá para mudar a ordem (quem fica por cima), esconder e mostrar.
 
 As **transições** entre cenas podem ser corte seco, esmaecer ou passar pelo preto, com a duração que você quiser.
+
+## 💬 Chat da live
+
+<table align="center"><tr><td align="center"><img src="assets/chat-painel.png" width="250"><br><sub>Painel do chat com a prévia</sub></td><td align="center"><img src="assets/chat-ajustes.png" width="250"><br><sub>Fundo, cores, tamanho e nomes</sub></td></tr></table>
+
+O próprio app lê o chat e desenha na tela, sem abrir página da internet (fica bem mais leve).
+
+- **Twitch e YouTube, sem login**: é só escrever o canal. Com os dois, as mensagens vêm juntas e em ordem. O YouTube acha a live sozinho quando ela começa.
+- **Visuais prontos**: Neon, Minimal, Caixa, Claro e Roxo. Um toque e já fica bonito.
+- **Do seu jeito**: fundo transparente, uma caixa ou balões, cor e transparência do fundo, cor e tamanho do texto, contorno, cor dos nomes (a de cada pessoa ou uma só), mensagens que somem depois de um tempo e animação de entrada.
+- **Detalhes**: emotes da Twitch, emojis do YouTube, Super Chat e bits em destaque, marca de dono, moderador e membro, e opção de esconder comandos (!sorteio) e robôs.
+- **Prévia na hora** no painel, já com as mensagens de verdade. A letra cresce junto quando você aumenta a caixa.
+- **No controle remoto**: um botão Chat abre o chat grande para você ler durante a live.
+
+<table align="center"><tr><td align="center"><img src="assets/chat-neon.png" width="160"><br><sub>Neon</sub></td><td align="center"><img src="assets/chat-minimal.png" width="160"><br><sub>Minimal</sub></td><td align="center"><img src="assets/chat-claro.png" width="160"><br><sub>Claro</sub></td><td align="center"><img src="assets/chat-roxo.png" width="160"><br><sub>Roxo</sub></td></tr></table>
+
+Ainda dá para usar o link de chat do Restream ou do Streamlabs, pelo painel da fonte.
+
+## 🏁 Cronômetro de speedrun
+
+- Escreva os **trechos** da corrida (um por linha) e marque cada **split**.
+- **Verde** quando você está na frente do seu recorde, **vermelho** quando está atrás, **dourado** no recorde novo. Cada lista de trechos guarda o seu recorde.
+- Começar, split, pausar, desfazer e zerar pelo painel da fonte, pelo **botão flutuante** (sem sair do jogo) e pelo **controle remoto** (um botão só que abre todas as funções).
 
 ## ✨ Filtros
 
@@ -120,6 +147,8 @@ Um segundo celular vira um **painel de botões grandes** para controlar a live, 
 - **Pausa**: vai para a cena "Já volto" e muta o microfone num toque. Toque de novo e tudo volta.
 - **Próxima cena**, **Silenciar tudo** e **mudo** de cada som.
 - **Editar textos** da tela (placar, aviso, meta) sem encostar no celular da live.
+- **Chat**: abre o chat da live grande, para ler durante a live. O próprio controle lê o chat, então o celular da live não faz trabalho a mais.
+- **Cronômetro**: um botão que abre começar, split, pausar, desfazer e zerar.
 - **Ver a live**: uma telinha mostra a imagem que está saindo para o público.
 - Página de **mixer** com o volume de cada som.
 - **Você monta o painel**: escolhe o que cada botão faz, o nome, a **cor** e o lugar, e separa em **páginas**, quantas quiser.

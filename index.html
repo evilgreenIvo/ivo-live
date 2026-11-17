@@ -199,6 +199,18 @@ img, video { max-width: 100%; height: auto; display: block; }
 .points li:nth-child(3)::before { background: var(--violet); box-shadow: 0 0 10px var(--violet); }
 
 /* screenshot collage */
+/* Chat da live: the panel beside its points, then the five looks in a row (swipes sideways on a phone). */
+.chat-grid { display: grid; gap: 30px; margin-top: 34px; align-items: center; }
+.chat-shot { justify-self: center; width: min(88vw, 520px); margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+.chat-shot img:nth-child(2) { margin-top: 48px; }
+.chat-shot img { width: 100%; border-radius: 18px; border: 1px solid var(--line); box-shadow: 0 0 70px rgba(57,255,106,.18), 0 0 40px rgba(178,107,255,.14); }
+.new-tag { display: inline-block; margin-left: 8px; padding: 3px 9px; border-radius: 99px; background: var(--acid); color: #000; font-size: 10px; font-weight: 800; letter-spacing: .12em; vertical-align: middle; }
+.themes { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(150px, 1fr); gap: 12px; margin-top: 30px; overflow-x: auto; padding-bottom: 8px; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.themes::-webkit-scrollbar { display: none; }
+.themes figure { margin: 0; scroll-snap-align: start; }
+.themes img { width: 100%; aspect-ratio: 422 / 477; object-fit: cover; border-radius: 14px; border: 1px solid var(--line); transition: transform .7s var(--expo); }
+.themes figure:hover img { transform: translateY(-6px); }
+.themes figcaption { margin-top: 8px; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #6F727C; }
 .collage { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin-top: 36px; align-items: start; }
 .collage figure { margin: 0; }
 .collage figure:nth-child(2) { margin-top: 44px; }
@@ -250,6 +262,8 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
   .card.wide { grid-column: span 2; }
   .card { padding: 26px; min-height: 230px; }
   .video-grid { grid-template-columns: auto 1fr; gap: 56px; }
+  .chat-grid { grid-template-columns: 1fr auto; gap: 56px; }
+  .chat-shot { width: 500px; }
   .reel { width: 300px; }
   .sec-head { grid-template-columns: 1fr minmax(0, 300px); align-items: end; }
   .collage { gap: 22px; }
@@ -295,6 +309,7 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
   <nav>
     <a href="https://github.com/evilgreenIvo/ivo-live/releases/latest" target="_blank" rel="noopener">Baixar</a>
     <a href="#funcoes">Funções</a>
+    <a href="#chat">Chat</a>
     <a href="#video">Vídeo</a>
   </nav>
   <span class="scroll">Role para explorar</span>
@@ -312,7 +327,7 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
   <div class="hero-in wrap" id="heroIn">
     <span class="status"><i></i><span id="ver">Android // online</span></span>
     <h1 class="title glow" aria-label="IVO LIVE"><span class="chrome">IVO</span><span class="chrome">LIVE</span></h1>
-    <p class="lede">O estúdio de live inteiro <b>no seu celular</b>. Cenas, mixer, filtros e live no YouTube, Twitch e Kick, sem PC.</p>
+    <p class="lede">O estúdio de live inteiro <b>no seu celular</b>. Cenas, mixer, chat da live, filtros e live no YouTube, Twitch e Kick, sem PC.</p>
     <div class="cta">
       <a class="btn btn-acid" href="https://github.com/evilgreenIvo/ivo-live/releases/latest" target="_blank" rel="noopener">Baixar grátis
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a>
@@ -324,8 +339,8 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
 
 <div class="band-zone" aria-hidden="true">
   <div class="band"><div class="track">
-    <em>Estúdio de live</em><b>IVO LIVE</b><em>Sem PC</em><b>Grave e transmita</b>
-    <em>Estúdio de live</em><b>IVO LIVE</b><em>Sem PC</em><b>Grave e transmita</b>
+    <em>Estúdio de live</em><b>IVO LIVE</b><em>Sem PC</em><b>Chat na tela</b><em>Grave e transmita</em><b>Speedrun</b>
+    <em>Estúdio de live</em><b>IVO LIVE</b><em>Sem PC</em><b>Chat na tela</b><em>Grave e transmita</em><b>Speedrun</b>
   </div></div>
 </div>
 
@@ -344,7 +359,7 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
             <span class="no">01 // Cenas</span>
           </div>
           <h3>Monte a tela da sua live</h3>
-          <p>Jogo, câmera, imagem, texto, página da web e outro celular na mesma cena. Arraste, gire, recorte e troque de cena com um toque. Tem modelos prontos.</p>
+          <p>Jogo, câmera, imagem, texto, chat da live, página da web e outro celular na mesma cena. Arraste, gire, recorte e troque de cena com um toque. Tem modelos prontos.</p>
         </article>
         <article class="card reveal" style="--d:.08s">
           <div class="top">
@@ -369,7 +384,7 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
           </div>
           <div class="row">
             <div><h3>Stream Deck no bolso</h3>
-            <p>Um segundo celular vira painel de botões: cenas, mudo, pausa, textos, efeitos sonoros e a imagem da live.</p></div>
+            <p>Um segundo celular vira painel de botões: cenas, mudo, pausa, textos, efeitos sonoros, cronômetro, o chat para ler e a imagem da live.</p></div>
             <a class="btn btn-dark" href="https://github.com/evilgreenIvo/ivo-live/releases/latest" target="_blank" rel="noopener">Baixar grátis</a>
           </div>
         </article>
@@ -389,6 +404,48 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
           <h3>Leve no meio do jogo</h3>
           <p>Teste do celular e da internet que já escolhem a qualidade certa. Estatísticas ao vivo.</p>
         </article>
+        <article class="card wide reveal">
+          <div class="top">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#B26BFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 13.5V9.5M9.5 2.5h5M18.5 6.5l1.5-1.5"/></svg>
+            <span class="no">07 // Speedrun</span>
+          </div>
+          <h3>Cronômetro de speedrun</h3>
+          <p>Como o LiveSplit: escreva os trechos da corrida e marque cada split. Verde quando está na frente do seu recorde, vermelho quando está atrás, dourado no recorde novo. Dá para marcar pelo botão flutuante, sem sair do jogo, ou pelo controle remoto.</p>
+        </article>
+        <article class="card reveal" style="--d:.08s">
+          <div class="top">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#39FF6A" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>
+            <span class="no">08 // Chat</span>
+          </div>
+          <h3>Chat da live na tela</h3>
+          <p>Twitch e YouTube juntos, sem login, com as suas cores. <a href="#chat" style="color:var(--acid)">Ver os visuais</a></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><hr class="rule"></div>
+
+  <section class="sec" id="chat" aria-labelledby="t-chat">
+    <div class="wrap">
+      <div class="chat-grid">
+        <div class="reveal">
+          <span class="kicker">/// Chat da live</span><span class="new-tag">NOVO</span>
+          <h2 class="duo" id="t-chat"><span>Seu chat</span><span class="dim">Do seu jeito</span></h2>
+          <ul class="points">
+            <li>O app lê o chat da Twitch e do YouTube sozinho. Não precisa entrar com a conta: é só escrever o canal, e o YouTube acha a live quando ela começa.</li>
+            <li>Fundo transparente, uma caixa ou balões. Cor e transparência do fundo, cor e tamanho do texto, contorno e a cor dos nomes, com prévia na hora.</li>
+            <li>Emotes, Super Chat em destaque, marca de moderador e membro, e opção de esconder comandos e robôs. No controle remoto, o chat aparece grande para você ler durante a live.</li>
+          </ul>
+        </div>
+        <figure class="chat-shot reveal" style="--d:.1s"><img src="assets/chat-painel.png" alt="Painel do Chat da live com a prévia das mensagens" loading="lazy" width="540" height="1122"><img src="assets/chat-ajustes.png" alt="Ajustes do chat: fundo, cores, tamanho e nomes" loading="lazy" width="540" height="1122"></figure>
+      </div>
+      <div class="themes" aria-label="Visuais prontos do chat">
+        <figure class="reveal"><img src="assets/chat-neon.png" alt="Chat no visual Neon" loading="lazy" width="422" height="477"><figcaption>Neon</figcaption></figure>
+        <figure class="reveal" style="--d:.06s"><img src="assets/chat-minimal.png" alt="Chat no visual Minimal, sem fundo" loading="lazy" width="422" height="477"><figcaption>Minimal</figcaption></figure>
+        <figure class="reveal" style="--d:.12s"><img src="assets/chat-caixa.png" alt="Chat no visual Caixa" loading="lazy" width="422" height="477"><figcaption>Caixa</figcaption></figure>
+        <figure class="reveal" style="--d:.18s"><img src="assets/chat-claro.png" alt="Chat no visual Claro" loading="lazy" width="422" height="477"><figcaption>Claro</figcaption></figure>
+        <figure class="reveal" style="--d:.24s"><img src="assets/chat-roxo.png" alt="Chat no visual Roxo" loading="lazy" width="422" height="477"><figcaption>Roxo</figcaption></figure>
       </div>
     </div>
   </section>
