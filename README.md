@@ -1,11 +1,27 @@
 <p align="center"><img src="docs/capa.png" alt="IVO LIVE" width="100%"></p>
 
+<p align="center">
+  <a href="https://github.com/evilgreenIvo/ivo-live/releases/latest"><img src="https://img.shields.io/github/v/release/evilgreenIvo/ivo-live?label=vers%C3%A3o&color=00C853&style=for-the-badge" alt="versão"></a>
+  <a href="https://github.com/evilgreenIvo/ivo-live/releases"><img src="https://img.shields.io/github/downloads/evilgreenIvo/ivo-live/total?label=downloads&color=0B2E14&style=for-the-badge" alt="downloads"></a>
+  <img src="https://img.shields.io/badge/Android-10%2B-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android 10+">
+  <img src="https://img.shields.io/badge/pre%C3%A7o-gr%C3%A1tis-00C853?style=for-the-badge" alt="grátis">
+</p>
+
 <h3 align="center"><a href="https://github.com/evilgreenIvo/ivo-live/releases/latest">⬇️ Baixar a versão mais nova</a></h3>
-<p align="center">Grátis · sem anúncios · sem conta · Android 10 ou mais novo</p>
+<p align="center">Grátis · sem anúncios · sem conta · em português, inglês e espanhol</p>
 
 ---
 
 O **IVO LIVE** transforma o celular num estúdio de transmissão: você monta **cenas** com o jogo, a sua câmera, imagens, textos e alertas, mistura o som e **grava** ou faz **live** no YouTube, Twitch ou Kick, tudo do próprio celular. É a ideia do OBS do PC, feita para o Android, em português.
+
+> [!TIP]
+> **Novidades da 0.52.0: Avatar (PNGtuber)**
+> - Um personagem seu que **fala junto com você**: troca a boca na sua voz, pisca, pula, dorme quando você fica calado e faz cara de surpreso num grito.
+> - **Criar com IA em 3 passos**: o app manda o pedido e a imagem do seu personagem direto para o ChatGPT (ou o Flow do Google) e depois recorta e alinha as expressões sozinho. Não precisa saber desenhar.
+> - **Até 11 expressões** e **reações** (Feliz, Rindo, Surpreso, Bravo, Triste) num toque, inclusive pelo botão flutuante durante o jogo.
+> - Também nas últimas versões: cenas em botões, arrastar para ordenar as fontes, cadeado para travar uma fonte no lugar e o painel da fonte com a prévia à vista.
+>
+> [Ver todas as versões e o que mudou em cada uma](https://github.com/evilgreenIvo/ivo-live/releases)
 
 <table align="center"><tr><td align="center"><img src="docs/tela-principal.png" width="250"><br><sub>Cenas e prévia</sub></td><td align="center"><img src="docs/controle.png" width="250"><br><sub>Controle remoto mostrando a live</sub></td><td align="center"><img src="docs/fontes-mixer.png" width="250"><br><sub>Fontes e mixer</sub></td></tr></table>
 
@@ -13,11 +29,13 @@ O **IVO LIVE** transforma o celular num estúdio de transmissão: você monta **
 
 - [Gravar e fazer live](#-gravar-e-fazer-live)
 - [Cenas e fontes](#-cenas-e-fontes)
+- [Avatar (PNGtuber)](#-avatar-pngtuber)
 - [Chat da live](#-chat-da-live)
 - [Cronômetro de speedrun](#-cronômetro-de-speedrun)
 - [Filtros](#-filtros)
 - [Som: mixer e IA no microfone](#-som-mixer-e-ia-no-microfone)
 - [Outro celular como fonte](#-outro-celular-como-fonte)
+- [Tela do iPhone na live](#-tela-do-iphone-na-live)
 - [Câmera com efeitos de fundo](#-câmera-com-efeitos-de-fundo)
 - [Controle remoto estilo Stream Deck](#-controle-remoto-estilo-stream-deck)
 - [Efeitos sonoros](#-efeitos-sonoros)
@@ -54,6 +72,7 @@ Cada cena tem as suas **fontes**:
 | 🎮 **Jogo (tela)** | A tela do celular, com o jogo que estiver aberto |
 | 📷 **Câmera** | A câmera frontal ou a traseira do próprio celular |
 | 🖼️ **Imagem** | Logo, moldura, fundo, overlay |
+| 🧑‍🎤 **Avatar** | O seu personagem (PNGtuber), que fala e reage junto com a sua voz (veja abaixo) |
 | 🔤 **Texto** | Avisos, placar, "Já volto", com contorno para ler em cima de qualquer jogo |
 | 🎨 **Cor** | Um bloco de cor (faixas, fundos) |
 | 💬 **Chat da live** | O chat da Twitch e do YouTube na tela, com as suas cores (veja abaixo) |
@@ -62,9 +81,30 @@ Cada cena tem as suas **fontes**:
 | 📱 **Outro celular** | A tela, a câmera ou o som de outro celular (veja abaixo) |
 | ⏱️ **Medidor de FPS** | Os quadros por segundo do jogo na tela (celular com root ou Shizuku) |
 
-Na **prévia**, você arrasta, muda o tamanho com o canto ou com dois dedos, **gira** em qualquer ângulo e **recorta** as bordas. As fontes "grudam" nas bordas e no centro com um toquezinho de vibração. Dá para mudar a ordem (quem fica por cima), esconder e mostrar.
+Na **prévia**, você arrasta, muda o tamanho com o canto ou com dois dedos, **gira** em qualquer ângulo, vira em **3D (perspectiva)** e **recorta** arrastando as bordas. As fontes "grudam" nas bordas e no centro com um toquezinho de vibração.
+
+- No celular, as **cenas viram botões** lado a lado: um toque troca, segurar abre as opções.
+- **Segure o ≡** ao lado de uma fonte e arraste para mudar a ordem (quem fica por cima).
+- **Cadeado**: trava uma fonte no lugar, para um toque sem querer na prévia não mexer nela.
+- O **painel da fonte** abre sem cobrir a prévia, então cada ajuste aparece na hora.
 
 As **transições** entre cenas podem ser corte seco, esmaecer ou passar pelo preto, com a duração que você quiser.
+
+## 🧑‍🎤 Avatar (PNGtuber)
+
+Um personagem seu na tela, por cima do jogo, que **fala junto com você**. Leve, sem 3D e sem câmera: ele reage ao seu microfone.
+
+- **Fala e se mexe com a voz**: troca a boca (A, E, O), pula e estica quando você fala, pisca sozinho, fica mais escuro quando você está calado, **dorme** depois de 30 segundos em silêncio e faz **cara de surpreso** num grito.
+- **Reações num toque**: Feliz, Rindo, Surpreso, Bravo ou Triste por 5 segundos, pelo painel do Avatar ou pelo **botão flutuante** sem sair do jogo.
+- **Criar com IA, em 3 passos**:
+  1. Escolha uma imagem do seu personagem (um desenho, um personagem ou uma foto sua), ou descreva como ele é.
+  2. Toque em **Abrir no ChatGPT**: o pedido e a imagem já vão prontos, é só enviar. Também funciona no **Flow do Google**.
+  3. Volte e escolha a imagem gerada. O app **tira o fundo, separa e alinha** cada expressão sozinho, e cola só a boca e os olhos sobre a cara neutra, para o corpo nunca pular.
+- **Folha extra** (opcional): mais 5 expressões, feitas a partir da cara do seu próprio avatar, para chegar a **11 expressões** no total.
+- **Sem IA também**: use uma imagem só ou uma imagem para cada expressão. Um fundo de cor lisa sai sozinho.
+- No painel: o avatar se mexendo **ao vivo**, a **sensibilidade da voz** com um medidor para testar antes da live e o quanto ele se mexe (**Sutil, Normal ou Exagerado**).
+
+Tudo roda no próprio celular. Na live, ele usa o mesmo microfone da transmissão, sem pesar.
 
 ## 💬 Chat da live
 
@@ -124,6 +164,10 @@ Um segundo celular vira uma câmera ou uma tela extra da sua live, **sem fio** p
 - **Som do celular** ou **microfone**: só o áudio.
 
 O celular da live acha os outros sozinho na rede. A imagem chega em 1080p a 60 fps e cada celular ganha a sua própria barra no mixer.
+
+## 🍎 Tela do iPhone na live
+
+Quer jogar no iPhone e fazer a live pelo Android? O app irmão **[IVO Mirror](https://github.com/evilgreenIvo/ivo-mirror)** recebe a tela do iPhone pelo **Espelhamento de Tela** (o mesmo botão que manda a tela para uma TV) e entrega para o IVO LIVE como a fonte **Outro celular**, com imagem e som. Grátis e de código aberto.
 
 ## 🧑 Câmera com efeitos de fundo
 
@@ -200,5 +244,5 @@ No app: **Configurações › Sobre › Enviar relatório agora**. Ou abra uma [
 
 ---
 
-<sub>O IVO LIVE usa partes feitas por outras pessoas, com licenças que permitem isso. Os créditos estão em [NOTICE.md](NOTICE.md). "OBS" e "Stream Deck" são marcas dos seus donos. O IVO LIVE não tem ligação com eles.</sub>
+<sub>O IVO LIVE usa partes feitas por outras pessoas, com licenças que permitem isso. Os créditos estão em [NOTICE.md](NOTICE.md). "OBS", "Stream Deck", "ChatGPT", "Flow" e "iPhone" são marcas dos seus donos. O IVO LIVE não tem ligação com eles.</sub>
 <sub><b>👾 Dantiano</b></sub>
