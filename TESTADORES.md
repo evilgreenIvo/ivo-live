@@ -4,4 +4,4 @@ Pessoas que ajudam a testar o app de verdade, em gravações e lives, e mandam o
 
 Para entrar na lista: edite este arquivo, coloque seu nome numa linha nova abaixo e proponha a mudança.
 
-- 
+- LukeValen
