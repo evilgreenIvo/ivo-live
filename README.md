@@ -4,11 +4,11 @@
   <a href="https://github.com/evilgreenIvo/ivo-live/releases/latest"><img src="https://img.shields.io/github/v/release/evilgreenIvo/ivo-live?label=vers%C3%A3o&color=00C853&style=for-the-badge" alt="versão"></a>
   <a href="https://github.com/evilgreenIvo/ivo-live/releases"><img src="https://img.shields.io/github/downloads/evilgreenIvo/ivo-live/total?label=downloads&color=0B2E14&style=for-the-badge" alt="downloads"></a>
   <img src="https://img.shields.io/badge/Android-10%2B-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android 10+">
-  <img src="https://img.shields.io/badge/pre%C3%A7o-gr%C3%A1tis-00C853?style=for-the-badge" alt="grátis">
+  <img src="https://img.shields.io/badge/gr%C3%A1tis-por%20tempo%20limitado-00C853?style=for-the-badge" alt="grátis por tempo limitado">
 </p>
 
 <h3 align="center"><a href="https://github.com/evilgreenIvo/ivo-live/releases/latest">⬇️ Baixar a versão mais nova</a></h3>
-<p align="center">Grátis · sem anúncios · sem conta · em português, inglês e espanhol</p>
+<p align="center"><b>⏳ Teste agora 100% grátis.</b> Algumas funções vão ser pagas no futuro: aproveite enquanto está tudo liberado.<br>Sem anúncios · sem conta · em português, inglês e espanhol</p>
 
 ---
 
