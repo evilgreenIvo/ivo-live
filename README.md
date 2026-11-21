@@ -15,13 +15,16 @@
 O **IVO LIVE** transforma o celular num estúdio de transmissão: você monta **cenas** com o jogo, a sua câmera, imagens, textos e alertas, mistura o som e **grava** ou faz **live** no YouTube, Twitch ou Kick, tudo do próprio celular. É a ideia do OBS do PC, feita para o Android, em português.
 
 > [!TIP]
-> **Novidades da 0.52.0: Avatar (PNGtuber)**
-> - Um personagem seu que **fala junto com você**: troca a boca na sua voz, pisca, pula, dorme quando você fica calado e faz cara de surpreso num grito.
-> - **Criar com IA em 3 passos**: o app manda o pedido e a imagem do seu personagem direto para o ChatGPT (ou o Flow do Google) e depois recorta e alinha as expressões sozinho. Não precisa saber desenhar.
-> - **Até 11 expressões** e **reações** (Feliz, Rindo, Surpreso, Bravo, Triste) num toque, inclusive pelo botão flutuante durante o jogo.
-> - Também nas últimas versões: cenas em botões, arrastar para ordenar as fontes, cadeado para travar uma fonte no lugar e o painel da fonte com a prévia à vista.
+> **Novidades da 0.54.0: deitado e em pé ao mesmo tempo**
+> - **Vídeo em pé junto**: enquanto grava deitado (16:9), o app grava junto um vídeo em pé 9:16 para Shorts, Reels e TikTok, com as mesmas cenas e o mesmo som. Cada fonte tem o seu lugar, a sua Perspectiva 3D e os seus filtros em cada vídeo.
+> - **Live dupla**: uma live deitada e uma em pé ao mesmo tempo (YouTube, Twitch, Kick ou rtmp://). No YouTube dá para entrar com a conta e o app cria as duas lives no canal sozinho (por enquanto só para testadores, até o Google aprovar).
+> - **Fonte Vídeo ou GIF** com repetição sem parar, **Salvar e abrir cenas** num arquivo e o tema de chat **Cartões**, com a foto de quem comenta.
+> - Também nas últimas versões: Avatar (PNGtuber) com IA, filtro Sombra e o avatar seguindo a sua cabeça.
 >
 > [Ver todas as versões e o que mudou em cada uma](https://github.com/evilgreenIvo/ivo-live/releases)
+
+> [!WARNING]
+> **Vídeo e live dupla não são para qualquer celular.** Fazer os dois vídeos ao mesmo tempo é pesado: é para celulares topo de linha (Galaxy S22/S23 ou melhor, Snapdragon 8 Gen 1 ou mais novo), de preferência com cooler, e para a live dupla uma internet que aguente mandar as duas juntas. Em celulares mais simples pode esquentar, perder quadros ou cortar o som: use um vídeo de cada vez.
 
 <table align="center"><tr><td align="center"><img src="docs/tela-principal.png" width="250"><br><sub>Cenas e prévia</sub></td><td align="center"><img src="docs/controle.png" width="250"><br><sub>Controle remoto mostrando a live</sub></td><td align="center"><img src="docs/fontes-mixer.png" width="250"><br><sub>Fontes e mixer</sub></td></tr></table>
 
@@ -55,6 +58,7 @@ O **IVO LIVE** transforma o celular num estúdio de transmissão: você monta **
 - **Qualidade automática na live**: se a internet fica fraca, o app baixa a qualidade sozinho para a live não travar, e sobe de novo quando a internet melhora.
 - **Ritmo de quadros certinho**: cada quadro sai no tempo exato, então o vídeo não fica tremido nem acelerado.
 - **Formatos de vídeo**: deitado (16:9, 4:3), quadrado (1:1) ou em pé (3:4, 9:16, para Shorts, Reels e TikTok).
+- **Deitado e em pé ao mesmo tempo** (celulares topo de linha): grava e faz live com um segundo vídeo em pé 9:16, arrumado à parte com a chave Deitado | Em pé em cima da prévia. Cada fonte pode aparecer nos dois ou só num deles.
 - **Botão no painel de atalhos** do Android: grava com um toque, sem abrir o app.
 - **Botão flutuante** por cima do jogo, para trocar de cena e ver o tempo sem sair da partida.
 - **Tela de Gravações**: seus vídeos com miniatura, duração e tamanho, para assistir, compartilhar ou apagar (um ou vários de uma vez).
@@ -233,7 +237,7 @@ No controle remoto, toque em **Adicionar som**: abre o site **MyInstants** dentr
 
 ## Privacidade
 
-- O app **não tem conta, anúncios nem rastreamento**.
+- O app **não pede conta, não tem anúncios nem rastreamento**. Só a live dupla no YouTube oferece, se você quiser, **Entrar com YouTube** para o app criar as lives no seu canal; o acesso fica só no seu celular e sai quando você toca em Sair.
 - Gravações, cenas e chaves de live ficam **só no seu celular**.
 - O relatório de erro só sai do celular se **você** tocar em Enviar no e-mail, e ele **não leva** sua chave de live, senhas, fotos nem vídeos.
 - O app só consulta esta página para saber se tem versão nova. Ele não manda nada sobre você.
