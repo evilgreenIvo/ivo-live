@@ -19,6 +19,7 @@ O **IVO LIVE** transforma o celular num estúdio de transmissão: você monta **
 > - **Vídeo em pé junto**: enquanto grava deitado (16:9), o app grava junto um vídeo em pé 9:16 para Shorts, Reels e TikTok, com as mesmas cenas e o mesmo som. Cada fonte tem o seu lugar, a sua Perspectiva 3D e os seus filtros em cada vídeo.
 > - **Live dupla**: uma live deitada e uma em pé ao mesmo tempo (YouTube, Twitch, Kick ou rtmp://). No YouTube dá para entrar com a conta e o app cria as duas lives no canal sozinho (por enquanto só para testadores, até o Google aprovar).
 > - **Fonte Vídeo ou GIF** com repetição sem parar, **Salvar e abrir cenas** num arquivo e o tema de chat **Cartões**, com a foto de quem comenta.
+> - **0.54.1:** avatar mais fluido (expressões se dissolvem, sem pulo e sem piscar de luz) e estilo no Criar com IA: manter, desenho/cartoon ou anime (dá para virar personagem a partir de uma foto sua).
 > - Também nas últimas versões: Avatar (PNGtuber) com IA, filtro Sombra e o avatar seguindo a sua cabeça.
 >
 > [Ver todas as versões e o que mudou em cada uma](https://github.com/evilgreenIvo/ivo-live/releases)
