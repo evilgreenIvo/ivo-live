@@ -19,6 +19,7 @@ O **IVO LIVE** transforma o celular num estúdio de transmissão: você monta **
 > - **Vídeo em pé junto**: enquanto grava deitado (16:9), o app grava junto um vídeo em pé 9:16 para Shorts, Reels e TikTok, com as mesmas cenas e o mesmo som. Cada fonte tem o seu lugar, a sua Perspectiva 3D e os seus filtros em cada vídeo.
 > - **Live dupla**: uma live deitada e uma em pé ao mesmo tempo (YouTube, Twitch, Kick ou rtmp://). No YouTube dá para entrar com a conta e o app cria as duas lives no canal sozinho (por enquanto só para testadores, até o Google aprovar).
 > - **Fonte Vídeo ou GIF** com repetição sem parar, **Salvar e abrir cenas** num arquivo e o tema de chat **Cartões**, com a foto de quem comenta.
+> - **Novo na 0.55.0: texto com estilo.** 12 estilos prontos (Neon, Fogo, Ouro, Gamer, Adesivo…), degradê, verniz, contorno duplo, brilho, sombra e fundo, 15 fontes novas e **Importar fonte** (.ttf/.otf do celular).
 > - **0.54.2 e 0.54.3:** avatar mais fluido (expressões se dissolvem, sem pulo e sem piscar de luz) e estilo no Criar com IA: manter, desenho/cartoon ou anime (dá para virar personagem a partir de uma foto sua).
 > - Também nas últimas versões: Avatar (PNGtuber) com IA, filtro Sombra e o avatar seguindo a sua cabeça.
 >
@@ -78,7 +79,7 @@ Cada cena tem as suas **fontes**:
 | 📷 **Câmera** | A câmera frontal ou a traseira do próprio celular |
 | 🖼️ **Imagem** | Logo, moldura, fundo, overlay |
 | 🧑‍🎤 **Avatar** | O seu personagem (PNGtuber), que fala e reage junto com a sua voz (veja abaixo) |
-| 🔤 **Texto** | Avisos, placar, "Já volto", com contorno para ler em cima de qualquer jogo |
+| 🔤 **Texto** | Avisos, placar, "Já volto", com estilos prontos (neon, fogo, ouro…), degradê, contorno, brilho, sombra e 15 fontes, ou a sua própria fonte .ttf/.otf |
 | 🎨 **Cor** | Um bloco de cor (faixas, fundos) |
 | 💬 **Chat da live** | O chat da Twitch e do YouTube na tela, com as suas cores (veja abaixo) |
 | 🏁 **Cronômetro de speedrun** | Tempo e trechos da corrida, como o LiveSplit (veja abaixo) |
