@@ -19,6 +19,7 @@ O **IVO LIVE** transforma o celular num estúdio de transmissão: você monta **
 > - **Vídeo em pé junto**: enquanto grava deitado (16:9), o app grava junto um vídeo em pé 9:16 para Shorts, Reels e TikTok, com as mesmas cenas e o mesmo som. Cada fonte tem o seu lugar, a sua Perspectiva 3D e os seus filtros em cada vídeo.
 > - **Live dupla**: uma live deitada e uma em pé ao mesmo tempo (YouTube, Twitch, Kick ou rtmp://). No YouTube dá para entrar com a conta e o app cria as duas lives no canal sozinho (por enquanto só para testadores, até o Google aprovar).
 > - **Fonte Vídeo ou GIF** com repetição sem parar, **Salvar e abrir cenas** num arquivo e o tema de chat **Cartões**, com a foto de quem comenta.
+> - **Novo na 0.60.1:** o som do Enviar não some mais quando um jogo pesado abre (com Som de chamadas por root ou Shizuku).
 > - **Novo na 0.60: tema Pôr do sol neon**, com o céu de fim de tarde, o sol retrô e palmeiras no fundo do app.
 > - **Novo na 0.59: automação.** A cena troca sozinha com o app que você abre (jogo → Jogando, YouTube → YouTube) e qualquer outro app leva para a **cena de privacidade** (Já volto), na hora. No Enviar, cada app vai na sua qualidade e os outros apps podem ir escondidos.
 > - **0.58.0:** o app passa a mandar dados anônimos de uso (duração das lives, quadros por segundo, erros), sem nada pessoal e sem ID de publicidade. Dá para desligar em Configurações › Sobre.
