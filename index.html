@@ -292,6 +292,18 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
   .card.wide { grid-column: span 2; }
   .card { min-height: 250px; }
 }
+/* back to the top: a round logo that floats in once the page is scrolled (phones; computers have the rail's) */
+.totop { position: fixed; right: max(16px, env(safe-area-inset-right, 0px)); bottom: max(18px, env(safe-area-inset-bottom, 0px)); z-index: 55;
+  width: 52px; height: 52px; padding: 0; border-radius: 50%; border: 1.5px solid var(--acid); background: rgba(0,0,0,.72);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); cursor: pointer;
+  box-shadow: 0 0 22px rgba(57,255,106,.45), 0 10px 30px rgba(0,0,0,.6);
+  opacity: 0; transform: translateY(18px) scale(.8); pointer-events: none;
+  transition: opacity .45s var(--expo), transform .6s var(--expo), box-shadow .4s; }
+.totop img { width: 100%; height: 100%; border-radius: 50%; display: block; }
+.totop.on { opacity: 1; transform: none; pointer-events: auto; }
+.totop:hover, .totop:focus-visible { box-shadow: 0 0 36px rgba(57,255,106,.8), 0 10px 30px rgba(0,0,0,.6); }
+.totop:active { transform: scale(.92); }
+@media (min-width: 1000px) { .totop { display: none; } }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .js .reveal { opacity: 1; transform: none; }
@@ -305,6 +317,7 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
 <body>
 <div class="grain" aria-hidden="true"></div>
 <div class="cursor" aria-hidden="true"></div>
+<button class="totop" type="button" aria-label="Voltar ao topo"><img src="assets/logo.png" alt="" width="52" height="52"></button>
 
 <aside class="rail" aria-label="Atalhos">
   <a class="logo" href="#topo" aria-label="Topo"><img src="assets/logo.png" alt="" width="40" height="40"></a>
@@ -645,6 +658,64 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
     c.addEventListener('pointermove', at);
     c.addEventListener('pointerdown', at);
   });
+
+  // Back to the top, fluidly: a long, soft curve (eases in, glides, settles) timed by the distance, that a
+  // finger or the wheel can interrupt. The floating logo rises with the page and fades; on arrival the
+  // lights at the top pulse and the title settles into place. The logo (rail, header) and the button use it.
+  (function () {
+    var btn = document.querySelector('.totop');
+    var running = 0;
+    // Smooth both ways (no jolt at the start, a long glide into the top).
+    function ease(t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+    function stop() { running = 0; document.documentElement.style.scrollBehavior = ''; }
+    function arrive() {
+      var spring = 'cubic-bezier(.19, 1, .22, 1)';
+      var title = document.querySelector('.title, main h1');
+      if (title && title.animate) title.animate([
+        { transform: 'translateY(34px) scale(.965)', filter: 'blur(8px)', opacity: .35 },
+        { transform: 'none', filter: 'blur(0)', opacity: 1 }], { duration: 1100, easing: spring });
+      var lights = document.querySelector('.lights');
+      if (lights && lights.animate) lights.animate([
+        { filter: 'brightness(1)' }, { filter: 'brightness(1.9) saturate(1.3)' }, { filter: 'brightness(1)' }],
+        { duration: 1400, easing: 'ease-out' });
+    }
+    function up(e) {
+      if (e) e.preventDefault();
+      var from = window.scrollY || document.documentElement.scrollTop;
+      if (from < 2) return;
+      // With reduced motion asked for, a short, plain glide (no jump that loses the reader, no extras).
+      // The button goes up with the page and fades away.
+      if (!calm && btn && btn.animate && btn.classList.contains('on')) btn.animate([
+        { transform: 'none', opacity: 1 }, { transform: 'translateY(-14px) scale(1.08)', opacity: 1, offset: .18 },
+        { transform: 'translateY(-55vh) scale(.55)', opacity: 0 }], { duration: 900, easing: 'cubic-bezier(.55, 0, .3, 1)' });
+      // (The page's own smooth scrolling would fight a frame-by-frame scroll.)
+      document.documentElement.style.scrollBehavior = 'auto';
+      var dur = calm ? Math.min(650, Math.max(380, 300 + from * 0.08)) : Math.min(1700, Math.max(950, 650 + from * 0.22));
+      var t0 = performance.now(), id = ++running, landed = false;
+      (function step(now) {
+        if (id !== running) return;
+        var k = Math.min(1, (now - t0) / dur);
+        window.scrollTo(0, Math.round(from * (1 - ease(k))));
+        // The title starts settling just before the page stops, so the two motions blend.
+        if (!calm && !landed && k > .78) { landed = true; arrive(); }
+        if (k < 1) requestAnimationFrame(step); else stop();
+      })(t0);
+    }
+    ['wheel', 'touchstart', 'keydown'].forEach(function (ev) { window.addEventListener(ev, function () { if (running) stop(); }, { passive: true }); });
+    document.querySelectorAll('a[href="#topo"], .totop').forEach(function (a) { a.addEventListener('click', up); });
+    window.__ivoUp = up;
+    if (btn) {
+      var shown = false, tick = false;
+      window.addEventListener('scroll', function () {
+        if (tick) return; tick = true;
+        requestAnimationFrame(function () {
+          var on = (window.scrollY || 0) > 520;
+          if (on !== shown) { shown = on; btn.classList.toggle('on', on); }
+          tick = false;
+        });
+      }, { passive: true });
+    }
+  })();
 
   // The ring that follows the mouse (not on touch screens).
   if (!calm && window.matchMedia('(pointer: fine)').matches) {
