@@ -49,7 +49,7 @@ layout: null
 * { box-sizing: border-box; }
 html { background: var(--void); scroll-behavior: smooth; }
 body {
-  background: var(--void); color: var(--fg);
+  margin: 0; background: var(--void); color: var(--fg);
   font-family: var(--body); font-size: 16px; line-height: 1.55;
   overflow-x: clip; -webkit-font-smoothing: antialiased;
 }
@@ -275,7 +275,7 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
   .band { top: -78px; }
 }
 /* ---------- computer ---------- */
-@media (min-width: 1000px) {
+@media (min-width: 960px) {
   :root { --rail: 72px; }
   .rail {
     position: fixed; left: 0; top: 0; bottom: 0; width: var(--rail); z-index: 40; display: flex; flex-direction: column; align-items: center; justify-content: space-between;
@@ -292,6 +292,31 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
   .card.wide { grid-column: span 2; }
   .card { min-height: 250px; }
 }
+/* phone menu: button beside "Baixar", full-screen glass panel (computers have the rail) */
+.top-right { display: flex; align-items: stretch; gap: 10px; }
+.menu-btn { width: 42px; padding: 0; display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+  border: 1px solid rgba(255,255,255,.22); background: rgba(0,0,0,.35); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); cursor: pointer; transition: border-color .3s; }
+.menu-btn i { display: block; width: 18px; height: 1.5px; background: var(--fg); }
+.menu-btn:hover, .menu-btn:focus-visible { border-color: var(--acid); }
+.menu { position: fixed; inset: 0; z-index: 58; display: flex; flex-direction: column; justify-content: center; gap: 4px;
+  padding: 96px max(28px, env(safe-area-inset-right, 0px)) max(40px, env(safe-area-inset-bottom, 0px)) max(28px, env(safe-area-inset-left, 0px));
+  background: radial-gradient(120% 60% at 0% 0%, rgba(57,255,106,.16), transparent 60%), radial-gradient(120% 60% at 100% 100%, rgba(178,107,255,.2), transparent 60%), rgba(0,0,0,.84);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4); backdrop-filter: blur(20px) saturate(1.4);
+  opacity: 0; visibility: hidden; clip-path: circle(0 at calc(100% - 37px) 37px);
+  transition: opacity .5s var(--expo), clip-path .7s var(--expo), visibility 0s .7s; }
+.menu.open { opacity: 1; visibility: visible; clip-path: circle(150% at calc(100% - 37px) 37px); transition: opacity .4s var(--expo), clip-path .8s var(--expo); }
+.menu a { display: flex; align-items: baseline; gap: 14px; text-decoration: none; color: var(--fg);
+  font-family: var(--display); font-weight: 800; font-size: clamp(2rem, 9.4vw, 3.6rem); line-height: 1.14; text-transform: uppercase;
+  opacity: 0; transform: translateY(34px); transition: transform .8s var(--expo), opacity .6s var(--expo), color .3s; }
+.menu a small { font-family: var(--body); font-size: 11px; font-weight: 700; letter-spacing: .2em; color: var(--acid); }
+.menu.open a { opacity: 1; transform: none; transition-delay: calc(var(--i) * 60ms + 120ms); }
+.menu a:hover, .menu a:active { color: var(--acid); }
+.menu a.dl { align-self: flex-start; margin-top: 26px; padding: 15px 24px; background: var(--acid); color: #000; font-family: var(--body); font-size: 13px; letter-spacing: .14em; line-height: 1; box-shadow: 0 0 26px rgba(57,255,106,.55); }
+.menu-x { position: absolute; top: 18px; right: max(16px, env(safe-area-inset-right, 0px)); width: 42px; height: 36px; padding: 0; cursor: pointer;
+  border: 1px solid var(--acid); background: transparent; transform: rotate(-90deg) scale(.6); opacity: 0; transition: transform .7s var(--expo), opacity .4s; }
+.menu.open .menu-x { transform: none; opacity: 1; transition-delay: .15s; }
+.menu-x::before, .menu-x::after { content: ""; position: absolute; left: 11px; right: 11px; top: 50%; height: 1.5px; background: var(--acid); transform: rotate(45deg); }
+.menu-x::after { transform: rotate(-45deg); }
 /* back to the top: a round logo that floats in once the page is scrolled (phones; computers have the rail's) */
 .totop { position: fixed; right: max(16px, env(safe-area-inset-right, 0px)); bottom: max(18px, env(safe-area-inset-bottom, 0px)); z-index: 55;
   width: 52px; height: 52px; padding: 0; border-radius: 50%; border: 1.5px solid var(--acid); background: rgba(0,0,0,.72);
@@ -303,7 +328,7 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
 .totop.on { opacity: 1; transform: none; pointer-events: auto; }
 .totop:hover, .totop:focus-visible { box-shadow: 0 0 36px rgba(57,255,106,.8), 0 10px 30px rgba(0,0,0,.6); }
 .totop:active { transform: scale(.92); }
-@media (min-width: 1000px) { .totop { display: none; } }
+@media (min-width: 960px) { .totop, .menu-btn, .menu { display: none; } }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .js .reveal { opacity: 1; transform: none; }
@@ -318,6 +343,15 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
 <div class="grain" aria-hidden="true"></div>
 <div class="cursor" aria-hidden="true"></div>
 <button class="totop" type="button" aria-label="Voltar ao topo"><img src="assets/logo.png" alt="" width="52" height="52"></button>
+
+<nav class="menu" id="menu" aria-label="Menu" aria-hidden="true">
+  <button class="menu-x" type="button" aria-label="Fechar menu"></button>
+  <a href="#funcoes" style="--i:0"><small>01</small>Funções</a>
+  <a href="#chat" style="--i:1"><small>02</small>Chat</a>
+  <a href="#video" style="--i:2"><small>03</small>Vídeo</a>
+  <a href="guias/" style="--i:3"><small>04</small>Guias</a>
+  <a class="dl" href="https://github.com/evilgreenIvo/ivo-live/releases/latest" target="_blank" rel="noopener" style="--i:4">Baixar grátis</a>
+</nav>
 
 <aside class="rail" aria-label="Atalhos">
   <a class="logo" href="#topo" aria-label="Topo"><img src="assets/logo.png" alt="" width="40" height="40"></a>
@@ -337,7 +371,10 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
   <div class="wrap">
     <div class="topbar">
       <a class="brand" href="#topo"><img src="assets/logo.png" alt="" width="36" height="36">IVO LIVE</a>
-      <a class="top-dl" href="https://github.com/evilgreenIvo/ivo-live/releases/latest" target="_blank" rel="noopener">Baixar</a>
+      <div class="top-right">
+        <a class="top-dl" href="https://github.com/evilgreenIvo/ivo-live/releases/latest" target="_blank" rel="noopener">Baixar</a>
+        <button class="menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><i></i><i></i><i></i></button>
+      </div>
     </div>
   </div>
   <div class="hero-in wrap" id="heroIn">
@@ -731,6 +768,24 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
       requestAnimationFrame(loop);
     })();
   }
+})();
+</script>
+<script>
+// Phone menu: opens from the button beside "Baixar"; a link, the X or Esc closes it.
+(function () {
+  var menu = document.getElementById('menu'), btn = document.querySelector('.menu-btn');
+  if (!menu || !btn) return;
+  function set(open) {
+    menu.classList.toggle('open', open);
+    menu.setAttribute('aria-hidden', open ? 'false' : 'true');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.documentElement.style.overflow = open ? 'hidden' : '';
+    if (open) menu.querySelector('.menu-x').focus({ preventScroll: true }); else btn.focus({ preventScroll: true });
+  }
+  btn.addEventListener('click', function () { set(true); });
+  menu.querySelector('.menu-x').addEventListener('click', function () { set(false); });
+  menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { set(false); }); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && menu.classList.contains('open')) set(false); });
 })();
 </script>
 </body>
