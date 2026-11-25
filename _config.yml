@@ -7,3 +7,17 @@ theme: jekyll-theme-primer
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
+# Pages Google shouldn't count as the site's content (credits, testers list, the Search Console check file).
+defaults:
+  - scope:
+      path: "NOTICE.md"
+    values:
+      sitemap: false
+  - scope:
+      path: "TESTADORES.md"
+    values:
+      sitemap: false
+  - scope:
+      path: "googlee6c0e05a04bb57d2.html"
+    values:
+      sitemap: false
