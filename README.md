@@ -20,7 +20,9 @@ O **IVO LIVE** transforma o celular num estúdio de transmissão: você monta **
 > - **Vídeo em pé junto**: enquanto grava deitado (16:9), o app grava junto um vídeo em pé 9:16 para Shorts, Reels e TikTok, com as mesmas cenas e o mesmo som. Cada fonte tem o seu lugar, a sua Perspectiva 3D e os seus filtros em cada vídeo.
 > - **Live dupla**: uma live deitada e uma em pé ao mesmo tempo (YouTube, Twitch, Kick ou rtmp://). No YouTube dá para entrar com a conta e o app cria as duas lives no canal sozinho (por enquanto só para testadores, até o Google aprovar).
 > - **Fonte Vídeo ou GIF** com repetição sem parar, **Salvar e abrir cenas** num arquivo e o tema de chat **Cartões**, com a foto de quem comenta.
-> - **Novo na 0.64: avatar de PNGtuber renovado.** Troca da imagem inteira com fusão, fundo da folha saindo por completo, movimento mais natural, um avatar para o narrador do chat e Criar com IA direto no Gemini.
+> - **Novo na 0.67: live programada no YouTube.** Se você já programou a live no YouTube Studio, o app usa ela (com título e thumbnail) em vez de criar outra. E a ordem das fontes agora é separada entre a live deitada e a em pé.
+> - **Na 0.66: rosto completo no avatar.** Ele pisca, abre a boca e faz as suas caras, inclusive pela câmera de outro celular, e o app ganhou uma abertura nova.
+> - **Na 0.64: avatar de PNGtuber renovado.** Troca da imagem inteira com fusão, fundo da folha saindo por completo, movimento mais natural, um avatar para o narrador do chat e Criar com IA direto no Gemini.
 > - **Na 0.63: a voz do chat diz quem mandou, e o som do Discord de outro celular no seu fone.** A redução de ruído com IA muda na hora, até no meio da live, com a voz mais natural.
 > - **Na 0.62: 13 idiomas.** Português, inglês, espanhol, francês, alemão, italiano, russo, turco, indonésio, hindi, japonês, coreano e chinês. Troque em Configurações › Idioma, sem depender do idioma do celular.
 > - **Na 0.61: Modo AERO e contagem regressiva.** Barras e botões de vidro com movimento de mola (liga em cada tema), e um texto que conta o tempo e troca de cena quando zera ("Começa em 5:00").
