@@ -459,13 +459,8 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
 .side.t, .side.b { height: var(--d); left: calc(var(--R) - 1px); right: calc(var(--R) - 1px); top: calc(50% - var(--d) / 2); }
 .side.t { transform: rotateX(90deg) translateZ(calc(var(--H) / 2)); }
 .side.b { transform: rotateX(-90deg) translateZ(calc(var(--H) / 2)); }
-/* The 4 rounded corners: a slanted piece each (the chord of the curve), so a phone seen edge-on has no hole. */
-.side.k { width: var(--d); height: calc(var(--R) * 1.42 + 3px); left: calc(50% - var(--d) / 2); top: calc(50% - (var(--R) * 1.42 + 3px) / 2);
-  background: linear-gradient(180deg, #3a3d44, #16171b 50%, #2c2e34); }
-.side.k1 { transform: translate(calc(var(--W) / 2 - var(--R) * .5), calc(var(--H) / -2 + var(--R) * .5)) rotateZ(-45deg) rotateY(90deg); }
-.side.k2 { transform: translate(calc(var(--W) / 2 - var(--R) * .5), calc(var(--H) / 2 - var(--R) * .5)) rotateZ(45deg) rotateY(90deg); }
-.side.k3 { transform: translate(calc(var(--W) / -2 + var(--R) * .5), calc(var(--H) / 2 - var(--R) * .5)) rotateZ(135deg) rotateY(90deg); }
-.side.k4 { transform: translate(calc(var(--W) / -2 + var(--R) * .5), calc(var(--H) / -2 + var(--R) * .5)) rotateZ(-135deg) rotateY(90deg); }
+/* The rounded corners: each made of small pieces following the curve (placed by the script). */
+.side.k { width: var(--d); left: calc(50% - var(--d) / 2); background: linear-gradient(180deg, #4a4d55, #16171b 40%, #2c2e34 70%, #101114); }
 .floor { position: absolute; left: 8%; right: 8%; bottom: -34px; height: 26px; border-radius: 50%;
   background: radial-gradient(closest-side, rgba(57,255,106,.35), rgba(0,0,0,.6) 55%, transparent); filter: blur(6px); transform: scale(var(--fs, 1)); }
 .stage.grabbing { cursor: grabbing; }
@@ -555,7 +550,6 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
           <svg class="defs" width="0" height="0" aria-hidden="true" focusable="false"><filter id="liquid" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.025 0.045" numOctaves="2" seed="4"><animate attributeName="baseFrequency" dur="9s" values="0.025 0.045;0.04 0.022;0.025 0.045" repeatCount="indefinite"/></feTurbulence><feDisplacementMap in="SourceGraphic" scale="24" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
         </div>
         <div class="side r"></div><div class="side l"></div><div class="side t"></div><div class="side b"></div>
-        <div class="side k k1"></div><div class="side k k2"></div><div class="side k k3"></div><div class="side k k4"></div>
       </div>
       <div class="floor" aria-hidden="true"></div>
     </div>
@@ -967,8 +961,25 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
   var stage = document.getElementById('stage'), phone = document.getElementById('phone');
   if (!stage || !phone) return;
   var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var turn = /costas/.test(location.search) ? 180 : (/lado/.test(location.search) ? 106 : 0), tilt = 0, vel = 0, drag = null, px = 0, py = 0, sp = 0, t0 = performance.now(), visible = true;
+  var qa = /ang=(-?[0-9]+)/.exec(location.search), qt = /tilt=(-?[0-9]+)/.exec(location.search);
+  var turn = /costas/.test(location.search) ? 180 : (/lado/.test(location.search) ? 106 : (qa ? +qa[1] : 0)), tilt = qt ? +qt[1] : 0, vel = 0, drag = null, px = 0, py = 0, sp = 0, t0 = performance.now(), visible = true;
   new IntersectionObserver(function (es) { visible = es[0].isIntersecting; }).observe(stage);
+  // The rounded corners' edge: 6 small pieces per corner, each turned to face out along the curve.
+  function edges() {
+    Array.prototype.forEach.call(phone.querySelectorAll('.side.k'), function (e) { e.remove(); });
+    var W = stage.offsetWidth, H = stage.offsetHeight, R = parseFloat(getComputedStyle(stage).getPropertyValue('--R')) || 26, n = 6, a = W / 2, b = H / 2;
+    [[a - R, -(b - R), -90], [a - R, b - R, 0], [-(a - R), b - R, 90], [-(a - R), -(b - R), 180]].forEach(function (c) {
+      for (var k = 0; k < n; k++) {
+        var step = 90 / n, mid = (c[2] + step * (k + .5)) * Math.PI / 180, half = step / 2 * Math.PI / 180;
+        var len = 2 * R * Math.sin(half) + 1.4, r = R * Math.cos(half);
+        var e = document.createElement('div'); e.className = 'side k';
+        e.style.height = len + 'px'; e.style.top = 'calc(50% - ' + (len / 2) + 'px)';
+        e.style.transform = 'translate(' + (c[0] + r * Math.cos(mid)).toFixed(2) + 'px,' + (c[1] + r * Math.sin(mid)).toFixed(2) + 'px) rotateZ(' + (mid * 180 / Math.PI).toFixed(2) + 'deg) rotateY(90deg)';
+        phone.appendChild(e);
+      }
+    });
+  }
+  edges(); addEventListener('resize', edges);
   // Turn it with a finger or the mouse: sideways turns it all the way round, up and down tilts it a bit.
   // (On a phone, up and down still scrolls the page.)
   stage.addEventListener('pointerdown', function (e) {
@@ -995,7 +1006,7 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
     var target = Math.min(1, scrollY / Math.max(1, innerHeight * .9));
     sp += (target - sp) * .08;
     if (!drag && Math.abs(vel) > .02) { turn += vel; vel *= .94; }
-    if (!drag) tilt *= .96;
+    if (!drag && !qt) tilt *= .96;
     var hands = drag ? 0 : 1;
     var ry = -16 + (calm ? 0 : Math.sin(t * .6) * 5 * hands) + px * 9 * hands + sp * 34 + turn;
     var rx = 6 + (calm ? 0 : Math.sin(t * .8) * 1.5 * hands) - py * 5 * hands - sp * 6 + tilt;
