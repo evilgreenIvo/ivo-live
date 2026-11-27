@@ -423,13 +423,28 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
 .vent img { width: 40%; filter: sepia(1) saturate(3) hue-rotate(-12deg) brightness(.95); opacity: .9; }
 .mark { position: absolute; left: 0; right: 0; top: 35.5%; text-align: center; font: 700 10px var(--body); letter-spacing: .42em; color: #c99a5b; text-shadow: 0 0 6px rgba(201,154,91,.35); }
 .disc { position: absolute; left: 50%; top: 66%; width: 68%; aspect-ratio: 1; transform: translate(-50%, -50%); }
-.disc .led { position: absolute; inset: 0; border-radius: 50%;
-  background: conic-gradient(from var(--spin, 0deg), #2d7bff 0 22%, #5aa2ff 24%, #2d7bff 26% 47%, transparent 47.5% 50%, #2d7bff 50.5% 72%, #8cc0ff 74%, #2d7bff 76% 97%, transparent 97.5%);
-  -webkit-mask: radial-gradient(circle closest-side, transparent 84%, #000 86% 95%, transparent 97%); mask: radial-gradient(circle closest-side, transparent 84%, #000 86% 95%, transparent 97%);
-  filter: drop-shadow(0 0 6px #2d7bff) drop-shadow(0 0 16px rgba(45,123,255,.8)); animation: ringspin 7s linear infinite, breathe 3.2s ease-in-out infinite; }
-@property --spin { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
-@keyframes ringspin { to { --spin: 360deg; } }
-@keyframes breathe { 50% { opacity: .78; } }
+.defs { position: absolute; width: 0; height: 0; }
+/* The blue ring: a tube with liquid running inside (layers of blue turning at different speeds, rippled). */
+.disc .led { position: absolute; inset: 0; border-radius: 50%; overflow: hidden; background: #071a4d;
+  -webkit-mask: radial-gradient(circle closest-side, transparent 83%, #000 85% 95%, transparent 97%); mask: radial-gradient(circle closest-side, transparent 83%, #000 85% 95%, transparent 97%);
+  filter: url(#liquid); }
+.disc .led i { position: absolute; inset: -12%; border-radius: 50%; }
+.disc .led .f1 { background: conic-gradient(from 0deg, #04124f, #1f5bff 14%, #04124f 28%, #2d7bff 42%, #04124f 56%, #4fb8ff 70%, #061a6b 84%, #04124f); animation: spin 5s linear infinite; }
+.disc .led .f2 { mix-blend-mode: screen; opacity: .85;
+  background: conic-gradient(from 90deg, transparent 0 10%, rgba(89,200,255,.9) 18%, transparent 30% 55%, rgba(120,170,255,.8) 64%, transparent 76%); animation: spin 9s linear infinite reverse; }
+.disc .led .f3 { mix-blend-mode: screen; opacity: .7;
+  background: conic-gradient(from 200deg, transparent 0 40%, rgba(190,230,255,.9) 46%, transparent 52% 88%, rgba(160,210,255,.8) 93%, transparent); animation: spin 3.8s linear infinite; }
+.disc .led .bub { inset: 0; filter: blur(1.2px); animation: spin 2.4s linear infinite;
+  background: radial-gradient(circle at 50% 5%, rgba(225,246,255,.95) 0 2.4%, transparent 4.4%),
+    radial-gradient(circle at 50% 95%, rgba(200,236,255,.85) 0 1.9%, transparent 3.6%),
+    radial-gradient(circle at 5% 50%, rgba(200,236,255,.7) 0 1.5%, transparent 3%),
+    radial-gradient(circle at 82% 18%, rgba(210,240,255,.6) 0 1.3%, transparent 2.8%); }
+.disc .ledglow { position: absolute; inset: 2%; border-radius: 50%;
+  box-shadow: 0 0 16px 3px rgba(45,123,255,.75), 0 0 34px 8px rgba(45,123,255,.35), inset 0 0 14px 3px rgba(45,123,255,.55); animation: breathe 3.2s ease-in-out infinite; }
+.disc .joints { position: absolute; inset: 0; border-radius: 50%; pointer-events: none;
+  background: conic-gradient(from -2deg, #0b0c0f 0 1.2%, transparent 1.2% 49.4%, #0b0c0f 49.4% 50.6%, transparent 50.6% 98.8%, #0b0c0f 98.8%);
+  -webkit-mask: radial-gradient(circle closest-side, transparent 83%, #000 85% 95%, transparent 97%); mask: radial-gradient(circle closest-side, transparent 83%, #000 85% 95%, transparent 97%); }
+@keyframes breathe { 50% { opacity: .7; } }
 .disc .metal { position: absolute; inset: 12%; border-radius: 50%;
   background: radial-gradient(circle closest-side, rgba(255,255,255,.16), transparent 40%),
     repeating-radial-gradient(circle closest-side, rgba(255,255,255,.035) 0 1px, transparent 1px 2px),
@@ -449,7 +464,7 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
 .flip { position: absolute; right: -8px; bottom: -62px; padding: 8px 14px; border-radius: 99px; border: 1px solid rgba(255,255,255,.18);
   background: rgba(0,0,0,.45); color: #fff; font: 700 12px var(--body); letter-spacing: .06em; cursor: pointer; backdrop-filter: blur(6px); }
 .flip:hover { border-color: var(--acid); color: var(--acid); }
-@media (prefers-reduced-motion: reduce) { .disc .led, .cam-tile i { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .disc .led i, .disc .ledglow, .cam-tile i { animation: none; } .disc .led { filter: none; } }
 </style>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6426161266572963"
@@ -530,7 +545,8 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
             <i class="vent"><img src="/assets/logo.png" alt=""></i>
           </div>
           <span class="mark">IVO LIVE</span>
-          <div class="disc"><div class="led"></div><div class="metal"></div><i class="dot"></i></div>
+          <div class="disc"><div class="ledglow"></div><div class="led"><i class="f1"></i><i class="f2"></i><i class="f3"></i><i class="bub"></i></div><div class="joints"></div><div class="metal"></div><i class="dot"></i></div>
+          <svg class="defs" width="0" height="0" aria-hidden="true" focusable="false"><filter id="liquid" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.025 0.045" numOctaves="2" seed="4"><animate attributeName="baseFrequency" dur="9s" values="0.025 0.045;0.04 0.022;0.025 0.045" repeatCount="indefinite"/></feTurbulence><feDisplacementMap in="SourceGraphic" scale="24" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
         </div>
         <div class="side r"></div><div class="side l"></div><div class="side t"></div><div class="side b"></div>
       </div>
