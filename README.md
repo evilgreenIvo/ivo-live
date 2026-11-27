@@ -8,6 +8,7 @@
 </p>
 
 <h3 align="center"><a href="https://github.com/evilgreenIvo/ivo-live/releases/latest">⬇️ Baixar a versão mais nova</a></h3>
+<p align="center">🌐 <a href="https://ivolive.com"><b>ivolive.com</b></a> · <a href="https://ivolive.com/guias/">Guias de uso</a></p>
 <p align="center"><b>⏳ Teste agora 100% grátis.</b> Algumas funções vão ser pagas no futuro: aproveite enquanto está tudo liberado.<br>Sem anúncios · sem conta · em 13 idiomas</p>
 
 ---
