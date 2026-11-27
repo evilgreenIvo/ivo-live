@@ -368,7 +368,7 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
   .hero-split .cta { flex-direction: row; align-items: center; }
   .stage { justify-self: center; }
 }
-.stage { --sw: 250px; --bz: 7px; --d: 15px; position: relative; perspective: 1700px; perspective-origin: 50% 40%;
+.stage { --sw: 250px; --bz: 7px; --d: 15px; position: relative; cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; perspective: 1700px; perspective-origin: 50% 40%;
   width: calc(var(--sw) + var(--bz) * 2); height: calc(var(--sw) * 1122 / 540 + var(--bz) * 2); margin: 6px 0 96px; }
 @media (min-width: 980px) { .stage { --sw: 290px; --bz: 8px; --d: 17px; } }
 .phone { position: absolute; inset: 0; transform-style: preserve-3d; will-change: transform;
@@ -461,9 +461,8 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
 .side.b { transform: rotateX(-90deg) translateZ(calc((var(--sw) * 1122 / 540 + var(--bz) * 2) / 2)); }
 .floor { position: absolute; left: 8%; right: 8%; bottom: -34px; height: 26px; border-radius: 50%;
   background: radial-gradient(closest-side, rgba(57,255,106,.35), rgba(0,0,0,.6) 55%, transparent); filter: blur(6px); transform: scale(var(--fs, 1)); }
-.flip { position: absolute; right: -8px; bottom: -62px; padding: 8px 14px; border-radius: 99px; border: 1px solid rgba(255,255,255,.18);
-  background: rgba(0,0,0,.45); color: #fff; font: 700 12px var(--body); letter-spacing: .06em; cursor: pointer; backdrop-filter: blur(6px); }
-.flip:hover { border-color: var(--acid); color: var(--acid); }
+.stage.grabbing { cursor: grabbing; }
+.stage img { -webkit-user-drag: none; pointer-events: none; }
 @media (prefers-reduced-motion: reduce) { .disc .led i, .disc .ledglow, .cam-tile i { animation: none; } .disc .led { filter: none; } }
 </style>
 
@@ -551,7 +550,6 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
         <div class="side r"></div><div class="side l"></div><div class="side t"></div><div class="side b"></div>
       </div>
       <div class="floor" aria-hidden="true"></div>
-      <button class="flip" id="flip" type="button" aria-label="Girar o celular">↻ Girar</button>
     </div>
   </div>
 </header>
@@ -961,11 +959,25 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
   var stage = document.getElementById('stage'), phone = document.getElementById('phone');
   if (!stage || !phone) return;
   var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var flipped = /costas/.test(location.search) ? 180 : 0, flipShown = flipped, px = 0, py = 0, sp = 0, t0 = performance.now(), visible = true;
+  var turn = /costas/.test(location.search) ? 180 : 0, tilt = 0, vel = 0, drag = null, px = 0, py = 0, sp = 0, t0 = performance.now(), visible = true;
   new IntersectionObserver(function (es) { visible = es[0].isIntersecting; }).observe(stage);
-  document.getElementById('flip').addEventListener('click', function () { flipped = flipped ? 0 : 180; });
-  stage.addEventListener('click', function (e) { if (e.target.id !== 'flip') flipped = flipped ? 0 : 180; });
+  // Turn it with a finger or the mouse: sideways turns it all the way round, up and down tilts it a bit.
+  // (On a phone, up and down still scrolls the page.)
+  stage.addEventListener('pointerdown', function (e) {
+    drag = { x: e.clientX, y: e.clientY, id: e.pointerId, last: performance.now() };
+    stage.setPointerCapture(e.pointerId); stage.classList.add('grabbing'); vel = 0;
+  });
+  stage.addEventListener('pointermove', function (e) {
+    if (!drag || e.pointerId !== drag.id) return;
+    var dx = e.clientX - drag.x, dy = e.clientY - drag.y, now = performance.now();
+    turn += dx * .55; vel = dx * .55 / Math.max(8, now - drag.last) * 16;
+    if (e.pointerType === 'mouse') tilt = Math.max(-35, Math.min(35, tilt - dy * .35));
+    drag.x = e.clientX; drag.y = e.clientY; drag.last = now;
+  });
+  function letGo(e) { if (!drag || (e && e.pointerId !== drag.id)) return; drag = null; stage.classList.remove('grabbing'); }
+  stage.addEventListener('pointerup', letGo); stage.addEventListener('pointercancel', letGo); stage.addEventListener('lostpointercapture', letGo);
   window.addEventListener('pointermove', function (e) {
+    if (drag || e.pointerType !== 'mouse') return;
     px = (e.clientX / innerWidth - .5) * 2; py = (e.clientY / innerHeight - .5) * 2;
   }, { passive: true });
   function frame(now) {
@@ -974,9 +986,11 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
     var t = (now - t0) / 1000;
     var target = Math.min(1, scrollY / Math.max(1, innerHeight * .9));
     sp += (target - sp) * .08;
-    flipShown += (flipped - flipShown) * .07;
-    var ry = -16 + (calm ? 0 : Math.sin(t * .6) * 5) + px * 9 + sp * 34 + flipShown;
-    var rx = 6 + (calm ? 0 : Math.sin(t * .8) * 1.5) - py * 5 - sp * 6;
+    if (!drag && Math.abs(vel) > .02) { turn += vel; vel *= .94; }
+    if (!drag) tilt *= .96;
+    var hands = drag ? 0 : 1;
+    var ry = -16 + (calm ? 0 : Math.sin(t * .6) * 5 * hands) + px * 9 * hands + sp * 34 + turn;
+    var rx = 6 + (calm ? 0 : Math.sin(t * .8) * 1.5 * hands) - py * 5 * hands - sp * 6 + tilt;
     var fy = calm ? 0 : Math.sin(t * 1.1) * 8;
     phone.style.setProperty('--ry', ry.toFixed(2) + 'deg');
     phone.style.setProperty('--rx', rx.toFixed(2) + 'deg');
