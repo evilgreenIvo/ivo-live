@@ -368,12 +368,12 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
   .hero-split .cta { flex-direction: row; align-items: center; }
   .stage { justify-self: center; }
 }
-.stage { --sw: 250px; --bz: 7px; --d: 15px; position: relative; cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; perspective: 1700px; perspective-origin: 50% 40%;
+.stage { --sw: 250px; --bz: 7px; --d: 15px; --R: 26px; --W: calc(var(--sw) + var(--bz) * 2); --H: calc(var(--sw) * 1122 / 540 + var(--bz) * 2); position: relative; cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; perspective: 1700px; perspective-origin: 50% 40%;
   width: calc(var(--sw) + var(--bz) * 2); height: calc(var(--sw) * 1122 / 540 + var(--bz) * 2); margin: 6px 0 96px; }
 @media (min-width: 980px) { .stage { --sw: 290px; --bz: 8px; --d: 17px; } }
 .phone { position: absolute; inset: 0; transform-style: preserve-3d; will-change: transform;
   transform: translateY(var(--fy, 0px)) rotateX(var(--rx, 6deg)) rotateY(var(--ry, -16deg)) rotateZ(var(--rz, 0deg)); }
-.face { position: absolute; inset: 0; border-radius: 26px; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.face { position: absolute; inset: 0; border-radius: var(--R); backface-visibility: hidden; -webkit-backface-visibility: hidden; }
 .front { transform: translateZ(calc(var(--d) / 2)); padding: var(--bz);
   background: linear-gradient(145deg, #3a3d44, #0d0e11 38%, #24262c 62%, #0b0c0e);
   box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.14), inset 0 0 0 3px #050506; }
@@ -452,13 +452,20 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
   box-shadow: inset 0 0 0 2px #2a2d33, inset 0 4px 12px rgba(0,0,0,.5), 0 0 0 3px #121417; }
 .disc .dot { position: absolute; left: 50%; top: 50%; width: 9%; height: 2.4%; border-radius: 2px; transform: translate(-50%, -50%) rotate(-35deg); background: #4d95ff; box-shadow: 0 0 6px #2d7bff; }
 .side { position: absolute; background: linear-gradient(180deg, #4a4d55, #16171b 40%, #2c2e34 70%, #101114); }
-.side.r, .side.l { width: var(--d); top: 22px; bottom: 22px; left: calc(50% - var(--d) / 2); }
-.side.r { transform: rotateY(90deg) translateZ(calc((var(--sw) + var(--bz) * 2) / 2)); }
-.side.l { transform: rotateY(-90deg) translateZ(calc((var(--sw) + var(--bz) * 2) / 2)); }
+.side.r, .side.l { width: var(--d); top: calc(var(--R) - 1px); bottom: calc(var(--R) - 1px); left: calc(50% - var(--d) / 2); }
+.side.r { transform: rotateY(90deg) translateZ(calc(var(--W) / 2)); }
+.side.l { transform: rotateY(-90deg) translateZ(calc(var(--W) / 2)); }
 .side.r::after { content: ""; position: absolute; left: 30%; right: 30%; top: 18%; height: 9%; border-radius: 3px; background: #39FF6A; box-shadow: 0 0 8px #39FF6A; }
-.side.t, .side.b { height: var(--d); left: 22px; right: 22px; top: calc(50% - var(--d) / 2); }
-.side.t { transform: rotateX(90deg) translateZ(calc((var(--sw) * 1122 / 540 + var(--bz) * 2) / 2)); }
-.side.b { transform: rotateX(-90deg) translateZ(calc((var(--sw) * 1122 / 540 + var(--bz) * 2) / 2)); }
+.side.t, .side.b { height: var(--d); left: calc(var(--R) - 1px); right: calc(var(--R) - 1px); top: calc(50% - var(--d) / 2); }
+.side.t { transform: rotateX(90deg) translateZ(calc(var(--H) / 2)); }
+.side.b { transform: rotateX(-90deg) translateZ(calc(var(--H) / 2)); }
+/* The 4 rounded corners: a slanted piece each (the chord of the curve), so a phone seen edge-on has no hole. */
+.side.k { width: var(--d); height: calc(var(--R) * 1.42 + 3px); left: calc(50% - var(--d) / 2); top: calc(50% - (var(--R) * 1.42 + 3px) / 2);
+  background: linear-gradient(180deg, #3a3d44, #16171b 50%, #2c2e34); }
+.side.k1 { transform: translate(calc(var(--W) / 2 - var(--R) * .5), calc(var(--H) / -2 + var(--R) * .5)) rotateZ(-45deg) rotateY(90deg); }
+.side.k2 { transform: translate(calc(var(--W) / 2 - var(--R) * .5), calc(var(--H) / 2 - var(--R) * .5)) rotateZ(45deg) rotateY(90deg); }
+.side.k3 { transform: translate(calc(var(--W) / -2 + var(--R) * .5), calc(var(--H) / 2 - var(--R) * .5)) rotateZ(135deg) rotateY(90deg); }
+.side.k4 { transform: translate(calc(var(--W) / -2 + var(--R) * .5), calc(var(--H) / -2 + var(--R) * .5)) rotateZ(-135deg) rotateY(90deg); }
 .floor { position: absolute; left: 8%; right: 8%; bottom: -34px; height: 26px; border-radius: 50%;
   background: radial-gradient(closest-side, rgba(57,255,106,.35), rgba(0,0,0,.6) 55%, transparent); filter: blur(6px); transform: scale(var(--fs, 1)); }
 .stage.grabbing { cursor: grabbing; }
@@ -548,6 +555,7 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
           <svg class="defs" width="0" height="0" aria-hidden="true" focusable="false"><filter id="liquid" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.025 0.045" numOctaves="2" seed="4"><animate attributeName="baseFrequency" dur="9s" values="0.025 0.045;0.04 0.022;0.025 0.045" repeatCount="indefinite"/></feTurbulence><feDisplacementMap in="SourceGraphic" scale="24" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
         </div>
         <div class="side r"></div><div class="side l"></div><div class="side t"></div><div class="side b"></div>
+        <div class="side k k1"></div><div class="side k k2"></div><div class="side k k3"></div><div class="side k k4"></div>
       </div>
       <div class="floor" aria-hidden="true"></div>
     </div>
@@ -959,7 +967,7 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
   var stage = document.getElementById('stage'), phone = document.getElementById('phone');
   if (!stage || !phone) return;
   var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var turn = /costas/.test(location.search) ? 180 : 0, tilt = 0, vel = 0, drag = null, px = 0, py = 0, sp = 0, t0 = performance.now(), visible = true;
+  var turn = /costas/.test(location.search) ? 180 : (/lado/.test(location.search) ? 106 : 0), tilt = 0, vel = 0, drag = null, px = 0, py = 0, sp = 0, t0 = performance.now(), visible = true;
   new IntersectionObserver(function (es) { visible = es[0].isIntersecting; }).observe(stage);
   // Turn it with a finger or the mouse: sideways turns it all the way round, up and down tilts it a bit.
   // (On a phone, up and down still scrolls the page.)
