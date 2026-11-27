@@ -402,41 +402,50 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
   background: linear-gradient(115deg, transparent 38%, rgba(255,255,255,.13) 46%, rgba(255,255,255,.04) 52%, transparent 60%);
   transform: translateX(var(--sx, 0%)); }
 .back { transform: rotateY(180deg) translateZ(calc(var(--d) / 2)); overflow: hidden;
-  background: linear-gradient(160deg, #2b2e34, #17191d 45%, #23262b);
-  box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.22), inset 0 0 0 4px #0c0d0f, inset 0 0 0 5px rgba(255,255,255,.06); }
-.mesh { position: absolute; inset: 5px; border-radius: 22px; opacity: .55;
-  background: repeating-linear-gradient(45deg, rgba(255,255,255,.05) 0 1px, transparent 1px 3px), repeating-linear-gradient(-45deg, rgba(0,0,0,.35) 0 1px, transparent 1px 3px); }
-.cam-bay { position: absolute; left: 7px; right: 7px; top: 7px; height: 30%; border-radius: 18px 18px 6px 6px; padding: 7% 7% 6%;
-  display: flex; flex-direction: column; justify-content: space-between;
-  background: linear-gradient(180deg, #121417, #0a0b0d); box-shadow: inset 0 0 0 1px rgba(255,255,255,.12), 0 1px 0 rgba(255,255,255,.06); }
-/* Two straight rows, everything centred on its row. */
-.cam-bay .row { display: flex; align-items: center; justify-content: space-between; }
-.cam-bay .r1 { padding: 0 2%; }
-.cam-bay .r2 { gap: 6%; justify-content: flex-start; padding-left: 4%; }
+  background: linear-gradient(155deg, #4a4e55, #33363c 35%, #2a2d32 65%, #3a3e44);
+  box-shadow: inset 0 0 0 2px #b9bec6, inset 0 0 0 3px #5b6068, inset 0 0 0 4px #1a1c20, inset 0 0 0 5px rgba(255,255,255,.08); }
+.mesh { position: absolute; inset: 5px; border-radius: 22px; opacity: .5;
+  background: repeating-linear-gradient(45deg, rgba(255,255,255,.045) 0 1px, transparent 1px 3px), repeating-linear-gradient(-45deg, rgba(0,0,0,.28) 0 1px, transparent 1px 3px); }
+.backsheen { position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: linear-gradient(125deg, rgba(255,255,255,.10) 0%, transparent 28%, transparent 62%, rgba(255,255,255,.06) 80%, transparent 92%); }
+.cam-bay { position: absolute; left: 9px; right: 9px; top: 9px; height: 27%; border-radius: 16px 16px 5px 5px; padding: 6% 6% 5%;
+  display: grid; grid-template-columns: 31% 19% 1fr; column-gap: 4%;
+  background: linear-gradient(180deg, #1b1d21, #121316); box-shadow: 0 0 0 1px #5d626a, 0 0 0 2.5px #1b1d21, inset 0 1px 0 rgba(255,255,255,.08); }
+.cam-bay > div { display: flex; flex-direction: column; align-items: center; justify-content: space-between; min-height: 0; }
 .cam-bay i { display: block; flex: none; }
 .lens { border-radius: 50%; aspect-ratio: 1; }
-/* The glass: rings all around the same centre; the shine is a layer of its own on top. */
-.lens.big { width: 40%; background:
-    radial-gradient(circle at 37% 33%, rgba(175,195,235,.95) 0 3.5%, transparent 8%),
-    radial-gradient(circle at 50% 50%, #18213a 0 16%, #04060a 30%, #1f2228 48%, #0b0c0e 53%, #3a3d44 57%, #101114 62%, #24272d 100%);
-  box-shadow: 0 0 0 3px #2a2d33, 0 0 0 4.5px rgba(255,255,255,.1), inset 0 0 6px rgba(0,0,0,.8); }
-.lens.small { width: 16%; background:
+/* Glass in the middle, a thick dark-metal ring around it (one centre), the shine on top. */
+.lens.big { width: 86%; background:
+    radial-gradient(circle at 37% 33%, rgba(185,205,240,.9) 0 3%, transparent 7%),
+    radial-gradient(circle at 50% 50%, #1b2440 0 13%, #04060a 26%, #15171b 40%, #050607 46%,
+      #2d3036 49%, #6b7078 55%, #3c4046 61%, #868b93 66%, #34373d 72%, #1a1c20 77%, #121316 100%);
+  box-shadow: 0 0 0 1.5px #0b0c0e, 0 2px 5px rgba(0,0,0,.6); }
+.lens.big.bronze { background:
+    radial-gradient(circle at 37% 33%, rgba(220,200,170,.8) 0 3%, transparent 7%),
+    radial-gradient(circle at 50% 50%, #2a2116 0 12%, #070504 26%, #17140f 40%, #060504 46%,
+      #4a3a28 49%, #a07a52 55%, #5e4a33 61%, #c49a6c 66%, #4f3e2b 72%, #1c1813 77%, #121316 100%); }
+.lens.small { width: 66%; background:
     radial-gradient(circle at 37% 33%, rgba(170,220,190,.8) 0 5%, transparent 11%),
-    radial-gradient(circle at 50% 50%, #0d2a1a 0 22%, #03100a 38%, #1d2024 56%, #0b0c0e 64%, #22252b 100%);
-  box-shadow: 0 0 0 2px #2a2d33; }
-.flash { width: 14%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 50% 50%, #fff6e0 0 32%, #2a2d33 34% 44%, #dfe3ea 46% 62%, #2a2d33 64%); }
-.led-bar { width: 3px; height: 70%; align-self: center; border-radius: 2px; background: #2d7bff; box-shadow: 0 0 8px #2d7bff, 0 0 2px #fff; }
-.r2 { height: 34%; }
-.vent { margin-left: auto; width: 34%; height: 100%; border-radius: 6px; display: grid !important; place-items: center;
-  background: repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 1px, transparent 1px 3px), #0d0f12;
-  box-shadow: 0 0 0 2px #2d7bff, 0 0 12px rgba(45,123,255,.75); }
-.vent img { width: 40%; filter: sepia(1) saturate(3) hue-rotate(-12deg) brightness(.95); opacity: .9; }
-.mark { position: absolute; left: 0; right: 0; top: 35.5%; text-align: center; font: 700 10px var(--body); letter-spacing: .42em; color: #c99a5b; text-shadow: 0 0 6px rgba(201,154,91,.35); }
-.disc { position: absolute; left: 50%; top: 66%; width: 68%; aspect-ratio: 1; transform: translate(-50%, -50%); }
+    radial-gradient(circle at 50% 50%, #0d2a1a 0 20%, #03100a 34%, #121418 46%, #4a4f56 54%, #8a9098 62%, #3a3e44 72%, #15171a 100%);
+  box-shadow: 0 0 0 1.5px #0b0c0e; }
+.flash { width: 64%; aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, #1a1c20 0 34%, #fbfaf6 38% 64%, #9ea3ab 68% 74%, #1a1c20 78%); box-shadow: 0 0 0 1.5px #0b0c0e; }
+.chip { width: 62%; aspect-ratio: 1; border-radius: 3px; background:
+    linear-gradient(135deg, rgba(255,255,255,.12), transparent 50%),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.05) 0 1px, transparent 1px 3px), #16181c;
+  box-shadow: inset 0 0 0 1px #6b7078, inset 0 0 0 3px #16181c, inset 0 0 0 4px rgba(255,255,255,.12); }
+.cam-bay .c3 { align-items: stretch; justify-content: flex-start; gap: 12%; }
+.vent { height: 58%; border-radius: 7px; display: grid !important; place-items: center;
+  background: repeating-linear-gradient(0deg, rgba(255,255,255,.07) 0 1px, transparent 1px 2.5px), #0b0c0f;
+  box-shadow: 0 0 0 2px #2d7bff, 0 0 14px rgba(45,123,255,.85), inset 0 0 0 4px #0b0c0f, inset 0 0 0 5px #3a3e45; }
+.vent img { height: 62%; filter: sepia(1) saturate(3) hue-rotate(-12deg) brightness(.95); opacity: .92; }
+.led-bar { height: 3px; width: 78%; align-self: center; border-radius: 2px; background: #2d7bff; box-shadow: 0 0 8px #2d7bff, 0 0 2px #fff; }
+.mark { position: absolute; left: 7%; bottom: 7%; writing-mode: vertical-rl; transform: rotate(180deg); font: 700 11.5px var(--body); letter-spacing: .42em; background: linear-gradient(180deg, #e0b07a, #a8703e 60%, #d29a62); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.disc { position: absolute; left: 50%; top: 61%; width: 90%; aspect-ratio: 1; transform: translate(-50%, -50%); }
 .defs { position: absolute; width: 0; height: 0; }
 /* The blue ring: a tube with liquid running inside (layers of blue turning at different speeds, rippled). */
 .disc .led { position: absolute; inset: 0; border-radius: 50%; overflow: hidden; background: #071a4d;
-  -webkit-mask: radial-gradient(circle closest-side, transparent 83%, #000 85% 95%, transparent 97%); mask: radial-gradient(circle closest-side, transparent 83%, #000 85% 95%, transparent 97%);
+  -webkit-mask: radial-gradient(circle closest-side, transparent 89%, #000 90.5% 96.5%, transparent 98%); mask: radial-gradient(circle closest-side, transparent 89%, #000 90.5% 96.5%, transparent 98%);
   filter: url(#liquid); }
 .disc .led i { position: absolute; inset: -12%; border-radius: 50%; }
 .disc .led .f1 { background: conic-gradient(from 0deg, #04124f, #1f5bff 14%, #04124f 28%, #2d7bff 42%, #04124f 56%, #4fb8ff 70%, #061a6b 84%, #04124f); animation: spin 5s linear infinite; }
@@ -449,17 +458,17 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
     radial-gradient(circle at 50% 95%, rgba(200,236,255,.85) 0 1.9%, transparent 3.6%),
     radial-gradient(circle at 5% 50%, rgba(200,236,255,.7) 0 1.5%, transparent 3%),
     radial-gradient(circle at 82% 18%, rgba(210,240,255,.6) 0 1.3%, transparent 2.8%); }
-.disc .ledglow { position: absolute; inset: 2%; border-radius: 50%;
+.disc .ledglow { position: absolute; inset: 3.5%; border-radius: 50%;
   box-shadow: 0 0 16px 3px rgba(45,123,255,.75), 0 0 34px 8px rgba(45,123,255,.35), inset 0 0 14px 3px rgba(45,123,255,.55); animation: breathe 3.2s ease-in-out infinite; }
 .disc .joints { position: absolute; inset: 0; border-radius: 50%; pointer-events: none;
-  background: conic-gradient(from -2deg, #0b0c0f 0 1.2%, transparent 1.2% 49.4%, #0b0c0f 49.4% 50.6%, transparent 50.6% 98.8%, #0b0c0f 98.8%);
-  -webkit-mask: radial-gradient(circle closest-side, transparent 83%, #000 85% 95%, transparent 97%); mask: radial-gradient(circle closest-side, transparent 83%, #000 85% 95%, transparent 97%); }
+  background: conic-gradient(from 32deg, #2c2f34 0 .7%, transparent .7% 24.6%, rgba(44,47,52,.55) 24.6% 25.2%, transparent 25.2% 49.6%, #2c2f34 49.6% 50.4%, transparent 50.4% 74.6%, rgba(44,47,52,.55) 74.6% 75.2%, transparent 75.2% 99.3%, #2c2f34 99.3%);
+  -webkit-mask: radial-gradient(circle closest-side, transparent 89%, #000 90.5% 96.5%, transparent 98%); mask: radial-gradient(circle closest-side, transparent 89%, #000 90.5% 96.5%, transparent 98%); }
 @keyframes breathe { 50% { opacity: .7; } }
-.disc .metal { position: absolute; inset: 12%; border-radius: 50%;
-  background: radial-gradient(circle closest-side, rgba(255,255,255,.16), transparent 40%),
-    repeating-radial-gradient(circle closest-side, rgba(255,255,255,.035) 0 1px, transparent 1px 2px),
-    conic-gradient(from 25deg, #8e949d, #5a5f67 25%, #aeb4bd 50%, #5a5f67 75%, #8e949d);
-  box-shadow: inset 0 0 0 2px #2a2d33, inset 0 4px 12px rgba(0,0,0,.5), 0 0 0 3px #121417; }
+.disc .metal { position: absolute; inset: 15%; border-radius: 50%;
+  background: radial-gradient(circle closest-side, rgba(255,255,255,.14), transparent 35%),
+    repeating-radial-gradient(circle closest-side, rgba(255,255,255,.07) 0 .6px, rgba(0,0,0,.08) .6px 1.6px),
+    conic-gradient(from 30deg, #7d838c, #4f545b 22%, #b3b9c2 48%, #50555c 74%, #7d838c);
+  box-shadow: inset 0 0 0 1.5px #23262b, inset 0 0 0 3px rgba(255,255,255,.08), inset 0 5px 14px rgba(0,0,0,.45), 0 0 0 3px #15171a, 0 0 0 4px rgba(255,255,255,.06); }
 .disc .dot { position: absolute; left: 50%; top: 50%; width: 9%; height: 2.4%; border-radius: 2px; transform: translate(-50%, -50%) rotate(-35deg); background: #4d95ff; box-shadow: 0 0 6px #2d7bff; }
 .side { position: absolute; background: linear-gradient(180deg, #4a4d55, #16171b 40%, #2c2e34 70%, #101114); }
 .side.r, .side.l { width: var(--d); top: calc(var(--R) - 1px); bottom: calc(var(--R) - 1px); left: calc(50% - var(--d) / 2); }
@@ -550,10 +559,12 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
         <div class="face back" aria-hidden="true">
           <div class="mesh"></div>
           <div class="cam-bay">
-            <div class="row r1"><i class="lens big"></i><i class="lens big"></i></div>
-            <div class="row r2"><i class="lens small"></i><i class="flash"></i><i class="led-bar"></i><i class="vent"><img src="/assets/logo.png" alt=""></i></div>
+            <div class="c1"><i class="lens big"></i><i class="lens big bronze"></i></div>
+            <div class="c2"><i class="flash"></i><i class="lens small"></i><i class="chip"></i></div>
+            <div class="c3"><i class="vent"><img src="/assets/logo.png" alt=""></i><i class="led-bar"></i></div>
           </div>
           <span class="mark">IVO LIVE</span>
+          <div class="backsheen"></div>
           <div class="disc"><div class="ledglow"></div><div class="led"><i class="f1"></i><i class="f2"></i><i class="f3"></i><i class="bub"></i></div><div class="joints"></div><div class="metal"></div><i class="dot"></i></div>
           <svg class="defs" width="0" height="0" aria-hidden="true" focusable="false"><filter id="liquid" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.025 0.045" numOctaves="2" seed="4"><animate attributeName="baseFrequency" dur="9s" values="0.025 0.045;0.04 0.022;0.025 0.045" repeatCount="indefinite"/></feTurbulence><feDisplacementMap in="SourceGraphic" scale="24" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
         </div>
