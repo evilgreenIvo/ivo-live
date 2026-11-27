@@ -406,18 +406,28 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
   box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.22), inset 0 0 0 4px #0c0d0f, inset 0 0 0 5px rgba(255,255,255,.06); }
 .mesh { position: absolute; inset: 5px; border-radius: 22px; opacity: .55;
   background: repeating-linear-gradient(45deg, rgba(255,255,255,.05) 0 1px, transparent 1px 3px), repeating-linear-gradient(-45deg, rgba(0,0,0,.35) 0 1px, transparent 1px 3px); }
-.cam-bay { position: absolute; left: 7px; right: 7px; top: 7px; height: 30%; border-radius: 18px 18px 6px 6px;
+.cam-bay { position: absolute; left: 7px; right: 7px; top: 7px; height: 30%; border-radius: 18px 18px 6px 6px; padding: 7% 7% 6%;
+  display: flex; flex-direction: column; justify-content: space-between;
   background: linear-gradient(180deg, #121417, #0a0b0d); box-shadow: inset 0 0 0 1px rgba(255,255,255,.12), 0 1px 0 rgba(255,255,255,.06); }
-.cam-bay > i { position: absolute; display: block; }
+/* Two straight rows, everything centred on its row. */
+.cam-bay .row { display: flex; align-items: center; justify-content: space-between; }
+.cam-bay .r1 { padding: 0 2%; }
+.cam-bay .r2 { gap: 6%; justify-content: flex-start; padding-left: 4%; }
+.cam-bay i { display: block; flex: none; }
 .lens { border-radius: 50%; aspect-ratio: 1; }
-.lens.big { top: 9%; width: 31%; background: radial-gradient(circle at 42% 38%, #8394b5 0 5%, #121826 12%, #030406 32%, #23262c 50%, #0b0c0e 55%, #3d4047 58%, #0c0d0f 64%);
-  box-shadow: 0 0 0 3px #2a2d33, 0 0 0 4px rgba(255,255,255,.12); }
-.lens.big:nth-child(1) { left: 9%; } .lens.big:nth-child(2) { left: 54%; }
-.lens.small { left: 13%; top: 66%; width: 14%; background: radial-gradient(circle at 42% 38%, #40604e 0 10%, #04120a 34%, #1d2024 56%, #0b0c0e 64%); box-shadow: 0 0 0 2px #2a2d33; }
-.flash { left: 31%; top: 67%; width: 13%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, #fff6e0 0 32%, #2a2d33 34% 44%, #dfe3ea 46% 62%, #2a2d33 64%); }
-.sensor { display: none; }
-.led-bar { left: 51%; top: 63%; width: 3px; height: 28%; border-radius: 2px; background: #2d7bff; box-shadow: 0 0 8px #2d7bff, 0 0 2px #fff; }
-.vent { left: 58%; top: 60%; width: 33%; height: 33%; border-radius: 6px; display: grid !important; place-items: center;
+/* The glass: rings all around the same centre; the shine is a layer of its own on top. */
+.lens.big { width: 40%; background:
+    radial-gradient(circle at 37% 33%, rgba(175,195,235,.95) 0 3.5%, transparent 8%),
+    radial-gradient(circle at 50% 50%, #18213a 0 16%, #04060a 30%, #1f2228 48%, #0b0c0e 53%, #3a3d44 57%, #101114 62%, #24272d 100%);
+  box-shadow: 0 0 0 3px #2a2d33, 0 0 0 4.5px rgba(255,255,255,.1), inset 0 0 6px rgba(0,0,0,.8); }
+.lens.small { width: 16%; background:
+    radial-gradient(circle at 37% 33%, rgba(170,220,190,.8) 0 5%, transparent 11%),
+    radial-gradient(circle at 50% 50%, #0d2a1a 0 22%, #03100a 38%, #1d2024 56%, #0b0c0e 64%, #22252b 100%);
+  box-shadow: 0 0 0 2px #2a2d33; }
+.flash { width: 14%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 50% 50%, #fff6e0 0 32%, #2a2d33 34% 44%, #dfe3ea 46% 62%, #2a2d33 64%); }
+.led-bar { width: 3px; height: 70%; align-self: center; border-radius: 2px; background: #2d7bff; box-shadow: 0 0 8px #2d7bff, 0 0 2px #fff; }
+.r2 { height: 34%; }
+.vent { margin-left: auto; width: 34%; height: 100%; border-radius: 6px; display: grid !important; place-items: center;
   background: repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 1px, transparent 1px 3px), #0d0f12;
   box-shadow: 0 0 0 2px #2d7bff, 0 0 12px rgba(45,123,255,.75); }
 .vent img { width: 40%; filter: sepia(1) saturate(3) hue-rotate(-12deg) brightness(.95); opacity: .9; }
@@ -540,10 +550,8 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
         <div class="face back" aria-hidden="true">
           <div class="mesh"></div>
           <div class="cam-bay">
-            <i class="lens big"></i><i class="lens big"></i>
-            <i class="lens small"></i><i class="flash"></i>
-            <i class="sensor"></i><i class="led-bar"></i>
-            <i class="vent"><img src="/assets/logo.png" alt=""></i>
+            <div class="row r1"><i class="lens big"></i><i class="lens big"></i></div>
+            <div class="row r2"><i class="lens small"></i><i class="flash"></i><i class="led-bar"></i><i class="vent"><img src="/assets/logo.png" alt=""></i></div>
           </div>
           <span class="mark">IVO LIVE</span>
           <div class="disc"><div class="ledglow"></div><div class="led"><i class="f1"></i><i class="f2"></i><i class="f3"></i><i class="bub"></i></div><div class="joints"></div><div class="metal"></div><i class="dot"></i></div>
