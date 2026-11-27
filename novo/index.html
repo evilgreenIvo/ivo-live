@@ -401,27 +401,41 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
 .sheen { position: absolute; inset: -20%; pointer-events: none; mix-blend-mode: screen;
   background: linear-gradient(115deg, transparent 38%, rgba(255,255,255,.13) 46%, rgba(255,255,255,.04) 52%, transparent 60%);
   transform: translateX(var(--sx, 0%)); }
-.back { transform: rotateY(180deg) translateZ(calc(var(--d) / 2)); padding: 0;
-  background: linear-gradient(150deg, #1b1d22, #07080a 55%, #15171b); box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.12); overflow: hidden; }
-.glass { position: absolute; inset: 9px; border-radius: 19px; overflow: hidden;
-  background: radial-gradient(120% 60% at 30% 10%, rgba(255,255,255,.08), transparent 55%), repeating-linear-gradient(90deg, rgba(255,255,255,.025) 0 1px, transparent 1px 7px), #0a0b0e; }
-.lenses { position: absolute; left: 10%; top: 5%; display: flex; flex-direction: column; gap: 8px; }
-.lenses i { width: 30px; height: 30px; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #3b4a66 0 12%, #05070a 30%, #111 58%, #2a2c31 60%, #0a0a0b 66%); box-shadow: 0 0 0 2px #2b2d33; }
-.lenses i:last-child { width: 18px; height: 18px; margin-left: 6px; }
-.fan { position: absolute; left: 50%; top: 50%; width: 46%; aspect-ratio: 1; transform: translate(-50%, -30%); }
-.fan .ring { position: absolute; inset: 0; border-radius: 50%; padding: 3px;
-  background: conic-gradient(from var(--hue, 0deg), #ff2d3d, #ffb800, #39FF6A, #00E5FF, #8a5bff, #ff2d3d);
-  -webkit-mask: radial-gradient(circle, transparent 66%, #000 67%); mask: radial-gradient(circle, transparent 66%, #000 67%);
-  filter: drop-shadow(0 0 10px rgba(57,255,106,.7)); animation: hue 4s linear infinite; }
-@property --hue { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
-@keyframes hue { to { --hue: 360deg; } }
-.fan .blades { position: absolute; inset: 12%; border-radius: 50%; animation: spin .45s linear infinite;
-  background: repeating-conic-gradient(from 0deg, rgba(200,210,230,.35) 0 14deg, transparent 14deg 40deg); filter: blur(.6px); }
-.fan .hub { position: absolute; inset: 38%; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #3a3d44, #0c0d10); box-shadow: 0 0 0 2px #23252b; }
-@keyframes spin { to { transform: rotate(360deg); } }
-.trace { position: absolute; height: 1.5px; background: linear-gradient(90deg, transparent, rgba(57,255,106,.55), transparent); }
-.trace.t1 { left: 8%; right: 30%; top: 72%; } .trace.t2 { left: 40%; right: 8%; top: 78%; } .trace.t3 { left: 15%; right: 50%; top: 84%; }
-.engrave { position: absolute; left: 0; right: 0; bottom: 7%; text-align: center; font: 800 11px var(--display); letter-spacing: .3em; color: rgba(255,255,255,.22); }
+.back { transform: rotateY(180deg) translateZ(calc(var(--d) / 2)); overflow: hidden;
+  background: linear-gradient(160deg, #2b2e34, #17191d 45%, #23262b);
+  box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.22), inset 0 0 0 4px #0c0d0f, inset 0 0 0 5px rgba(255,255,255,.06); }
+.mesh { position: absolute; inset: 5px; border-radius: 22px; opacity: .55;
+  background: repeating-linear-gradient(45deg, rgba(255,255,255,.05) 0 1px, transparent 1px 3px), repeating-linear-gradient(-45deg, rgba(0,0,0,.35) 0 1px, transparent 1px 3px); }
+.cam-bay { position: absolute; left: 7px; right: 7px; top: 7px; height: 30%; border-radius: 18px 18px 6px 6px;
+  background: linear-gradient(180deg, #121417, #0a0b0d); box-shadow: inset 0 0 0 1px rgba(255,255,255,.12), 0 1px 0 rgba(255,255,255,.06); }
+.cam-bay > i { position: absolute; display: block; }
+.lens { border-radius: 50%; aspect-ratio: 1; }
+.lens.big { top: 9%; width: 31%; background: radial-gradient(circle at 42% 38%, #8394b5 0 5%, #121826 12%, #030406 32%, #23262c 50%, #0b0c0e 55%, #3d4047 58%, #0c0d0f 64%);
+  box-shadow: 0 0 0 3px #2a2d33, 0 0 0 4px rgba(255,255,255,.12); }
+.lens.big:nth-child(1) { left: 9%; } .lens.big:nth-child(2) { left: 54%; }
+.lens.small { left: 13%; top: 66%; width: 14%; background: radial-gradient(circle at 42% 38%, #40604e 0 10%, #04120a 34%, #1d2024 56%, #0b0c0e 64%); box-shadow: 0 0 0 2px #2a2d33; }
+.flash { left: 31%; top: 67%; width: 13%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, #fff6e0 0 32%, #2a2d33 34% 44%, #dfe3ea 46% 62%, #2a2d33 64%); }
+.sensor { display: none; }
+.led-bar { left: 51%; top: 63%; width: 3px; height: 28%; border-radius: 2px; background: #2d7bff; box-shadow: 0 0 8px #2d7bff, 0 0 2px #fff; }
+.vent { left: 58%; top: 60%; width: 33%; height: 33%; border-radius: 6px; display: grid !important; place-items: center;
+  background: repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 1px, transparent 1px 3px), #0d0f12;
+  box-shadow: 0 0 0 2px #2d7bff, 0 0 12px rgba(45,123,255,.75); }
+.vent img { width: 40%; filter: sepia(1) saturate(3) hue-rotate(-12deg) brightness(.95); opacity: .9; }
+.mark { position: absolute; left: 0; right: 0; top: 35.5%; text-align: center; font: 700 10px var(--body); letter-spacing: .42em; color: #c99a5b; text-shadow: 0 0 6px rgba(201,154,91,.35); }
+.disc { position: absolute; left: 50%; top: 66%; width: 68%; aspect-ratio: 1; transform: translate(-50%, -50%); }
+.disc .led { position: absolute; inset: 0; border-radius: 50%;
+  background: conic-gradient(from var(--spin, 0deg), #2d7bff 0 22%, #5aa2ff 24%, #2d7bff 26% 47%, transparent 47.5% 50%, #2d7bff 50.5% 72%, #8cc0ff 74%, #2d7bff 76% 97%, transparent 97.5%);
+  -webkit-mask: radial-gradient(circle closest-side, transparent 84%, #000 86% 95%, transparent 97%); mask: radial-gradient(circle closest-side, transparent 84%, #000 86% 95%, transparent 97%);
+  filter: drop-shadow(0 0 6px #2d7bff) drop-shadow(0 0 16px rgba(45,123,255,.8)); animation: ringspin 7s linear infinite, breathe 3.2s ease-in-out infinite; }
+@property --spin { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+@keyframes ringspin { to { --spin: 360deg; } }
+@keyframes breathe { 50% { opacity: .78; } }
+.disc .metal { position: absolute; inset: 12%; border-radius: 50%;
+  background: radial-gradient(circle closest-side, rgba(255,255,255,.16), transparent 40%),
+    repeating-radial-gradient(circle closest-side, rgba(255,255,255,.035) 0 1px, transparent 1px 2px),
+    conic-gradient(from 25deg, #8e949d, #5a5f67 25%, #aeb4bd 50%, #5a5f67 75%, #8e949d);
+  box-shadow: inset 0 0 0 2px #2a2d33, inset 0 4px 12px rgba(0,0,0,.5), 0 0 0 3px #121417; }
+.disc .dot { position: absolute; left: 50%; top: 50%; width: 9%; height: 2.4%; border-radius: 2px; transform: translate(-50%, -50%) rotate(-35deg); background: #4d95ff; box-shadow: 0 0 6px #2d7bff; }
 .side { position: absolute; background: linear-gradient(180deg, #4a4d55, #16171b 40%, #2c2e34 70%, #101114); }
 .side.r, .side.l { width: var(--d); top: 22px; bottom: 22px; left: calc(50% - var(--d) / 2); }
 .side.r { transform: rotateY(90deg) translateZ(calc((var(--sw) + var(--bz) * 2) / 2)); }
@@ -435,7 +449,7 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
 .flip { position: absolute; right: -8px; bottom: -62px; padding: 8px 14px; border-radius: 99px; border: 1px solid rgba(255,255,255,.18);
   background: rgba(0,0,0,.45); color: #fff; font: 700 12px var(--body); letter-spacing: .06em; cursor: pointer; backdrop-filter: blur(6px); }
 .flip:hover { border-color: var(--acid); color: var(--acid); }
-@media (prefers-reduced-motion: reduce) { .fan .blades, .fan .ring, .cam-tile i { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .disc .led, .cam-tile i { animation: none; } }
 </style>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6426161266572963"
@@ -508,12 +522,15 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
           </div>
         </div>
         <div class="face back" aria-hidden="true">
-          <div class="glass">
-            <div class="lenses"><i></i><i></i><i></i></div>
-            <div class="fan"><div class="ring"></div><div class="blades"></div><div class="hub"></div></div>
-            <div class="trace t1"></div><div class="trace t2"></div><div class="trace t3"></div>
-            <span class="engrave">IVO LIVE</span>
+          <div class="mesh"></div>
+          <div class="cam-bay">
+            <i class="lens big"></i><i class="lens big"></i>
+            <i class="lens small"></i><i class="flash"></i>
+            <i class="sensor"></i><i class="led-bar"></i>
+            <i class="vent"><img src="/assets/logo.png" alt=""></i>
           </div>
+          <span class="mark">IVO LIVE</span>
+          <div class="disc"><div class="led"></div><div class="metal"></div><i class="dot"></i></div>
         </div>
         <div class="side r"></div><div class="side l"></div><div class="side t"></div><div class="side b"></div>
       </div>
@@ -928,7 +945,7 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
   var stage = document.getElementById('stage'), phone = document.getElementById('phone');
   if (!stage || !phone) return;
   var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var flipped = 0, flipShown = 0, px = 0, py = 0, sp = 0, t0 = performance.now(), visible = true;
+  var flipped = /costas/.test(location.search) ? 180 : 0, flipShown = flipped, px = 0, py = 0, sp = 0, t0 = performance.now(), visible = true;
   new IntersectionObserver(function (es) { visible = es[0].isIntersecting; }).observe(stage);
   document.getElementById('flip').addEventListener('click', function () { flipped = flipped ? 0 : 180; });
   stage.addEventListener('click', function (e) { if (e.target.id !== 'flip') flipped = flipped ? 0 : 180; });
