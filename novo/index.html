@@ -438,7 +438,7 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
 .vent { height: 58%; border-radius: 7px; display: grid !important; place-items: center;
   background: repeating-linear-gradient(0deg, rgba(255,255,255,.07) 0 1px, transparent 1px 2.5px), #0b0c0f;
   box-shadow: 0 0 0 2px #2d7bff, 0 0 14px rgba(45,123,255,.85), inset 0 0 0 4px #0b0c0f, inset 0 0 0 5px #3a3e45; }
-.vent img { height: 62%; filter: sepia(1) saturate(3) hue-rotate(-12deg) brightness(.95); opacity: .92; }
+.vent .vlogo { height: 60%; aspect-ratio: 1; filter: drop-shadow(0 0 4px rgba(57,255,106,.85)) drop-shadow(0 0 10px rgba(57,255,106,.45)); }
 .led-bar { height: 3px; width: 78%; align-self: center; border-radius: 2px; background: #2d7bff; box-shadow: 0 0 8px #2d7bff, 0 0 2px #fff; }
 .mark { position: absolute; left: 7%; bottom: 7%; writing-mode: vertical-rl; transform: rotate(180deg); font: 700 11.5px var(--body); letter-spacing: .42em; background: linear-gradient(180deg, #e0b07a, #a8703e 60%, #d29a62); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .disc { position: absolute; left: 50%; top: 61%; width: 90%; aspect-ratio: 1; transform: translate(-50%, -50%); }
@@ -561,7 +561,7 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
           <div class="cam-bay">
             <div class="c1"><i class="lens big"></i><i class="lens big bronze"></i></div>
             <div class="c2"><i class="flash"></i><i class="lens small"></i><i class="chip"></i></div>
-            <div class="c3"><i class="vent"><img src="/assets/logo.png" alt=""></i><i class="led-bar"></i></div>
+            <div class="c3"><i class="vent"><svg class="vlogo" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="9" fill="#39FF6A"/><g fill="none" stroke="#39FF6A" stroke-width="6.5" stroke-linecap="round"><path d="M38 34a19 19 0 0 0 0 32"/><path d="M62 34a19 19 0 0 1 0 32"/><path d="M27 23a33 33 0 0 0 0 54"/><path d="M73 23a33 33 0 0 1 0 54"/></g></svg></i><i class="led-bar"></i></div>
           </div>
           <span class="mark">IVO LIVE</span>
           <div class="backsheen"></div>
