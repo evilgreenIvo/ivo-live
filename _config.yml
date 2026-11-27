@@ -1,8 +1,8 @@
 title: IVO LIVE
 description: "Grave e faça live dos seus jogos no Android (YouTube, Twitch, Kick), com cenas, fontes e mixer como no OBS. Grátis, sem anúncios, em português."
 lang: pt-BR
-url: https://evilgreenivo.github.io
-baseurl: /ivo-live
+url: https://ivolive.com
+baseurl: ""
 theme: jekyll-theme-primer
 plugins:
   - jekyll-seo-tag
