@@ -615,6 +615,24 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 90; pointer-event
 .card.acid p { color: #A9ACB6; }
 .card.acid .no { color: var(--acid); }
 .card.acid .btn-dark { background: var(--acid); color: #000; }
+
+/* ---- Themes: a row of phones ---- */
+.themes-sec { overflow: hidden; }
+.trow { display: flex; gap: 18px; padding: 26px max(16px, calc((100vw - 1180px) / 2)) 46px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.trow::-webkit-scrollbar { display: none; }
+.tcard { flex: none; margin: 0; scroll-snap-align: center; text-align: center; }
+.tphone { width: 168px; aspect-ratio: 556 / 1138; padding: 5px; border-radius: 22px;
+  background: linear-gradient(145deg, #3a3d44, #0d0e11 38%, #24262c 62%, #0b0c0e);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.14), 0 24px 50px rgba(0,0,0,.55), 0 0 40px color-mix(in srgb, var(--c) 22%, transparent);
+  animation: tfloat 6s ease-in-out infinite; animation-delay: calc(var(--i) * -.8s); transition: translate .5s var(--expo), box-shadow .5s; }
+.tphone img { display: block; width: 100%; height: 100%; border-radius: 17px; }
+.tcard:hover .tphone { translate: 0 -10px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.2), 0 30px 60px rgba(0,0,0,.6), 0 0 60px color-mix(in srgb, var(--c) 45%, transparent); }
+@keyframes tfloat { 50% { transform: translateY(-8px) rotate(.6deg); } }
+.tcard figcaption { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; font: 600 13.5px var(--body); color: var(--fg); }
+.tcard figcaption i { width: 9px; height: 9px; border-radius: 50%; background: var(--c); box-shadow: 0 0 10px var(--c); }
+@media (min-width: 980px) { .trow { justify-content: center; overflow: visible; } .tphone { width: 150px; } .tcard:nth-child(even) { margin-top: 46px; } }
+@media (min-width: 1300px) { .tphone { width: 164px; } }
+@media (prefers-reduced-motion: reduce) { .tphone { animation: none; } }
 </style>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6426161266572963"
@@ -718,39 +736,62 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 90; pointer-event
       <span class="kicker">O que ele faz</span>
       <h2 class="story-title" id="t-func">Tudo do OBS,<br><em>no seu bolso.</em></h2>
     </div>
-    <div class="story-track" id="storyTrack" style="--n:6">
+    <div class="story-track" id="storyTrack" style="--n:8">
       <div class="story-sticky">
         <div class="story-glow" aria-hidden="true"></div>
         <div class="story-grid wrap">
           <ol class="story-steps" id="storySteps">
-          <li class="step on" data-i="0" data-accent="#39FF6A" data-finger="tap,38,59,38,59"><b class="big" aria-hidden="true">01</b><span class="no">01<i></i>Cenas</span><h3><span class="w" style="--k:0"><span>Monte</span></span> <span class="w" style="--k:1"><span>a</span></span> <span class="w" style="--k:2"><span>tela</span></span> <span class="w" style="--k:3"><span>da</span></span> <span class="w" style="--k:4"><span>sua</span></span> <span class="w" style="--k:5"><span>live</span></span></h3><p>Jogo, câmera, imagens, textos, chat e outro celular na mesma cena. Arraste, gire, recorte e troque de cena com um toque. Tem modelos prontos.</p></li>
-          <li class="step" data-i="1" data-accent="#5CFFB0" data-finger="drag,44,62,44,50"><b class="big" aria-hidden="true">02</b><span class="no">02<i></i>Som</span><h3><span class="w" style="--k:0"><span>Mixer</span></span> <span class="w" style="--k:1"><span>de</span></span> <span class="w" style="--k:2"><span>estúdio</span></span></h3><p>Volume de cada som, compressor, equalizador e volume em LUFS, como num estúdio de verdade.</p></li>
-          <li class="step" data-i="2" data-accent="#39FF6A" data-finger="tap,50,65,50,65"><b class="big" aria-hidden="true">03</b><span class="no">03<i></i>Outro celular</span><h3><span class="w" style="--k:0"><span>Celular</span></span> <span class="w" style="--k:1"><span>velho</span></span> <span class="w" style="--k:2"><span>vira</span></span> <span class="w" style="--k:3"><span>webcam</span></span></h3><p>A tela, a câmera ou o som de outro celular entram na sua live pelo Wi-Fi ou pelo cabo, em 1080p a 60 fps.</p></li>
-          <li class="step" data-i="3" data-accent="#5CFFB0" data-finger="tap,82,49,82,49"><b class="big" aria-hidden="true">04</b><span class="no">04<i></i>Controle remoto</span><h3><span class="w" style="--k:0"><span>Stream</span></span> <span class="w" style="--k:1"><span>Deck</span></span> <span class="w" style="--k:2"><span>no</span></span> <span class="w" style="--k:3"><span>bolso</span></span></h3><p>Um segundo celular vira painel de botões: cenas, mudo, pausa, efeitos sonoros e o chat para ler.</p></li>
-          <li class="step" data-i="4" data-accent="#39FF6A" data-finger="drag,40,35,66,35"><b class="big" aria-hidden="true">05</b><span class="no">05<i></i>Filtros</span><h3><span class="w" style="--k:0"><span>Visual</span></span> <span class="w" style="--k:1"><span>que</span></span> <span class="w" style="--k:2"><span>chama</span></span> <span class="w" style="--k:3"><span>atenção</span></span></h3><p>Chroma key, correção de cor, borda neon animada e perspectiva 3D para a câmera virar um cartão no canto.</p></li>
-          <li class="step" data-i="5" data-accent="#5CFFB0" data-finger="tap,76,61,76,61"><b class="big" aria-hidden="true">06</b><span class="no">06<i></i>Microfone</span><h3><span class="w" style="--k:0"><span>Voz</span></span> <span class="w" style="--k:1"><span>limpa</span></span> <span class="w" style="--k:2"><span>com</span></span> <span class="w" style="--k:3"><span>IA</span></span></h3><p>A redução de ruído com IA tira ventilador, teclado e barulho da rua, e deixa só a sua voz.</p></li>
+          <li class="step on" data-i="0" data-accent="#39FF6A" data-finger="tap,42,56,42,56"><b class="big" aria-hidden="true">01</b><span class="no">01<i></i>Cenas</span><h3><span class="w" style="--k:0"><span>Monte</span></span> <span class="w" style="--k:1"><span>a</span></span> <span class="w" style="--k:2"><span>tela</span></span> <span class="w" style="--k:3"><span>da</span></span> <span class="w" style="--k:4"><span>sua</span></span> <span class="w" style="--k:5"><span>live</span></span></h3><p>Jogo, câmera, imagens, textos, chat, vídeo, avatar e outro celular na mesma cena. Arraste, gire, recorte e troque de cena com um toque.</p></li>
+          <li class="step" data-i="1" data-accent="#5CFFB0" data-finger="tap,68,76,68,76"><b class="big" aria-hidden="true">02</b><span class="no">02<i></i>Transição</span><h3><span class="w" style="--k:0"><span>Transição</span></span> <span class="w" style="--k:1"><span>com</span></span> <span class="w" style="--k:2"><span>a</span></span> <span class="w" style="--k:3"><span>sua</span></span> <span class="w" style="--k:4"><span>mídia</span></span></h3><p>Corte, desvanecer, pelo preto, ou uma foto, vídeo ou GIF seu passando por cima da live na troca de cena, com chroma key.</p></li>
+          <li class="step" data-i="2" data-accent="#39FF6A" data-finger="tap,61,17,61,17"><b class="big" aria-hidden="true">03</b><span class="no">03<i></i>Vídeo em pé</span><h3><span class="w" style="--k:0"><span>Deitado</span></span> <span class="w" style="--k:1"><span>e</span></span> <span class="w" style="--k:2"><span>em</span></span> <span class="w" style="--k:3"><span>pé,</span></span> <span class="w" style="--k:4"><span>juntos</span></span></h3><p>Grave ou faça live em 16:9 e 9:16 ao mesmo tempo: uma versão para o YouTube e a Twitch, outra para Shorts, Reels e TikTok, cada uma com o seu layout.</p></li>
+          <li class="step" data-i="3" data-accent="#5CFFB0" data-finger="drag,44,62,44,50"><b class="big" aria-hidden="true">04</b><span class="no">04<i></i>Som</span><h3><span class="w" style="--k:0"><span>Mixer</span></span> <span class="w" style="--k:1"><span>de</span></span> <span class="w" style="--k:2"><span>estúdio</span></span></h3><p>Volume de cada som, compressor, equalizador e volume em LUFS, como num estúdio de verdade.</p></li>
+          <li class="step" data-i="4" data-accent="#39FF6A" data-finger="tap,72,36,72,36"><b class="big" aria-hidden="true">05</b><span class="no">05<i></i>Outro celular</span><h3><span class="w" style="--k:0"><span>Celular</span></span> <span class="w" style="--k:1"><span>velho</span></span> <span class="w" style="--k:2"><span>vira</span></span> <span class="w" style="--k:3"><span>webcam</span></span></h3><p>A tela, a câmera ou o som de outro celular entram na sua live pelo Wi-Fi ou pelo cabo, em 1080p a 60 fps.</p></li>
+          <li class="step" data-i="5" data-accent="#5CFFB0" data-finger="tap,82,63,82,63"><b class="big" aria-hidden="true">06</b><span class="no">06<i></i>Controle remoto</span><h3><span class="w" style="--k:0"><span>Stream</span></span> <span class="w" style="--k:1"><span>Deck</span></span> <span class="w" style="--k:2"><span>no</span></span> <span class="w" style="--k:3"><span>bolso</span></span></h3><p>Um segundo celular vira painel de botões, até em tela cheia: cenas, gravar, mudo, pausa, efeitos sonoros e o chat para ler.</p></li>
+          <li class="step" data-i="6" data-accent="#39FF6A" data-finger="tap,50,60,50,60"><b class="big" aria-hidden="true">07</b><span class="no">07<i></i>Avatar</span><h3><span class="w" style="--k:0"><span>Um</span></span> <span class="w" style="--k:1"><span>avatar</span></span> <span class="w" style="--k:2"><span>que</span></span> <span class="w" style="--k:3"><span>fala</span></span> <span class="w" style="--k:4"><span>com</span></span> <span class="w" style="--k:5"><span>você</span></span></h3><p>PNGtuber criado com IA: pisca, mexe a boca, faz as suas caras pela câmera do celular e reage quando você grita ou ri.</p></li>
+          <li class="step" data-i="7" data-accent="#5CFFB0" data-finger="tap,76,61,76,61"><b class="big" aria-hidden="true">08</b><span class="no">08<i></i>Microfone</span><h3><span class="w" style="--k:0"><span>Voz</span></span> <span class="w" style="--k:1"><span>limpa</span></span> <span class="w" style="--k:2"><span>com</span></span> <span class="w" style="--k:3"><span>IA</span></span></h3><p>A redução de ruído com IA tira ventilador, teclado e barulho da rua, e deixa só a sua voz.</p></li>
           </ol>
           <div class="story-phone">
             <div class="sp-float"><div class="sp-frame" id="spFrame"><div class="sp-screen" id="spScreen">
-              <img class="shot on" data-i="0" src="/docs/tela-principal.png" alt="Monte a tela da sua live" width="540" height="1122" decoding="async">
-              <img class="shot" data-i="1" src="/docs/fontes-mixer.png" alt="Mixer de estúdio" width="540" height="1122" decoding="async">
-              <img class="shot" data-i="2" src="/docs/enviar.png" alt="Celular velho vira webcam" width="540" height="1122" decoding="async">
-              <img class="shot" data-i="3" src="/docs/controle-botoes.png" alt="Stream Deck no bolso" width="540" height="1122" decoding="async">
-              <img class="shot" data-i="4" src="/docs/filtros.png" alt="Visual que chama atenção" width="540" height="1122" decoding="async">
-              <img class="shot" data-i="5" src="/docs/ia-microfone.png" alt="Voz limpa com IA" width="540" height="1122" decoding="async">
+              <img class="shot on" data-i="0" src="/docs/v2/principal.jpg" alt="Monte a tela da sua live" width="540" height="1122" decoding="async">
+              <img class="shot" data-i="1" src="/docs/v2/transicao.jpg" alt="Transição com a sua mídia" width="540" height="1122" decoding="async">
+              <img class="shot" data-i="2" src="/docs/v2/empe.jpg" alt="Deitado e em pé, juntos" width="540" height="1122" decoding="async">
+              <img class="shot" data-i="3" src="/docs/fontes-mixer.png" alt="Mixer de estúdio" width="540" height="1122" decoding="async">
+              <img class="shot" data-i="4" src="/docs/v2/enviar.jpg" alt="Celular velho vira webcam" width="540" height="1122" decoding="async">
+              <img class="shot" data-i="5" src="/docs/v2/remote-full.jpg" alt="Stream Deck no bolso" width="540" height="1122" decoding="async">
+              <img class="shot" data-i="6" src="/docs/v2/avatar-criar.jpg" alt="Um avatar que fala com você" width="540" height="1122" decoding="async">
+              <img class="shot" data-i="7" src="/docs/ia-microfone.png" alt="Voz limpa com IA" width="540" height="1122" decoding="async">
               <span class="finger" id="finger" aria-hidden="true"><i></i></span>
               <span class="sweep" aria-hidden="true"></span>
             </div></div></div>
             <div class="sp-rail" aria-hidden="true"><i id="spFill"></i></div>
-            <div class="sp-dots" id="spDots"><button class="dot on" type="button" data-i="0" aria-label="Monte a tela da sua live"></button><button class="dot" type="button" data-i="1" aria-label="Mixer de estúdio"></button><button class="dot" type="button" data-i="2" aria-label="Celular velho vira webcam"></button><button class="dot" type="button" data-i="3" aria-label="Stream Deck no bolso"></button><button class="dot" type="button" data-i="4" aria-label="Visual que chama atenção"></button><button class="dot" type="button" data-i="5" aria-label="Voz limpa com IA"></button></div>
+            <div class="sp-dots" id="spDots"><button class="dot on" type="button" data-i="0" aria-label="Monte a tela da sua live"></button><button class="dot" type="button" data-i="1" aria-label="Transição com a sua mídia"></button><button class="dot" type="button" data-i="2" aria-label="Deitado e em pé, juntos"></button><button class="dot" type="button" data-i="3" aria-label="Mixer de estúdio"></button><button class="dot" type="button" data-i="4" aria-label="Celular velho vira webcam"></button><button class="dot" type="button" data-i="5" aria-label="Stream Deck no bolso"></button><button class="dot" type="button" data-i="6" aria-label="Um avatar que fala com você"></button><button class="dot" type="button" data-i="7" aria-label="Voz limpa com IA"></button></div>
           </div>
         </div>
       </div>
     </div>
-    <div class="wrap story-more reveal"><span>E mais</span><b>Cronômetro de speedrun</b><b>Teste do celular e da internet</b><b>Estatísticas ao vivo</b><b>Live dupla deitada e em pé</b><b>13 idiomas</b></div>
+    <div class="wrap story-more reveal"><span>E mais</span><b>Live programada no YouTube</b><b>Troca automática de cena</b><b>Rosto completo no avatar</b><b>Chroma key e filtros</b><b>Cronômetro de speedrun</b><b>Teste do celular</b><b>Estatísticas ao vivo</b><b>13 idiomas</b></div>
   </section>
 
   <div class="wrap"><hr class="rule"></div>
+
+  <section class="sec themes-sec" id="temas" aria-labelledby="t-temas">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div><span class="kicker">Temas</span>
+        <h2 class="duo" id="t-temas">7 temas, <em>com vidro AERO.</em></h2></div>
+        <p>Verde, roxo, laranja, azul, amarelo, cinza estilo OBS e pôr do sol neon. Cada um com o modo AERO: barras e botões de vidro com movimento de mola.</p>
+      </div>
+    </div>
+    <div class="trow">
+        <figure class="tcard reveal" style="--d:0.00s;--c:#39FF6A;--i:0"><div class="tphone"><img src="/docs/v2/principal.jpg" alt="Tema Verde" width="540" height="1122" loading="lazy" decoding="async"></div><figcaption><i></i>Verde</figcaption></figure>
+        <figure class="tcard reveal" style="--d:0.07s;--c:#B26BFF;--i:1"><div class="tphone"><img src="/docs/v2/tema-roxo.jpg" alt="Tema Roxo" width="540" height="1122" loading="lazy" decoding="async"></div><figcaption><i></i>Roxo</figcaption></figure>
+        <figure class="tcard reveal" style="--d:0.14s;--c:#FF8A1F;--i:2"><div class="tphone"><img src="/docs/v2/tema-laranja.jpg" alt="Tema Laranja" width="540" height="1122" loading="lazy" decoding="async"></div><figcaption><i></i>Laranja</figcaption></figure>
+        <figure class="tcard reveal" style="--d:0.21s;--c:#2F7BFF;--i:3"><div class="tphone"><img src="/docs/v2/tema-azul.jpg" alt="Tema Azul escuro" width="540" height="1122" loading="lazy" decoding="async"></div><figcaption><i></i>Azul escuro</figcaption></figure>
+        <figure class="tcard reveal" style="--d:0.28s;--c:#FFD60A;--i:4"><div class="tphone"><img src="/docs/v2/tema-amarelo.jpg" alt="Tema Amarelo e preto" width="540" height="1122" loading="lazy" decoding="async"></div><figcaption><i></i>Amarelo e preto</figcaption></figure>
+        <figure class="tcard reveal" style="--d:0.35s;--c:#C9CCD4;--i:5"><div class="tphone"><img src="/docs/v2/tema-obs.jpg" alt="Tema OBS" width="540" height="1122" loading="lazy" decoding="async"></div><figcaption><i></i>OBS</figcaption></figure>
+        <figure class="tcard reveal" style="--d:0.42s;--c:#FF4FA3;--i:6"><div class="tphone"><img src="/docs/v2/tema-sunset.jpg" alt="Tema Pôr do sol neon" width="540" height="1122" loading="lazy" decoding="async"></div><figcaption><i></i>Pôr do sol neon</figcaption></figure>
+    </div>
+  </section>
 
   <section class="sec" id="chat" aria-labelledby="t-chat">
     <div class="wrap">
@@ -830,12 +871,12 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 90; pointer-event
       <div class="sec-head reveal">
         <div><span class="kicker">Telas do app</span>
         <h2 class="duo" id="t-tela">Por dentro <em>do estúdio.</em></h2></div>
-        <p>Cenas e prévia, o mixer de som e o controle remoto mostrando a live.</p>
+        <p>O menu de cada cena, as fontes que dá para pôr na live e a cena que troca sozinha quando você abre um app.</p>
       </div>
       <div class="collage">
-        <figure class="reveal"><img src="/docs/tela-principal.png" alt="Tela principal com prévia e cenas" loading="lazy" width="540" height="1122"><figcaption>Cenas</figcaption></figure>
-        <figure class="reveal" style="--d:.1s"><img src="/docs/fontes-mixer.png" alt="Fontes e mixer de som" loading="lazy" width="540" height="1122"><figcaption>Mixer</figcaption></figure>
-        <figure class="reveal" style="--d:.2s"><img src="/docs/controle.png" alt="Controle remoto mostrando a live" loading="lazy" width="540" height="1122"><figcaption>Controle</figcaption></figure>
+        <figure class="reveal"><img src="/docs/v2/cena-menu.jpg" alt="Menu da cena com ícones" loading="lazy" width="540" height="1122"><figcaption>Menu da cena</figcaption></figure>
+        <figure class="reveal" style="--d:.1s"><img src="/docs/v2/fontes2.jpg" alt="Tipos de fonte: avatar, vídeo, chat, speedrun" loading="lazy" width="540" height="1122"><figcaption>Fontes</figcaption></figure>
+        <figure class="reveal" style="--d:.2s"><img src="/docs/v2/troca-auto.jpg" alt="Troca automática de cena pelo app aberto" loading="lazy" width="540" height="1122"><figcaption>Troca automática</figcaption></figure>
       </div>
     </div>
   </section>
