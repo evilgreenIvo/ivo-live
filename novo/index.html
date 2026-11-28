@@ -26,7 +26,7 @@ layout: null
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
 <style>
 /* Layout: full-screen liquid-metal hero (green→blue→purple light, centered chrome name) → tilted neon band → bento cards → two-tone headings with a staggered screenshot collage → giant dim call to action. Side rail on wide screens. */
 :root {
@@ -574,6 +574,21 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
   .shot.on, .shot.out, .sp-float, .finger, .finger i, .sp-frame.pop, .sp-screen.swept .sweep { animation: none !important; }
   .step *, .sp-frame { transition: opacity .3s !important; }
 }
+
+/* ---- Type with hierarchy ---- */
+:root { --serif: "Instrument Serif", Georgia, serif; }
+.kicker { display: inline-flex; align-items: center; gap: 10px; color: #A3A6B0; font-size: 11.5px; font-weight: 700; letter-spacing: .22em; }
+.kicker::before { content: ""; width: 18px; height: 1.5px; background: var(--acid); box-shadow: 0 0 8px rgba(57,255,106,.6); }
+.duo, .story-title { margin: 14px 0 0; font: 600 clamp(2.3rem, 5.8vw, 4.7rem)/1.02 var(--body); letter-spacing: -.045em; text-transform: none; color: var(--fg); text-wrap: balance; }
+.duo em, .story-title em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -.01em; color: #C9CCD4; font-size: 1.08em; }
+.sec-head p, .points li, .step p, .steps li span, .card p { line-height: 1.65; }
+.sec-head p { font-size: 1.06rem; color: #A9ACB6; max-width: 52ch; }
+.card h3 { font-family: var(--body); font-weight: 600; text-transform: none; letter-spacing: -.03em; font-size: clamp(1.4rem, 5vw, 1.8rem); line-height: 1.1; }
+.card .no, .card .top .no { letter-spacing: .2em; }
+.spec b { font-variant-numeric: tabular-nums; letter-spacing: -.04em; }
+.spec span { color: #A9ACB6; line-height: 1.5; }
+.steps li b { font-family: var(--body); font-weight: 600; letter-spacing: -.02em; text-transform: none; }
+.lede { line-height: 1.5; }
 </style>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6426161266572963"
@@ -674,7 +689,7 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
 <main>
   <section class="story" id="funcoes" aria-labelledby="t-func" style="--accent:#39FF6A">
     <div class="wrap story-head reveal">
-      <span class="kicker">/// O que ele faz</span>
+      <span class="kicker">O que ele faz</span>
       <h2 class="story-title" id="t-func">Tudo do OBS,<br><em>no seu bolso.</em></h2>
     </div>
     <div class="story-track" id="storyTrack" style="--n:6">
@@ -715,8 +730,8 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
     <div class="wrap">
       <div class="chat-grid">
         <div class="reveal">
-          <span class="kicker">/// Chat da live</span><span class="new-tag">NOVO</span>
-          <h2 class="duo" id="t-chat"><span>Seu chat</span><span class="dim">Do seu jeito</span></h2>
+          <span class="kicker">Chat da live</span><span class="new-tag">NOVO</span>
+          <h2 class="duo" id="t-chat">Seu chat, <em>do seu jeito.</em></h2>
           <ul class="points">
             <li>O app lê o chat da Twitch e do YouTube sozinho. Não precisa entrar com a conta: é só escrever o canal, e o YouTube acha a live quando ela começa.</li>
             <li>Fundo transparente, uma caixa ou balões. Cor e transparência do fundo, cor e tamanho do texto, contorno e a cor dos nomes, com prévia na hora.</li>
@@ -741,8 +756,8 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
     <div class="wrap">
       <div class="chat-grid">
         <div class="reveal">
-          <span class="kicker">/// IVO Mirror</span><span class="new-tag">NOVO</span>
-          <h2 class="duo" id="t-iphone"><span>Tela do iPhone</span><span class="dim">Na sua live</span></h2>
+          <span class="kicker">IVO Mirror</span><span class="new-tag">NOVO</span>
+          <h2 class="duo" id="t-iphone">Tela do iPhone <em>na sua live.</em></h2>
           <ul class="points">
             <li>Instale o app IVO Mirror num celular Android. No iPhone, use o Espelhar Tela de sempre (Central de Controle): a imagem e o som entram no IVO LIVE como a fonte Outro celular.</li>
             <li>Funciona no mesmo celular da live ou em outro na mesma Wi-Fi. A moldura 16:9 deixa você girar o iPhone sem a fonte piscar nem mudar de tamanho.</li>
@@ -769,8 +784,8 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M17 9a4 4 0 0 1 0 6"/></svg><span>Ligar som</span></button>
         </div>
         <div class="reveal" style="--d:.1s">
-          <span class="kicker">/// Veja em ação</span>
-          <h2 class="duo" id="t-video"><span>Grave</span><span class="dim">Transmita</span></h2>
+          <span class="kicker">Veja em ação</span>
+          <h2 class="duo" id="t-video">Grave e <em>transmita.</em></h2>
           <ul class="points">
             <li>Live no YouTube, Twitch e Kick, ou para um servidor seu e para o OBS do PC.</li>
             <li>Grave e faça live ao mesmo tempo, com botões separados.</li>
@@ -787,8 +802,8 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
   <section class="sec" aria-labelledby="t-tela">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div><span class="kicker">/// Telas do app</span>
-        <h2 class="duo" id="t-tela"><span>Por dentro</span><span class="dim">Do estúdio</span></h2></div>
+        <div><span class="kicker">Telas do app</span>
+        <h2 class="duo" id="t-tela">Por dentro <em>do estúdio.</em></h2></div>
         <p>Cenas e prévia, o mixer de som e o controle remoto mostrando a live.</p>
       </div>
       <div class="collage">
@@ -801,8 +816,8 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
 
   <section class="sec" aria-labelledby="t-num">
     <div class="wrap">
-      <div class="reveal"><span class="kicker">/// Em números</span>
-      <h2 class="duo" id="t-num"><span>Qualidade</span><span class="dim">De verdade</span></h2></div>
+      <div class="reveal"><span class="kicker">Em números</span>
+      <h2 class="duo" id="t-num">Qualidade <em>de verdade.</em></h2></div>
       <div class="specs">
         <div class="spec reveal"><b class="chrome">1440p</b><span>Resolução máxima da gravação e da live</span></div>
         <div class="spec reveal" style="--d:.06s"><b class="chrome">120</b><span>Quadros por segundo na gravação, nos celulares que aguentam</span></div>
@@ -814,8 +829,8 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
 
   <section class="sec" aria-labelledby="t-inst">
     <div class="wrap">
-      <div class="reveal"><span class="kicker">/// Como instalar</span>
-      <h2 class="duo" id="t-inst"><span>Em 1 minuto</span><span class="dim">Sem conta</span></h2></div>
+      <div class="reveal"><span class="kicker">Como instalar</span>
+      <h2 class="duo" id="t-inst">Em 1 minuto, <em>sem conta.</em></h2></div>
       <ol class="steps">
         <li class="reveal"><b>Baixe o APK</b><span>No botão "Baixar grátis", toque no arquivo IvoLive .apk da versão mais nova.</span></li>
         <li class="reveal" style="--d:.08s"><b>Abra o arquivo</b><span>Se o Android pedir, permita "instalar apps desta fonte".</span></li>
