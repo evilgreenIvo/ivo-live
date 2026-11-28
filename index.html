@@ -10,8 +10,8 @@ layout: null
 <meta name="description" content="Grave e faça live dos seus jogos no Android (YouTube, Twitch, Kick), com cenas, fontes, mixer e filtros como no OBS. 100% grátis por tempo limitado (algumas funções vão ser pagas no futuro), sem anúncios, em português.">
 <link rel="canonical" href="https://ivolive.com/">
 <meta name="theme-color" content="#000000">
-<link rel="icon" type="image/png" href="assets/logo.png">
-<link rel="apple-touch-icon" href="assets/logo.png">
+<link rel="icon" type="image/png" href="/assets/logo.png">
+<link rel="apple-touch-icon" href="/assets/logo.png">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="IVO LIVE">
@@ -25,7 +25,7 @@ layout: null
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
 <style>
 /* Layout: full-screen liquid-metal hero (green→blue→purple light, centered chrome name) → tilted neon band → bento cards → two-tone headings with a staggered screenshot collage → giant dim call to action. Side rail on wide screens. */
 :root {
@@ -353,6 +353,267 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
   .js .reveal { opacity: 1; transform: none; }
   .cursor { display: none; }
 }
+
+/* ---- Hero with a 3D gaming phone (preview) ---------------------------------------------------- */
+.hero-split { display: grid; grid-template-columns: 1fr; justify-items: center; gap: 34px; text-align: center; }
+.hero-split > * { min-width: 0; max-width: 100%; }
+.hero-copy { display: flex; flex-direction: column; align-items: center; width: 100%; }
+.free-note { margin-top: 14px; font-size: .9rem; letter-spacing: .02em; opacity: .85; max-width: 46ch; }
+@media (min-width: 980px) {
+  .hero-split { grid-template-columns: 1.05fr .95fr; align-items: center; text-align: left; justify-items: stretch; padding-block: 10px 70px; }
+  .hero-copy { align-items: flex-start; }
+  .hero-split .title { font-size: clamp(5rem, 10.5vw, 10rem); }
+  .hero-split .lede { margin-left: 0; }
+  .hero-split .cta { flex-direction: row; align-items: center; }
+  .stage { justify-self: center; }
+}
+.stage { --sw: 250px; --bz: 7px; --d: 15px; --R: 26px; --W: calc(var(--sw) + var(--bz) * 2); --H: calc(var(--sw) * 1122 / 540 + var(--bz) * 2); position: relative; cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; perspective: 1700px; perspective-origin: 50% 40%;
+  width: calc(var(--sw) + var(--bz) * 2); height: calc(var(--sw) * 1122 / 540 + var(--bz) * 2); margin: 6px 0 96px; }
+@media (min-width: 980px) { .stage { --sw: 290px; --bz: 8px; --d: 17px; } }
+.phone { position: absolute; inset: 0; transform-style: preserve-3d; will-change: transform;
+  transform: translateY(var(--fy, 0px)) rotateX(var(--rx, 6deg)) rotateY(var(--ry, -16deg)) rotateZ(var(--rz, 0deg)); }
+.face { position: absolute; inset: 0; border-radius: var(--R); backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.front { transform: translateZ(calc(var(--d) / 2)); padding: var(--bz);
+  background: linear-gradient(145deg, #3a3d44, #0d0e11 38%, #24262c 62%, #0b0c0e);
+  box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.14), inset 0 0 0 3px #050506; }
+.screen { position: relative; width: 100%; height: 100%; border-radius: 19px; overflow: hidden; background: #000; }
+.screen > img { display: block; width: 100%; height: 100%; }
+.game { position: absolute; left: 3.7%; top: 13.65%; width: 92.6%; height: 24.7%; border-radius: 3px; }
+.cam-tile { position: absolute; left: 70.5%; top: 29.4%; width: 25%; height: 8.4%; border-radius: 3px; overflow: hidden;
+  background: radial-gradient(120% 90% at 50% 120%, #1a5e3a, #062014 70%); border: 1px solid rgba(57,255,106,.7); }
+.cam-tile i { position: absolute; left: 50%; bottom: -10%; width: 46%; aspect-ratio: 1; transform: translateX(-50%);
+  border-radius: 50% 50% 40% 40%; background: radial-gradient(circle at 50% 30%, #d9b18c 0 24%, transparent 25%), radial-gradient(ellipse at 50% 100%, #39FF6A 0 60%, transparent 61%);
+  animation: talk 1.9s ease-in-out infinite; }
+@keyframes talk { 50% { transform: translateX(-50%) translateY(-3%) scale(1.03); } }
+.chatfx { position: absolute; left: 5%; top: 24.5%; width: 52%; display: flex; flex-direction: column; gap: 2px; pointer-events: none; }
+.chatfx span { font: 700 7.2px/1.25 var(--body); color: #fff; background: rgba(0,0,0,.55); padding: 2px 4px; border-radius: 3px;
+  width: fit-content; max-width: 100%; animation: pop .35s cubic-bezier(.2,1.4,.4,1) both; }
+.chatfx span b { margin-right: 3px; }
+@keyframes pop { from { opacity: 0; transform: translateY(4px) scale(.9); } }
+.onair { position: absolute; left: 50.3%; top: 2.35%; width: 15.4%; height: 2.9%; display: flex; align-items: center; justify-content: center; gap: 3px;
+  border-radius: 99px; background: #ff2d3d; color: #fff; font: 800 6.6px var(--body); letter-spacing: .06em; box-shadow: 0 0 12px rgba(255,45,61,.7); }
+.onair i, .rec i { width: 4px; height: 4px; border-radius: 50%; background: #fff; animation: blink 1.2s ease-in-out infinite; }
+.rec { position: absolute; left: 52.4%; top: 92.45%; width: 42.2%; height: 5.9%; display: flex; align-items: center; justify-content: center; gap: 6px;
+  border-radius: 12px; background: #2a0b0e; border: 1.5px solid #ff4d5a; box-shadow: 0 0 14px rgba(255,77,90,.55); color: #fff; font: 800 11px var(--body); letter-spacing: .04em; }
+.rec i { width: 8px; height: 8px; border-radius: 2px; background: #ff4d5a; animation: none; }
+.tx { position: absolute; left: 3.9%; top: 92.45%; width: 43.9%; height: 5.9%; border-radius: 12px; box-shadow: 0 0 0 1.5px #39FF6A, 0 0 18px rgba(57,255,106,.6); pointer-events: none; }
+.sheen { position: absolute; inset: -20%; pointer-events: none; mix-blend-mode: screen;
+  background: linear-gradient(115deg, transparent 38%, rgba(255,255,255,.13) 46%, rgba(255,255,255,.04) 52%, transparent 60%);
+  transform: translateX(var(--sx, 0%)); }
+.back { transform: rotateY(180deg) translateZ(calc(var(--d) / 2)); overflow: hidden;
+  background: linear-gradient(155deg, #4a4e55, #33363c 35%, #2a2d32 65%, #3a3e44);
+  box-shadow: inset 0 0 0 2px #b9bec6, inset 0 0 0 3px #5b6068, inset 0 0 0 4px #1a1c20, inset 0 0 0 5px rgba(255,255,255,.08); }
+.mesh { position: absolute; inset: 5px; border-radius: 22px; opacity: .5;
+  background: repeating-linear-gradient(45deg, rgba(255,255,255,.045) 0 1px, transparent 1px 3px), repeating-linear-gradient(-45deg, rgba(0,0,0,.28) 0 1px, transparent 1px 3px); }
+.backsheen { position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: linear-gradient(125deg, rgba(255,255,255,.10) 0%, transparent 28%, transparent 62%, rgba(255,255,255,.06) 80%, transparent 92%); }
+.cam-bay { position: absolute; left: 9px; right: 9px; top: 9px; height: 27%; border-radius: 16px 16px 5px 5px; padding: 6% 6% 5%;
+  display: grid; grid-template-columns: 31% 19% 1fr; column-gap: 4%;
+  background: linear-gradient(180deg, #1b1d21, #121316); box-shadow: 0 0 0 1px #5d626a, 0 0 0 2.5px #1b1d21, inset 0 1px 0 rgba(255,255,255,.08); }
+.cam-bay > div { display: flex; flex-direction: column; align-items: center; justify-content: space-between; min-height: 0; }
+.cam-bay i { display: block; flex: none; }
+.lens { border-radius: 50%; aspect-ratio: 1; }
+/* Glass in the middle, a thick dark-metal ring around it (one centre), the shine on top. */
+.lens.big { width: 86%; background:
+    radial-gradient(circle at 37% 33%, rgba(185,205,240,.9) 0 3%, transparent 7%),
+    radial-gradient(circle at 50% 50%, #1b2440 0 13%, #04060a 26%, #15171b 40%, #050607 46%,
+      #2d3036 49%, #6b7078 55%, #3c4046 61%, #868b93 66%, #34373d 72%, #1a1c20 77%, #121316 100%);
+  box-shadow: 0 0 0 1.5px #0b0c0e, 0 2px 5px rgba(0,0,0,.6); }
+.lens.big.bronze { background:
+    radial-gradient(circle at 37% 33%, rgba(220,200,170,.8) 0 3%, transparent 7%),
+    radial-gradient(circle at 50% 50%, #2a2116 0 12%, #070504 26%, #17140f 40%, #060504 46%,
+      #4a3a28 49%, #a07a52 55%, #5e4a33 61%, #c49a6c 66%, #4f3e2b 72%, #1c1813 77%, #121316 100%); }
+.lens.small { width: 66%; background:
+    radial-gradient(circle at 37% 33%, rgba(170,220,190,.8) 0 5%, transparent 11%),
+    radial-gradient(circle at 50% 50%, #0d2a1a 0 20%, #03100a 34%, #121418 46%, #4a4f56 54%, #8a9098 62%, #3a3e44 72%, #15171a 100%);
+  box-shadow: 0 0 0 1.5px #0b0c0e; }
+.flash { width: 64%; aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, #1a1c20 0 34%, #fbfaf6 38% 64%, #9ea3ab 68% 74%, #1a1c20 78%); box-shadow: 0 0 0 1.5px #0b0c0e; }
+.chip { width: 62%; aspect-ratio: 1; border-radius: 3px; background:
+    linear-gradient(135deg, rgba(255,255,255,.12), transparent 50%),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.05) 0 1px, transparent 1px 3px), #16181c;
+  box-shadow: inset 0 0 0 1px #6b7078, inset 0 0 0 3px #16181c, inset 0 0 0 4px rgba(255,255,255,.12); }
+.cam-bay .c3 { align-items: stretch; justify-content: flex-start; gap: 12%; }
+.vent { height: 58%; border-radius: 7px; display: grid !important; place-items: center;
+  background: repeating-linear-gradient(0deg, rgba(255,255,255,.07) 0 1px, transparent 1px 2.5px), #0b0c0f;
+  box-shadow: 0 0 0 2px #2d7bff, 0 0 14px rgba(45,123,255,.85), inset 0 0 0 4px #0b0c0f, inset 0 0 0 5px #3a3e45; }
+.vent .vlogo { height: 60%; aspect-ratio: 1; filter: drop-shadow(0 0 4px rgba(57,255,106,.85)) drop-shadow(0 0 10px rgba(57,255,106,.45)); }
+.led-bar { height: 3px; width: 78%; align-self: center; border-radius: 2px; background: #2d7bff; box-shadow: 0 0 8px #2d7bff, 0 0 2px #fff; }
+.mark { position: absolute; left: 7%; bottom: 7%; writing-mode: vertical-rl; transform: rotate(180deg); font: 700 11.5px var(--body); letter-spacing: .42em; background: linear-gradient(180deg, #e0b07a, #a8703e 60%, #d29a62); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.disc { position: absolute; left: 50%; top: 61%; width: 90%; aspect-ratio: 1; transform: translate(-50%, -50%); }
+.defs { position: absolute; width: 0; height: 0; }
+/* The blue ring: a tube with liquid running inside (layers of blue turning at different speeds, rippled). */
+.disc .led { position: absolute; inset: 0; border-radius: 50%; overflow: hidden; background: #071a4d;
+  -webkit-mask: radial-gradient(circle closest-side, transparent 89%, #000 90.5% 96.5%, transparent 98%); mask: radial-gradient(circle closest-side, transparent 89%, #000 90.5% 96.5%, transparent 98%);
+  filter: url(#liquid); }
+.disc .led i { position: absolute; inset: -12%; border-radius: 50%; }
+.disc .led .f1 { background: conic-gradient(from 0deg, #04124f, #1f5bff 14%, #04124f 28%, #2d7bff 42%, #04124f 56%, #4fb8ff 70%, #061a6b 84%, #04124f); animation: spin 5s linear infinite; }
+.disc .led .f2 { mix-blend-mode: screen; opacity: .85;
+  background: conic-gradient(from 90deg, transparent 0 10%, rgba(89,200,255,.9) 18%, transparent 30% 55%, rgba(120,170,255,.8) 64%, transparent 76%); animation: spin 9s linear infinite reverse; }
+.disc .led .f3 { mix-blend-mode: screen; opacity: .7;
+  background: conic-gradient(from 200deg, transparent 0 40%, rgba(190,230,255,.9) 46%, transparent 52% 88%, rgba(160,210,255,.8) 93%, transparent); animation: spin 3.8s linear infinite; }
+.disc .led .bub { inset: 0; filter: blur(1.2px); animation: spin 2.4s linear infinite;
+  background: radial-gradient(circle at 50% 5%, rgba(225,246,255,.95) 0 2.4%, transparent 4.4%),
+    radial-gradient(circle at 50% 95%, rgba(200,236,255,.85) 0 1.9%, transparent 3.6%),
+    radial-gradient(circle at 5% 50%, rgba(200,236,255,.7) 0 1.5%, transparent 3%),
+    radial-gradient(circle at 82% 18%, rgba(210,240,255,.6) 0 1.3%, transparent 2.8%); }
+.disc .ledglow { position: absolute; inset: 3.5%; border-radius: 50%;
+  box-shadow: 0 0 16px 3px rgba(45,123,255,.75), 0 0 34px 8px rgba(45,123,255,.35), inset 0 0 14px 3px rgba(45,123,255,.55); animation: breathe 3.2s ease-in-out infinite; }
+.disc .joints { position: absolute; inset: 0; border-radius: 50%; pointer-events: none;
+  background: conic-gradient(from 32deg, #2c2f34 0 .7%, transparent .7% 24.6%, rgba(44,47,52,.55) 24.6% 25.2%, transparent 25.2% 49.6%, #2c2f34 49.6% 50.4%, transparent 50.4% 74.6%, rgba(44,47,52,.55) 74.6% 75.2%, transparent 75.2% 99.3%, #2c2f34 99.3%);
+  -webkit-mask: radial-gradient(circle closest-side, transparent 89%, #000 90.5% 96.5%, transparent 98%); mask: radial-gradient(circle closest-side, transparent 89%, #000 90.5% 96.5%, transparent 98%); }
+@keyframes breathe { 50% { opacity: .7; } }
+.disc .metal { position: absolute; inset: 15%; border-radius: 50%;
+  background: radial-gradient(circle closest-side, rgba(255,255,255,.14), transparent 35%),
+    repeating-radial-gradient(circle closest-side, rgba(255,255,255,.07) 0 .6px, rgba(0,0,0,.08) .6px 1.6px),
+    conic-gradient(from 30deg, #7d838c, #4f545b 22%, #b3b9c2 48%, #50555c 74%, #7d838c);
+  box-shadow: inset 0 0 0 1.5px #23262b, inset 0 0 0 3px rgba(255,255,255,.08), inset 0 5px 14px rgba(0,0,0,.45), 0 0 0 3px #15171a, 0 0 0 4px rgba(255,255,255,.06); }
+.disc .dot { position: absolute; left: 50%; top: 50%; width: 9%; height: 2.4%; border-radius: 2px; transform: translate(-50%, -50%) rotate(-35deg); background: #4d95ff; box-shadow: 0 0 6px #2d7bff; }
+.side { position: absolute; background: linear-gradient(180deg, #4a4d55, #16171b 40%, #2c2e34 70%, #101114); }
+.side.r, .side.l { width: var(--d); top: calc(var(--R) - 1px); bottom: calc(var(--R) - 1px); left: calc(50% - var(--d) / 2); }
+.side.r { transform: rotateY(90deg) translateZ(calc(var(--W) / 2)); }
+.side.l { transform: rotateY(-90deg) translateZ(calc(var(--W) / 2)); }
+.side.r::after { content: ""; position: absolute; left: 30%; right: 30%; top: 18%; height: 9%; border-radius: 3px; background: #39FF6A; box-shadow: 0 0 8px #39FF6A; }
+.side.t, .side.b { height: var(--d); left: calc(var(--R) - 1px); right: calc(var(--R) - 1px); top: calc(50% - var(--d) / 2); }
+.side.t { transform: rotateX(90deg) translateZ(calc(var(--H) / 2)); }
+.side.b { transform: rotateX(-90deg) translateZ(calc(var(--H) / 2)); }
+/* The rounded corners: each made of small pieces following the curve (placed by the script). */
+.side.k { width: var(--d); left: calc(50% - var(--d) / 2); background: linear-gradient(180deg, #4a4d55, #16171b 40%, #2c2e34 70%, #101114); }
+.floor { position: absolute; left: 8%; right: 8%; bottom: -34px; height: 26px; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(57,255,106,.35), rgba(0,0,0,.6) 55%, transparent); filter: blur(6px); transform: scale(var(--fs, 1)); }
+.stage.grabbing { cursor: grabbing; }
+.stage img { -webkit-user-drag: none; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .disc .led i, .disc .ledglow, .cam-tile i { animation: none; } .disc .led { filter: none; } }
+
+/* ---- The features told by scrolling ---- */
+.story { position: relative; padding-top: clamp(70px, 10vw, 130px); --spring: cubic-bezier(.2, 1.35, .35, 1); }
+.story-head { margin-bottom: 10px; }
+.story-title { margin: 14px 0 0; font: 700 clamp(2.4rem, 6.2vw, 5rem)/1 var(--body); letter-spacing: -.035em; color: var(--fg); }
+.story-title em { font-style: normal; color: var(--muted); }
+.story-track { position: relative; height: calc(var(--n) * 80vh + 100vh); height: calc(var(--n) * 80svh + 100svh); }
+.story-sticky { position: sticky; top: 0; height: 100vh; height: 100svh; display: flex; align-items: center; overflow: hidden; }
+/* Each step's own colour, lighting the space behind the phone. */
+.story-glow { position: absolute; width: 90vmin; height: 90vmin; border-radius: 50%; right: -12vmin; top: 50%; translate: 0 -50%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 30%, transparent), transparent 70%);
+  transition: background .8s ease; pointer-events: none; filter: blur(10px); }
+@media (max-width: 979px) { .story-glow { right: auto; left: 50%; top: 34%; translate: -50% -50%; } }
+.story-grid { position: relative; display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr; gap: 18px; align-items: center; width: 100%; height: 100%; padding-block: 72px 24px; }
+.story-steps { order: 2; position: relative; list-style: none; margin: 0; padding: 0; min-height: 200px; align-self: start; }
+.step { position: absolute; inset: 0 0 auto; pointer-events: none; text-align: center; }
+.step .big { position: absolute; left: 50%; top: -38px; translate: -50% 0; font: 800 120px/1 var(--display); color: transparent;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--accent) 40%, transparent); opacity: 0; scale: .8; transition: opacity .6s, scale .8s var(--expo); z-index: -1; }
+.step .no { display: inline-flex; align-items: center; gap: 10px; font: 700 12px var(--body); letter-spacing: .18em; text-transform: uppercase; color: var(--accent);
+  opacity: 0; translate: 0 10px; transition: opacity .4s, translate .5s var(--expo), color .6s; }
+.step .no i { width: 0; height: 1.5px; background: currentColor; opacity: .7; transition: width .7s var(--expo) .1s; }
+.step h3 { margin: 12px 0 8px; font: 700 clamp(1.7rem, 6vw, 3.2rem)/1.08 var(--body); letter-spacing: -.03em; color: var(--fg); }
+.step .w { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: .08em; }
+.step .w > span { display: inline-block; translate: 0 105%; opacity: 0; filter: blur(6px);
+  transition: translate .7s var(--expo), opacity .5s, filter .6s; transition-delay: 0s; }
+.step p { margin: 0 auto; max-width: 40ch; font-size: clamp(.98rem, 3.6vw, 1.12rem); line-height: 1.5; color: var(--muted);
+  opacity: 0; translate: 0 14px; transition: opacity .5s, translate .7s var(--expo); }
+/* The step coming in: number, line, words one by one, then the text. */
+.step.on { pointer-events: auto; }
+.step.on .big { opacity: 1; scale: 1; }
+.step.on .no { opacity: 1; translate: 0 0; }
+.step.on .no i { width: 26px; }
+.step.on .w > span { translate: 0 0; opacity: 1; filter: none; transition-delay: calc(.12s + var(--k) * .06s); }
+.step.on p { opacity: 1; translate: 0 0; transition-delay: .32s; }
+.story-phone { order: 1; position: relative; display: flex; align-items: center; justify-content: center; gap: 14px; perspective: 1400px; }
+.sp-float { animation: spbob 5s ease-in-out infinite; }
+@keyframes spbob { 50% { translate: 0 -10px; rotate: .6deg; } }
+.sp-frame { position: relative; width: min(54vw, 236px); aspect-ratio: 556 / 1138; padding: 7px; border-radius: 26px;
+  background: linear-gradient(145deg, #3a3d44, #0d0e11 38%, #24262c 62%, #0b0c0e);
+  box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.14), inset 0 0 0 3px #050506, 0 30px 70px rgba(0,0,0,.55), 0 0 60px color-mix(in srgb, var(--accent) 22%, transparent);
+  transform: rotateY(var(--tilt, -10deg)) rotateX(5deg); transition: transform 1s var(--spring), box-shadow .8s; }
+.sp-frame.pop { animation: sppop .7s var(--spring); }
+@keyframes sppop { 30% { scale: .95; } 70% { scale: 1.02; } }
+.sp-screen { position: relative; width: 100%; height: 100%; border-radius: 19px; overflow: hidden; background: #000; }
+/* Screens: the new one springs up from below out of a blur, the old one leaves upwards; the live one drifts slowly. */
+.shot { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transform-origin: 50% 40%; }
+.shot.on { opacity: 1; animation: shotIn .9s var(--spring) both, kenburns 9s ease-in-out .9s infinite alternate; }
+.shot.out { animation: shotOut .6s cubic-bezier(.5, 0, .75, 0) both; }
+@keyframes shotIn { from { opacity: 0; translate: 0 22%; scale: .9; filter: blur(10px) brightness(1.6); } to { opacity: 1; translate: 0 0; scale: 1; filter: none; } }
+@keyframes shotOut { from { opacity: 1; } to { opacity: 0; translate: 0 -14%; scale: .94; filter: blur(8px); } }
+@keyframes kenburns { to { scale: 1.06; translate: 0 -2.5%; } }
+.sweep { position: absolute; inset: -10% -60%; background: linear-gradient(100deg, transparent 40%, rgba(255,255,255,.28) 50%, transparent 60%);
+  translate: -100% 0; pointer-events: none; mix-blend-mode: screen; }
+.sp-screen.swept .sweep { animation: sweep .9s ease .15s both; }
+@keyframes sweep { to { translate: 100% 0; } }
+/* The finger: comes in, presses (a ring spreads), or drags along. */
+.finger { position: absolute; left: var(--fx); top: var(--fy); width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%;
+  background: rgba(255,255,255,.85); box-shadow: 0 6px 18px rgba(0,0,0,.5), inset 0 0 0 2px rgba(255,255,255,.95); opacity: 0; pointer-events: none; }
+.finger i { position: absolute; inset: -2px; border-radius: 50%; border: 2px solid var(--accent); opacity: 0; }
+.finger.tap { animation: ftap 2.6s ease .7s infinite; }
+.finger.tap i { animation: fring 2.6s ease .7s infinite; }
+.finger.drag { animation: fdrag 2.8s ease-in-out .7s infinite; }
+.finger.drag i { animation: fring 2.8s ease .7s infinite; }
+@keyframes ftap { 0% { opacity: 0; translate: 26px 34px; scale: 1.15; } 18% { opacity: .95; translate: 0 0; scale: 1; } 30% { scale: .82; } 40% { scale: 1; } 75% { opacity: .95; } 100% { opacity: 0; } }
+@keyframes fring { 0%, 28% { opacity: 0; scale: .6; } 34% { opacity: 1; } 70% { opacity: 0; scale: 2.4; } 100% { opacity: 0; } }
+@keyframes fdrag { 0% { opacity: 0; translate: 20px 30px; } 14% { opacity: .95; translate: 0 0; scale: .86; } 62% { translate: var(--dx) var(--dy); scale: .86; } 74% { scale: 1; opacity: .95; } 100% { opacity: 0; translate: var(--dx) var(--dy); } }
+/* Progress: a line filling with the scroll, a dot per step. */
+.sp-rail { position: relative; width: 2px; height: min(46vh, 300px); border-radius: 2px; background: rgba(255,255,255,.12); overflow: hidden; }
+.sp-rail i { position: absolute; left: 0; top: 0; width: 100%; height: calc(var(--prog, 0) * 100%); background: var(--accent); box-shadow: 0 0 10px var(--accent); transition: background .6s; }
+.sp-dots { display: flex; flex-direction: column; gap: 9px; margin-left: -6px; }
+.dot { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 99px; background: rgba(255,255,255,.22); cursor: pointer; transition: height .5s var(--spring), background .3s; }
+.dot.on { height: 26px; background: var(--accent); box-shadow: 0 0 10px var(--accent); }
+.story-more { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: center; padding-block: 10px 30px; }
+.story-more span { font: 700 12px var(--body); letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-right: 6px; }
+.story-more b { font: 500 13.5px var(--body); color: var(--fg); padding: 8px 14px; border-radius: 99px; border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.03); }
+@media (min-width: 980px) {
+  .story-grid { grid-template-columns: 1.1fr .9fr; grid-template-rows: 1fr; padding-block: 40px; }
+  .story-steps { order: 1; align-self: center; min-height: 280px; }
+  .step { text-align: left; inset: 50% 0 auto; translate: 0 -50%; }
+  .step .big { left: -14px; translate: 0 0; top: -78px; font-size: 180px; }
+  .step p { margin: 0; }
+  .story-phone { order: 2; }
+  .sp-frame { width: 284px; }
+}
+@media (max-width: 979px) { .sp-rail { display: none; } .sp-dots { margin-left: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .shot.on, .shot.out, .sp-float, .finger, .finger i, .sp-frame.pop, .sp-screen.swept .sweep { animation: none !important; }
+  .step *, .sp-frame { transition: opacity .3s !important; }
+}
+
+/* ---- Type with hierarchy ---- */
+:root { --serif: "Instrument Serif", Georgia, serif; }
+.kicker { display: inline-flex; align-items: center; gap: 10px; color: #A3A6B0; font-size: 11.5px; font-weight: 700; letter-spacing: .22em; }
+.kicker::before { content: ""; width: 18px; height: 1.5px; background: var(--acid); box-shadow: 0 0 8px rgba(57,255,106,.6); }
+.duo, .story-title { margin: 14px 0 0; font: 600 clamp(2.3rem, 5.8vw, 4.7rem)/1.02 var(--body); letter-spacing: -.045em; text-transform: none; color: var(--fg); text-wrap: balance; }
+.duo em, .story-title em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -.01em; color: #C9CCD4; font-size: 1.08em; }
+.sec-head p, .points li, .step p, .steps li span, .card p { line-height: 1.65; }
+.sec-head p { font-size: 1.06rem; color: #A9ACB6; max-width: 52ch; }
+.card h3 { font-family: var(--body); font-weight: 600; text-transform: none; letter-spacing: -.03em; font-size: clamp(1.4rem, 5vw, 1.8rem); line-height: 1.1; }
+.card .no, .card .top .no { letter-spacing: .2em; }
+.spec b { font-variant-numeric: tabular-nums; letter-spacing: -.02em; white-space: nowrap; font-size: clamp(1.4rem, 6.4vw, 2.7rem); }
+@media (min-width: 980px) { .spec b { font-size: clamp(1.9rem, 2.9vw, 2.7rem); } }
+.spec span { color: #A9ACB6; line-height: 1.5; }
+.steps li b { font-family: var(--body); font-weight: 600; letter-spacing: -.02em; text-transform: none; }
+.lede { line-height: 1.5; }
+
+/* ---- Colour with discipline ---- */
+:root { --void: #060707; }
+html, body { background: var(--void); }
+/* A faint film grain over everything: depth instead of glows. */
+body::after { content: ""; position: fixed; inset: 0; z-index: 90; pointer-events: none; opacity: .07; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"); background-size: 220px 220px; }
+/* Hero light: green and a touch of teal, no purple. */
+.light.l1 { background: radial-gradient(circle, rgba(57,255,106,.26) 0%, rgba(57,255,106,.07) 38%, transparent 66%); }
+.light.l2 { background: radial-gradient(circle, rgba(0,229,190,.12) 0%, rgba(0,229,190,.03) 42%, transparent 66%); }
+.light.l3 { background: radial-gradient(circle, rgba(20,60,40,.55) 0%, rgba(20,60,40,.14) 38%, transparent 66%); }
+/* The band: a dark strip, green outline type, white words; tilted less. */
+.band { background: #0b0c0d; transform: rotate(-2deg); border-block: 1px solid rgba(57,255,106,.35); box-shadow: 0 0 0 1px rgba(0,0,0,.6), 0 20px 50px rgba(0,0,0,.6); }
+.band b { color: #ECEDF0; }
+.band em { color: transparent; -webkit-text-stroke: 1.2px rgba(57,255,106,.85); }
+/* One accent: the chat bullets all green, the screenshots' glow green only. */
+.points li::before, .points li:nth-child(2)::before, .points li:nth-child(3)::before { background: var(--acid); box-shadow: 0 0 10px rgba(57,255,106,.6); }
+.chat-shot img { box-shadow: 0 0 70px rgba(57,255,106,.14); }
+.menu { background: radial-gradient(120% 60% at 0% 0%, rgba(57,255,106,.12), transparent 60%), #060707 !important; }
+/* Green-filled cards become dark ones with a green edge (green stays for what you press). */
+.card.acid { background: linear-gradient(180deg, #101312, #0b0d0c); color: var(--fg); border-color: rgba(57,255,106,.4); box-shadow: inset 0 1px 0 rgba(57,255,106,.15); }
+.card.acid h3, .card.acid p { color: var(--fg); }
+.card.acid p { color: #A9ACB6; }
+.card.acid .no { color: var(--acid); }
+.card.acid .btn-dark { background: var(--acid); color: #000; }
 </style>
 
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6426161266572963"
@@ -361,25 +622,25 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
 <body>
 <div class="grain" aria-hidden="true"></div>
 <div class="cursor" aria-hidden="true"></div>
-<button class="totop" type="button" aria-label="Voltar ao topo"><img src="assets/logo.png" alt="" width="52" height="52"></button>
+<button class="totop" type="button" aria-label="Voltar ao topo"><img src="/assets/logo.png" alt="" width="52" height="52"></button>
 
 <nav class="menu" id="menu" aria-label="Menu" aria-hidden="true">
   <button class="menu-x" type="button" aria-label="Fechar menu"></button>
   <a href="#funcoes" style="--i:0"><small>01</small>Funções</a>
   <a href="#chat" style="--i:1"><small>02</small>Chat</a>
   <a href="#video" style="--i:2"><small>03</small>Vídeo</a>
-  <a href="guias/" style="--i:3"><small>04</small>Guias</a>
+  <a href="/guias/" style="--i:3"><small>04</small>Guias</a>
   <a class="dl" href="https://github.com/evilgreenIvo/ivo-live/releases/latest" target="_blank" rel="noopener" style="--i:4">Baixar grátis</a>
 </nav>
 
 <aside class="rail" aria-label="Atalhos">
-  <a class="logo" href="#topo" aria-label="Topo"><img src="assets/logo.png" alt="" width="40" height="40"></a>
+  <a class="logo" href="#topo" aria-label="Topo"><img src="/assets/logo.png" alt="" width="40" height="40"></a>
   <nav>
     <a href="https://github.com/evilgreenIvo/ivo-live/releases/latest" target="_blank" rel="noopener">Baixar</a>
     <a href="#funcoes">Funções</a>
     <a href="#chat">Chat</a>
     <a href="#video">Vídeo</a>
-    <a href="guias/">Guias</a>
+    <a href="/guias/">Guias</a>
   </nav>
   <span class="scroll">Role para explorar</span>
 </aside>
@@ -389,24 +650,57 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
   <div class="lights" aria-hidden="true"><div class="light l1"></div><div class="light l2"></div><div class="light l3"></div></div>
   <div class="wrap">
     <div class="topbar">
-      <a class="brand" href="#topo"><img src="assets/logo.png" alt="" width="36" height="36">IVO LIVE</a>
+      <a class="brand" href="#topo"><img src="/assets/logo.png" alt="" width="36" height="36">IVO LIVE</a>
       <div class="top-right">
         <a class="top-dl" href="https://github.com/evilgreenIvo/ivo-live/releases/latest" target="_blank" rel="noopener">Baixar</a>
         <button class="menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><i></i><i></i><i></i></button>
       </div>
     </div>
   </div>
-  <div class="hero-in wrap" id="heroIn">
-    <span class="status"><i></i><span id="ver">Android // online</span></span>
-    <h1 class="title glow" aria-label="IVO LIVE"><span class="chrome">IVO</span><span class="chrome">LIVE</span></h1>
-    <p class="lede">O estúdio de live inteiro <b>no seu celular</b>. Cenas, mixer, chat da live, filtros e live no YouTube, Twitch e Kick, sem PC.</p>
-    <div class="cta">
-      <a class="btn btn-acid" href="https://github.com/evilgreenIvo/ivo-live/releases/latest" target="_blank" rel="noopener">Baixar grátis
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a>
-      <a class="btn btn-metal" href="#video">Ver o vídeo
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.6" fill="currentColor"/></svg></a>
+  <div class="hero-in hero-split wrap" id="heroIn">
+    <div class="hero-copy">
+      <span class="status"><i></i><span id="ver">Android // online</span></span>
+      <h1 class="title glow" aria-label="IVO LIVE"><span class="chrome">IVO</span><span class="chrome">LIVE</span></h1>
+      <p class="lede">O estúdio de live inteiro <b>no seu celular</b>. Cenas, mixer, chat da live, filtros e live no YouTube, Twitch e Kick, sem PC.</p>
+      <div class="cta">
+        <a class="btn btn-acid" href="https://github.com/evilgreenIvo/ivo-live/releases/latest" target="_blank" rel="noopener">Baixar grátis
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a>
+        <a class="btn btn-metal" href="#video">Ver o vídeo
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.6" fill="currentColor"/></svg></a>
+      </div>
+      <p class="free-note">⏳ <b>Teste agora 100% grátis.</b> Algumas funções vão ser pagas no futuro: aproveite enquanto está tudo liberado. Sem anúncios, sem conta.</p>
     </div>
-    <p class="free-note" style="margin-top:14px;font-size:.9rem;letter-spacing:.02em;opacity:.85">⏳ <b>Teste agora 100% grátis.</b> Algumas funções vão ser pagas no futuro: aproveite enquanto está tudo liberado. Sem anúncios, sem conta.</p>
+
+    <div class="stage" id="stage" aria-label="O IVO LIVE gravando um jogo num celular" role="img">
+      <div class="phone" id="phone">
+        <div class="face front">
+          <div class="screen">
+            <img src="/docs/tela-principal.png" alt="" width="540" height="1122" decoding="async">
+            <canvas class="game" id="game" aria-hidden="true"></canvas>
+            <div class="cam-tile" aria-hidden="true"><i></i></div>
+            <div class="chatfx" id="chatfx" aria-hidden="true"></div>
+            <span class="onair" aria-hidden="true"><i></i>AO VIVO</span>
+            <span class="rec" aria-hidden="true"><i></i><b id="recTime">00:00</b></span>
+            <span class="tx" aria-hidden="true"></span>
+            <div class="sheen" aria-hidden="true"></div>
+          </div>
+        </div>
+        <div class="face back" aria-hidden="true">
+          <div class="mesh"></div>
+          <div class="cam-bay">
+            <div class="c1"><i class="lens big"></i><i class="lens big bronze"></i></div>
+            <div class="c2"><i class="flash"></i><i class="lens small"></i><i class="chip"></i></div>
+            <div class="c3"><i class="vent"><svg class="vlogo" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="9" fill="#39FF6A"/><g fill="none" stroke="#39FF6A" stroke-width="6.5" stroke-linecap="round"><path d="M38 34a19 19 0 0 0 0 32"/><path d="M62 34a19 19 0 0 1 0 32"/><path d="M27 23a33 33 0 0 0 0 54"/><path d="M73 23a33 33 0 0 1 0 54"/></g></svg></i><i class="led-bar"></i></div>
+          </div>
+          <span class="mark">IVO LIVE</span>
+          <div class="backsheen"></div>
+          <div class="disc"><div class="ledglow"></div><div class="led"><i class="f1"></i><i class="f2"></i><i class="f3"></i><i class="bub"></i></div><div class="joints"></div><div class="metal"></div><i class="dot"></i></div>
+          <svg class="defs" width="0" height="0" aria-hidden="true" focusable="false"><filter id="liquid" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.025 0.045" numOctaves="2" seed="4"><animate attributeName="baseFrequency" dur="9s" values="0.025 0.045;0.04 0.022;0.025 0.045" repeatCount="indefinite"/></feTurbulence><feDisplacementMap in="SourceGraphic" scale="24" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
+        </div>
+        <div class="side r"></div><div class="side l"></div><div class="side t"></div><div class="side b"></div>
+      </div>
+      <div class="floor" aria-hidden="true"></div>
+    </div>
   </div>
 </header>
 
@@ -418,83 +712,41 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
 </div>
 
 <main>
-  <section class="sec first" id="funcoes" aria-labelledby="t-func">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div><span class="kicker">/// O que ele faz</span>
-        <h2 class="duo" id="t-func"><span>Tudo do OBS</span><span class="dim">No seu bolso</span></h2></div>
-        <p>Feito para quem joga e transmite pelo celular: sem PC, sem cabo, sem complicação.</p>
-      </div>
-      <div class="bento">
-        <article class="card wide reveal">
-          <div class="top">
-            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#39FF6A" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5 20.5 7.3v9.4L12 21.5 3.5 16.7V7.3z"/></svg>
-            <span class="no">01 // Cenas</span>
+  <section class="story" id="funcoes" aria-labelledby="t-func" style="--accent:#39FF6A">
+    <div class="wrap story-head reveal">
+      <span class="kicker">O que ele faz</span>
+      <h2 class="story-title" id="t-func">Tudo do OBS,<br><em>no seu bolso.</em></h2>
+    </div>
+    <div class="story-track" id="storyTrack" style="--n:6">
+      <div class="story-sticky">
+        <div class="story-glow" aria-hidden="true"></div>
+        <div class="story-grid wrap">
+          <ol class="story-steps" id="storySteps">
+          <li class="step on" data-i="0" data-accent="#39FF6A" data-finger="tap,38,59,38,59"><b class="big" aria-hidden="true">01</b><span class="no">01<i></i>Cenas</span><h3><span class="w" style="--k:0"><span>Monte</span></span> <span class="w" style="--k:1"><span>a</span></span> <span class="w" style="--k:2"><span>tela</span></span> <span class="w" style="--k:3"><span>da</span></span> <span class="w" style="--k:4"><span>sua</span></span> <span class="w" style="--k:5"><span>live</span></span></h3><p>Jogo, câmera, imagens, textos, chat e outro celular na mesma cena. Arraste, gire, recorte e troque de cena com um toque. Tem modelos prontos.</p></li>
+          <li class="step" data-i="1" data-accent="#5CFFB0" data-finger="drag,44,62,44,50"><b class="big" aria-hidden="true">02</b><span class="no">02<i></i>Som</span><h3><span class="w" style="--k:0"><span>Mixer</span></span> <span class="w" style="--k:1"><span>de</span></span> <span class="w" style="--k:2"><span>estúdio</span></span></h3><p>Volume de cada som, compressor, equalizador e volume em LUFS, como num estúdio de verdade.</p></li>
+          <li class="step" data-i="2" data-accent="#39FF6A" data-finger="tap,50,65,50,65"><b class="big" aria-hidden="true">03</b><span class="no">03<i></i>Outro celular</span><h3><span class="w" style="--k:0"><span>Celular</span></span> <span class="w" style="--k:1"><span>velho</span></span> <span class="w" style="--k:2"><span>vira</span></span> <span class="w" style="--k:3"><span>webcam</span></span></h3><p>A tela, a câmera ou o som de outro celular entram na sua live pelo Wi-Fi ou pelo cabo, em 1080p a 60 fps.</p></li>
+          <li class="step" data-i="3" data-accent="#5CFFB0" data-finger="tap,82,49,82,49"><b class="big" aria-hidden="true">04</b><span class="no">04<i></i>Controle remoto</span><h3><span class="w" style="--k:0"><span>Stream</span></span> <span class="w" style="--k:1"><span>Deck</span></span> <span class="w" style="--k:2"><span>no</span></span> <span class="w" style="--k:3"><span>bolso</span></span></h3><p>Um segundo celular vira painel de botões: cenas, mudo, pausa, efeitos sonoros e o chat para ler.</p></li>
+          <li class="step" data-i="4" data-accent="#39FF6A" data-finger="drag,40,35,66,35"><b class="big" aria-hidden="true">05</b><span class="no">05<i></i>Filtros</span><h3><span class="w" style="--k:0"><span>Visual</span></span> <span class="w" style="--k:1"><span>que</span></span> <span class="w" style="--k:2"><span>chama</span></span> <span class="w" style="--k:3"><span>atenção</span></span></h3><p>Chroma key, correção de cor, borda neon animada e perspectiva 3D para a câmera virar um cartão no canto.</p></li>
+          <li class="step" data-i="5" data-accent="#5CFFB0" data-finger="tap,76,61,76,61"><b class="big" aria-hidden="true">06</b><span class="no">06<i></i>Microfone</span><h3><span class="w" style="--k:0"><span>Voz</span></span> <span class="w" style="--k:1"><span>limpa</span></span> <span class="w" style="--k:2"><span>com</span></span> <span class="w" style="--k:3"><span>IA</span></span></h3><p>A redução de ruído com IA tira ventilador, teclado e barulho da rua, e deixa só a sua voz.</p></li>
+          </ol>
+          <div class="story-phone">
+            <div class="sp-float"><div class="sp-frame" id="spFrame"><div class="sp-screen" id="spScreen">
+              <img class="shot on" data-i="0" src="/docs/tela-principal.png" alt="Monte a tela da sua live" width="540" height="1122" decoding="async">
+              <img class="shot" data-i="1" src="/docs/fontes-mixer.png" alt="Mixer de estúdio" width="540" height="1122" decoding="async">
+              <img class="shot" data-i="2" src="/docs/enviar.png" alt="Celular velho vira webcam" width="540" height="1122" decoding="async">
+              <img class="shot" data-i="3" src="/docs/controle-botoes.png" alt="Stream Deck no bolso" width="540" height="1122" decoding="async">
+              <img class="shot" data-i="4" src="/docs/filtros.png" alt="Visual que chama atenção" width="540" height="1122" decoding="async">
+              <img class="shot" data-i="5" src="/docs/ia-microfone.png" alt="Voz limpa com IA" width="540" height="1122" decoding="async">
+              <span class="finger" id="finger" aria-hidden="true"><i></i></span>
+              <span class="sweep" aria-hidden="true"></span>
+            </div></div></div>
+            <div class="sp-rail" aria-hidden="true"><i id="spFill"></i></div>
+            <div class="sp-dots" id="spDots"><button class="dot on" type="button" data-i="0" aria-label="Monte a tela da sua live"></button><button class="dot" type="button" data-i="1" aria-label="Mixer de estúdio"></button><button class="dot" type="button" data-i="2" aria-label="Celular velho vira webcam"></button><button class="dot" type="button" data-i="3" aria-label="Stream Deck no bolso"></button><button class="dot" type="button" data-i="4" aria-label="Visual que chama atenção"></button><button class="dot" type="button" data-i="5" aria-label="Voz limpa com IA"></button></div>
           </div>
-          <h3>Monte a tela da sua live</h3>
-          <p>Jogo, câmera, imagem, texto, chat da live, página da web e outro celular na mesma cena. Arraste, gire, recorte e troque de cena com um toque. Tem modelos prontos.</p>
-        </article>
-        <article class="card reveal" style="--d:.08s">
-          <div class="top">
-            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#00E5FF" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 4v16M12 4v16M18 4v16"/><rect x="3.5" y="13" width="5" height="3" rx="1" fill="#0E0F12"/><rect x="9.5" y="7" width="5" height="3" rx="1" fill="#0E0F12"/><rect x="15.5" y="11" width="5" height="3" rx="1" fill="#0E0F12"/></svg>
-            <span class="no">02 // Som</span>
-          </div>
-          <h3>Mixer de estúdio</h3>
-          <p>Volume de cada som, redução de ruído com IA, compressor, equalizador e volume em LUFS.</p>
-        </article>
-        <article class="card reveal">
-          <div class="top">
-            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#B26BFF" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 4.5-9 4.5-9-4.5z"/><path d="m3 12 9 4.5 9-4.5"/><path d="m3 16.5 9 4.5 9-4.5"/></svg>
-            <span class="no">03 // Outro celular</span>
-          </div>
-          <h3>Celular velho vira webcam</h3>
-          <p>Tela, câmera ou som de outro celular pelo Wi-Fi ou cabo, em 1080p a 60 fps. Com fundo desfocado ou sem fundo.</p>
-        </article>
-        <article class="card acid wide reveal" style="--d:.08s">
-          <div class="top">
-            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>
-            <span class="no">04 // Controle remoto</span>
-          </div>
-          <div class="row">
-            <div><h3>Stream Deck no bolso</h3>
-            <p>Um segundo celular vira painel de botões: cenas, mudo, pausa, textos, efeitos sonoros, cronômetro, o chat para ler e a imagem da live.</p></div>
-            <a class="btn btn-dark" href="https://github.com/evilgreenIvo/ivo-live/releases/latest" target="_blank" rel="noopener">Baixar grátis</a>
-          </div>
-        </article>
-        <article class="card wide reveal">
-          <div class="top">
-            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#00E5FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/><circle cx="12" cy="12" r="3"/></svg>
-            <span class="no">05 // Filtros</span>
-          </div>
-          <h3>Visual que chama atenção</h3>
-          <p>Color Key, Luma Key, correção de cor, máscara com borda neon ou arco-íris animado e perspectiva 3D para a câmera virar um cartão no canto.</p>
-        </article>
-        <article class="card reveal" style="--d:.08s">
-          <div class="top">
-            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#39FF6A" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 18a8 8 0 1 1 16 0"/><path d="m12 18 4-6"/></svg>
-            <span class="no">06 // Desempenho</span>
-          </div>
-          <h3>Leve no meio do jogo</h3>
-          <p>Teste do celular e da internet que já escolhem a qualidade certa. Estatísticas ao vivo.</p>
-        </article>
-        <article class="card wide reveal">
-          <div class="top">
-            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#B26BFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 13.5V9.5M9.5 2.5h5M18.5 6.5l1.5-1.5"/></svg>
-            <span class="no">07 // Speedrun</span>
-          </div>
-          <h3>Cronômetro de speedrun</h3>
-          <p>Como o LiveSplit: escreva os trechos da corrida e marque cada split. Verde quando está na frente do seu recorde, vermelho quando está atrás, dourado no recorde novo. Dá para marcar pelo botão flutuante, sem sair do jogo, ou pelo controle remoto.</p>
-        </article>
-        <article class="card reveal" style="--d:.08s">
-          <div class="top">
-            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#39FF6A" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>
-            <span class="no">08 // Chat</span>
-          </div>
-          <h3>Chat da live na tela</h3>
-          <p>Twitch e YouTube juntos, sem login, com as suas cores. <a href="#chat" style="color:var(--acid)">Ver os visuais</a></p>
-        </article>
+        </div>
       </div>
     </div>
+    <div class="wrap story-more reveal"><span>E mais</span><b>Cronômetro de speedrun</b><b>Teste do celular e da internet</b><b>Estatísticas ao vivo</b><b>Live dupla deitada e em pé</b><b>13 idiomas</b></div>
   </section>
 
   <div class="wrap"><hr class="rule"></div>
@@ -503,22 +755,22 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
     <div class="wrap">
       <div class="chat-grid">
         <div class="reveal">
-          <span class="kicker">/// Chat da live</span><span class="new-tag">NOVO</span>
-          <h2 class="duo" id="t-chat"><span>Seu chat</span><span class="dim">Do seu jeito</span></h2>
+          <span class="kicker">Chat da live</span><span class="new-tag">NOVO</span>
+          <h2 class="duo" id="t-chat">Seu chat, <em>do seu jeito.</em></h2>
           <ul class="points">
             <li>O app lê o chat da Twitch e do YouTube sozinho. Não precisa entrar com a conta: é só escrever o canal, e o YouTube acha a live quando ela começa.</li>
             <li>Fundo transparente, uma caixa ou balões. Cor e transparência do fundo, cor e tamanho do texto, contorno e a cor dos nomes, com prévia na hora.</li>
             <li>Emotes, Super Chat em destaque, marca de moderador e membro, e opção de esconder comandos e robôs. No controle remoto, o chat aparece grande para você ler durante a live.</li>
           </ul>
         </div>
-        <figure class="chat-shot reveal" style="--d:.1s"><img src="assets/chat-painel.png" alt="Painel do Chat da live com a prévia das mensagens" loading="lazy" width="540" height="1122"><img src="assets/chat-ajustes.png" alt="Ajustes do chat: fundo, cores, tamanho e nomes" loading="lazy" width="540" height="1122"></figure>
+        <figure class="chat-shot reveal" style="--d:.1s"><img src="/assets/chat-painel.png" alt="Painel do Chat da live com a prévia das mensagens" loading="lazy" width="540" height="1122"><img src="/assets/chat-ajustes.png" alt="Ajustes do chat: fundo, cores, tamanho e nomes" loading="lazy" width="540" height="1122"></figure>
       </div>
       <div class="themes" aria-label="Visuais prontos do chat">
-        <figure class="reveal"><img src="assets/chat-neon.png" alt="Chat no visual Neon" loading="lazy" width="422" height="477"><figcaption>Neon</figcaption></figure>
-        <figure class="reveal" style="--d:.06s"><img src="assets/chat-minimal.png" alt="Chat no visual Minimal, sem fundo" loading="lazy" width="422" height="477"><figcaption>Minimal</figcaption></figure>
-        <figure class="reveal" style="--d:.12s"><img src="assets/chat-caixa.png" alt="Chat no visual Caixa" loading="lazy" width="422" height="477"><figcaption>Caixa</figcaption></figure>
-        <figure class="reveal" style="--d:.18s"><img src="assets/chat-claro.png" alt="Chat no visual Claro" loading="lazy" width="422" height="477"><figcaption>Claro</figcaption></figure>
-        <figure class="reveal" style="--d:.24s"><img src="assets/chat-roxo.png" alt="Chat no visual Roxo" loading="lazy" width="422" height="477"><figcaption>Roxo</figcaption></figure>
+        <figure class="reveal"><img src="/assets/chat-neon.png" alt="Chat no visual Neon" loading="lazy" width="422" height="477"><figcaption>Neon</figcaption></figure>
+        <figure class="reveal" style="--d:.06s"><img src="/assets/chat-minimal.png" alt="Chat no visual Minimal, sem fundo" loading="lazy" width="422" height="477"><figcaption>Minimal</figcaption></figure>
+        <figure class="reveal" style="--d:.12s"><img src="/assets/chat-caixa.png" alt="Chat no visual Caixa" loading="lazy" width="422" height="477"><figcaption>Caixa</figcaption></figure>
+        <figure class="reveal" style="--d:.18s"><img src="/assets/chat-claro.png" alt="Chat no visual Claro" loading="lazy" width="422" height="477"><figcaption>Claro</figcaption></figure>
+        <figure class="reveal" style="--d:.24s"><img src="/assets/chat-roxo.png" alt="Chat no visual Roxo" loading="lazy" width="422" height="477"><figcaption>Roxo</figcaption></figure>
       </div>
     </div>
   </section>
@@ -529,8 +781,8 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
     <div class="wrap">
       <div class="chat-grid">
         <div class="reveal">
-          <span class="kicker">/// IVO Mirror</span><span class="new-tag">NOVO</span>
-          <h2 class="duo" id="t-iphone"><span>Tela do iPhone</span><span class="dim">Na sua live</span></h2>
+          <span class="kicker">IVO Mirror</span><span class="new-tag">NOVO</span>
+          <h2 class="duo" id="t-iphone">Tela do iPhone <em>na sua live.</em></h2>
           <ul class="points">
             <li>Instale o app IVO Mirror num celular Android. No iPhone, use o Espelhar Tela de sempre (Central de Controle): a imagem e o som entram no IVO LIVE como a fonte Outro celular.</li>
             <li>Funciona no mesmo celular da live ou em outro na mesma Wi-Fi. A moldura 16:9 deixa você girar o iPhone sem a fonte piscar nem mudar de tamanho.</li>
@@ -541,7 +793,7 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
             <a class="btn btn-line" href="https://github.com/evilgreenIvo/ivo-mirror" target="_blank" rel="noopener">Código aberto</a>
           </div>
         </div>
-        <figure class="chat-shot reveal" style="--d:.1s"><img src="assets/mirror-tela.png" alt="Tela do IVO Mirror com o botão Ligar e a qualidade da imagem" loading="lazy" width="540" height="1095"><img src="assets/mirror-ajustes.png" alt="Ajustes do IVO Mirror: moldura 16:9 fixa, código PIN e ligar ao abrir" loading="lazy" width="540" height="1095"></figure>
+        <figure class="chat-shot reveal" style="--d:.1s"><img src="/assets/mirror-tela.png" alt="Tela do IVO Mirror com o botão Ligar e a qualidade da imagem" loading="lazy" width="540" height="1095"><img src="/assets/mirror-ajustes.png" alt="Ajustes do IVO Mirror: moldura 16:9 fixa, código PIN e ligar ao abrir" loading="lazy" width="540" height="1095"></figure>
       </div>
     </div>
   </section>
@@ -552,18 +804,18 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
     <div class="wrap">
       <div class="video-grid">
         <div class="reel reveal">
-          <video id="promo" src="assets/promo.mp4" poster="assets/promo-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Vídeo mostrando o IVO LIVE"></video>
+          <video id="promo" src="/assets/promo.mp4" poster="/assets/promo-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Vídeo mostrando o IVO LIVE"></video>
           <button class="btn btn-acid" id="sound" type="button" aria-pressed="false">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M17 9a4 4 0 0 1 0 6"/></svg><span>Ligar som</span></button>
         </div>
         <div class="reveal" style="--d:.1s">
-          <span class="kicker">/// Veja em ação</span>
-          <h2 class="duo" id="t-video"><span>Grave</span><span class="dim">Transmita</span></h2>
+          <span class="kicker">Veja em ação</span>
+          <h2 class="duo" id="t-video">Grave e <em>transmita.</em></h2>
           <ul class="points">
             <li>Live no YouTube, Twitch e Kick, ou para um servidor seu e para o OBS do PC.</li>
             <li>Grave e faça live ao mesmo tempo, com botões separados.</li>
             <li>Vídeo deitado ou em pé, para Shorts, Reels e TikTok, ou os dois ao mesmo tempo (live dupla, em celulares topo de linha).</li>
-            <li>Na live dupla no YouTube, você pode (se quiser) <b>Entrar com YouTube</b>: o app cria a live deitada e a em pé no seu canal sozinho, sem copiar chave. <a href="privacidade.html" style="color:var(--acid)">Como seus dados são usados</a></li>
+            <li>Na live dupla no YouTube, você pode (se quiser) <b>Entrar com YouTube</b>: o app cria a live deitada e a em pé no seu canal sozinho, sem copiar chave. <a href="/privacidade.html" style="color:var(--acid)">Como seus dados são usados</a></li>
           </ul>
         </div>
       </div>
@@ -575,22 +827,22 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
   <section class="sec" aria-labelledby="t-tela">
     <div class="wrap">
       <div class="sec-head reveal">
-        <div><span class="kicker">/// Telas do app</span>
-        <h2 class="duo" id="t-tela"><span>Por dentro</span><span class="dim">Do estúdio</span></h2></div>
+        <div><span class="kicker">Telas do app</span>
+        <h2 class="duo" id="t-tela">Por dentro <em>do estúdio.</em></h2></div>
         <p>Cenas e prévia, o mixer de som e o controle remoto mostrando a live.</p>
       </div>
       <div class="collage">
-        <figure class="reveal"><img src="docs/tela-principal.png" alt="Tela principal com prévia e cenas" loading="lazy" width="540" height="1122"><figcaption>Cenas</figcaption></figure>
-        <figure class="reveal" style="--d:.1s"><img src="docs/fontes-mixer.png" alt="Fontes e mixer de som" loading="lazy" width="540" height="1122"><figcaption>Mixer</figcaption></figure>
-        <figure class="reveal" style="--d:.2s"><img src="docs/controle.png" alt="Controle remoto mostrando a live" loading="lazy" width="540" height="1122"><figcaption>Controle</figcaption></figure>
+        <figure class="reveal"><img src="/docs/tela-principal.png" alt="Tela principal com prévia e cenas" loading="lazy" width="540" height="1122"><figcaption>Cenas</figcaption></figure>
+        <figure class="reveal" style="--d:.1s"><img src="/docs/fontes-mixer.png" alt="Fontes e mixer de som" loading="lazy" width="540" height="1122"><figcaption>Mixer</figcaption></figure>
+        <figure class="reveal" style="--d:.2s"><img src="/docs/controle.png" alt="Controle remoto mostrando a live" loading="lazy" width="540" height="1122"><figcaption>Controle</figcaption></figure>
       </div>
     </div>
   </section>
 
   <section class="sec" aria-labelledby="t-num">
     <div class="wrap">
-      <div class="reveal"><span class="kicker">/// Em números</span>
-      <h2 class="duo" id="t-num"><span>Qualidade</span><span class="dim">De verdade</span></h2></div>
+      <div class="reveal"><span class="kicker">Em números</span>
+      <h2 class="duo" id="t-num">Qualidade <em>de verdade.</em></h2></div>
       <div class="specs">
         <div class="spec reveal"><b class="chrome">1440p</b><span>Resolução máxima da gravação e da live</span></div>
         <div class="spec reveal" style="--d:.06s"><b class="chrome">120</b><span>Quadros por segundo na gravação, nos celulares que aguentam</span></div>
@@ -602,8 +854,8 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
 
   <section class="sec" aria-labelledby="t-inst">
     <div class="wrap">
-      <div class="reveal"><span class="kicker">/// Como instalar</span>
-      <h2 class="duo" id="t-inst"><span>Em 1 minuto</span><span class="dim">Sem conta</span></h2></div>
+      <div class="reveal"><span class="kicker">Como instalar</span>
+      <h2 class="duo" id="t-inst">Em 1 minuto, <em>sem conta.</em></h2></div>
       <ol class="steps">
         <li class="reveal"><b>Baixe o APK</b><span>No botão "Baixar grátis", toque no arquivo IvoLive .apk da versão mais nova.</span></li>
         <li class="reveal" style="--d:.08s"><b>Abra o arquivo</b><span>Se o Android pedir, permita "instalar apps desta fonte".</span></li>
@@ -618,7 +870,7 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
         <article class="card reveal" style="--d:.08s">
           <div class="top"><span class="no">// Privacidade</span></div>
           <h3>Só no seu celular</h3>
-          <p>Não pede conta, sem anúncios e sem rastreamento. Gravações, cenas e chaves de live ficam no aparelho, e o relatório só sai se você mandar. O Entrar com YouTube (opcional) só cria e encerra as suas lives. <a href="privacidade.html" style="color:var(--acid)">Política de privacidade</a> · <a href="termos.html" style="color:var(--acid)">Termos de uso</a></p>
+          <p>Não pede conta, sem anúncios e sem rastreamento. Gravações, cenas e chaves de live ficam no aparelho, e o relatório só sai se você mandar. O Entrar com YouTube (opcional) só cria e encerra as suas lives. <a href="/privacidade.html" style="color:var(--acid)">Política de privacidade</a> · <a href="/termos.html" style="color:var(--acid)">Termos de uso</a></p>
         </article>
       </div>
     </div>
@@ -639,12 +891,12 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
 <footer>
   <div class="wrap">
     <div class="foot">
-      <a href="guias/">Guias passo a passo</a>
+      <a href="/guias/">Guias passo a passo</a>
       <a href="https://github.com/evilgreenIvo/ivo-live/releases" target="_blank" rel="noopener">Todas as versões</a>
       <a href="https://github.com/evilgreenIvo/ivo-live/issues" target="_blank" rel="noopener">Relatar problema</a>
       <a href="https://github.com/evilgreenIvo/ivo-live/blob/main/NOTICE.md" target="_blank" rel="noopener">Créditos</a>
-      <a href="privacidade.html">Privacidade</a>
-      <a href="termos.html">Termos de uso</a>
+      <a href="/privacidade.html">Privacidade</a>
+      <a href="/termos.html">Termos de uso</a>
     </div>
     <p class="legal">© IVO LIVE · Feito no Brasil. "OBS", "Stream Deck", "iPhone", "AirPlay" e "YouTube" são marcas dos seus donos; o IVO LIVE não tem ligação com eles.</p>
   </div>
@@ -805,6 +1057,164 @@ footer { padding-block: 30px 40px; border-top: 1px solid var(--line); }
   menu.querySelector('.menu-x').addEventListener('click', function () { set(false); });
   menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { set(false); }); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && menu.classList.contains('open')) set(false); });
+})();
+</script>
+
+<script>
+/* The 3D phone: floats, turns with the page and the pointer, flips on a tap; its screen plays a little
+   neon racing game in the preview, the live's clock and chat (all drawn here: no game footage). */
+(function () {
+  var stage = document.getElementById('stage'), phone = document.getElementById('phone');
+  if (!stage || !phone) return;
+  var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var qa = /ang=(-?[0-9]+)/.exec(location.search), qt = /tilt=(-?[0-9]+)/.exec(location.search);
+  var turn = /costas/.test(location.search) ? 180 : (/lado/.test(location.search) ? 106 : (qa ? +qa[1] : 0)), tilt = qt ? +qt[1] : 0, vel = 0, drag = null, px = 0, py = 0, sp = 0, t0 = performance.now(), visible = true;
+  new IntersectionObserver(function (es) { visible = es[0].isIntersecting; }).observe(stage);
+  // The rounded corners' edge: 6 small pieces per corner, each turned to face out along the curve.
+  function edges() {
+    Array.prototype.forEach.call(phone.querySelectorAll('.side.k'), function (e) { e.remove(); });
+    var W = stage.offsetWidth, H = stage.offsetHeight, R = parseFloat(getComputedStyle(stage).getPropertyValue('--R')) || 26, n = 6, a = W / 2, b = H / 2;
+    [[a - R, -(b - R), -90], [a - R, b - R, 0], [-(a - R), b - R, 90], [-(a - R), -(b - R), 180]].forEach(function (c) {
+      for (var k = 0; k < n; k++) {
+        var step = 90 / n, mid = (c[2] + step * (k + .5)) * Math.PI / 180, half = step / 2 * Math.PI / 180;
+        var len = 2 * R * Math.sin(half) + 1.4, r = R * Math.cos(half);
+        var e = document.createElement('div'); e.className = 'side k';
+        e.style.height = len + 'px'; e.style.top = 'calc(50% - ' + (len / 2) + 'px)';
+        e.style.transform = 'translate(' + (c[0] + r * Math.cos(mid)).toFixed(2) + 'px,' + (c[1] + r * Math.sin(mid)).toFixed(2) + 'px) rotateZ(' + (mid * 180 / Math.PI).toFixed(2) + 'deg) rotateY(90deg)';
+        phone.appendChild(e);
+      }
+    });
+  }
+  edges(); addEventListener('resize', edges);
+  // Turn it with a finger or the mouse: sideways turns it all the way round, up and down tilts it a bit.
+  // (On a phone, up and down still scrolls the page.)
+  stage.addEventListener('pointerdown', function (e) {
+    drag = { x: e.clientX, y: e.clientY, id: e.pointerId, last: performance.now() };
+    stage.setPointerCapture(e.pointerId); stage.classList.add('grabbing'); vel = 0;
+  });
+  stage.addEventListener('pointermove', function (e) {
+    if (!drag || e.pointerId !== drag.id) return;
+    var dx = e.clientX - drag.x, dy = e.clientY - drag.y, now = performance.now();
+    turn += dx * .55; vel = dx * .55 / Math.max(8, now - drag.last) * 16;
+    if (e.pointerType === 'mouse') tilt = Math.max(-35, Math.min(35, tilt - dy * .35));
+    drag.x = e.clientX; drag.y = e.clientY; drag.last = now;
+  });
+  function letGo(e) { if (!drag || (e && e.pointerId !== drag.id)) return; drag = null; stage.classList.remove('grabbing'); }
+  stage.addEventListener('pointerup', letGo); stage.addEventListener('pointercancel', letGo); stage.addEventListener('lostpointercapture', letGo);
+  window.addEventListener('pointermove', function (e) {
+    if (drag || e.pointerType !== 'mouse') return;
+    px = (e.clientX / innerWidth - .5) * 2; py = (e.clientY / innerHeight - .5) * 2;
+  }, { passive: true });
+  function frame(now) {
+    requestAnimationFrame(frame);
+    if (!visible) return;
+    var t = (now - t0) / 1000;
+    var target = Math.min(1, scrollY / Math.max(1, innerHeight * .9));
+    sp += (target - sp) * .08;
+    if (!drag && Math.abs(vel) > .02) { turn += vel; vel *= .94; }
+    if (!drag && !qt) tilt *= .96;
+    var hands = drag ? 0 : 1;
+    var ry = -16 + (calm ? 0 : Math.sin(t * .6) * 5 * hands) + px * 9 * hands + sp * 34 + turn;
+    var rx = 6 + (calm ? 0 : Math.sin(t * .8) * 1.5 * hands) - py * 5 * hands - sp * 6 + tilt;
+    var fy = calm ? 0 : Math.sin(t * 1.1) * 8;
+    phone.style.setProperty('--ry', ry.toFixed(2) + 'deg');
+    phone.style.setProperty('--rx', rx.toFixed(2) + 'deg');
+    phone.style.setProperty('--rz', (calm ? 0 : Math.sin(t * .5) * 1.2).toFixed(2) + 'deg');
+    phone.style.setProperty('--fy', fy.toFixed(1) + 'px');
+    phone.style.setProperty('--sx', ((ry + 16) * 1.6).toFixed(1) + '%');
+    stage.style.setProperty('--fs', (1 - fy / 60).toFixed(3));
+  }
+  requestAnimationFrame(frame);
+
+  // The live's clock.
+  var rec = document.getElementById('recTime'), start = Date.now() - 754000;
+  setInterval(function () {
+    var s = Math.floor((Date.now() - start) / 1000);
+    rec.textContent = String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
+  }, 1000);
+
+  // Chat lines coming in.
+  var box = document.getElementById('chatfx'), lines = [
+    ['#39FF6A', 'Lu_Speedrun', 'que jogada!!'], ['#00E5FF', 'Kleber', 'recorde hoje?'], ['#FFC53D', 'Ana', 'R$ 10 bora!'],
+    ['#ff6bb5', 'gamer_br', 'GG 🔥'], ['#b26bff', 'Ivo', 'valeu galera'], ['#39FF6A', 'mod', 'segue o canal']];
+  var li = 0;
+  setInterval(function () {
+    if (!visible) return;
+    var l = lines[li++ % lines.length], e = document.createElement('span');
+    e.innerHTML = '<b style="color:' + l[0] + '">' + l[1] + '</b>' + l[2];
+    box.appendChild(e);
+    while (box.children.length > 3) box.removeChild(box.firstChild);
+  }, 1500);
+
+  // The game: a neon road running to a striped sunset, a car weaving on it.
+  var cv = document.getElementById('game'), c = cv.getContext('2d');
+  function size() { var r = cv.getBoundingClientRect(), d = Math.min(2, devicePixelRatio || 1); cv.width = Math.max(1, r.width * d); cv.height = Math.max(1, r.height * d); }
+  size(); addEventListener('resize', size);
+  function draw(now) {
+    requestAnimationFrame(draw);
+    if (!visible) return;
+    var w = cv.width, h = cv.height, t = now / 1000, hz = h * .46;
+    var sky = c.createLinearGradient(0, 0, 0, hz);
+    sky.addColorStop(0, '#12052a'); sky.addColorStop(.6, '#5b1a6e'); sky.addColorStop(1, '#ff6a3d');
+    c.fillStyle = sky; c.fillRect(0, 0, w, hz);
+    var sr = h * .26, sx = w * .5, sy = hz;
+    var sun = c.createLinearGradient(0, sy - sr, 0, sy);
+    sun.addColorStop(0, '#ffe46b'); sun.addColorStop(1, '#ff3d7f');
+    c.save(); c.beginPath(); c.arc(sx, sy, sr, Math.PI, 0); c.clip(); c.fillStyle = sun; c.fillRect(sx - sr, sy - sr, sr * 2, sr);
+    c.fillStyle = '#5b1a6e'; for (var k = 0; k < 6; k++) { var yy = sy - sr * (.12 + k * .16); c.fillRect(sx - sr, yy, sr * 2, sr * .035 * (k + 1)); }
+    c.restore();
+    c.fillStyle = '#07020f'; c.fillRect(0, hz, w, h - hz);
+    c.strokeStyle = 'rgba(0,229,255,.75)'; c.lineWidth = Math.max(1, h / 140);
+    for (var i = -10; i <= 10; i++) { c.beginPath(); c.moveTo(w / 2 + i * w * .02, hz); c.lineTo(w / 2 + i * w * .22, h); c.stroke(); }
+    var off = (t * 1.6) % 1;
+    for (var j = 0; j < 12; j++) { var p = (j + off) / 12, y = hz + (h - hz) * p * p; c.globalAlpha = .25 + p * .75; c.beginPath(); c.moveTo(0, y); c.lineTo(w, y); c.stroke(); }
+    c.globalAlpha = 1;
+    var cx = w / 2 + Math.sin(t * 1.3) * w * .12, cy = h * .86, cw = w * .13, ch = h * .12;
+    c.fillStyle = '#ff2d6a'; c.shadowColor = '#ff2d6a'; c.shadowBlur = h / 14;
+    c.beginPath(); c.moveTo(cx - cw / 2, cy + ch / 2); c.lineTo(cx - cw * .38, cy - ch / 2); c.lineTo(cx + cw * .38, cy - ch / 2); c.lineTo(cx + cw / 2, cy + ch / 2); c.closePath(); c.fill();
+    c.shadowBlur = 0; c.fillStyle = '#ffe46b'; c.fillRect(cx - cw * .42, cy + ch * .2, cw * .16, ch * .16); c.fillRect(cx + cw * .26, cy + ch * .2, cw * .16, ch * .16);
+  }
+  requestAnimationFrame(draw);
+})();
+</script>
+
+<script>
+/* The features: the step follows the scroll through the track. Each change brings the screen in, sweeps
+   a light, pops the phone, turns it the other way, recolours the section and moves the finger. */
+(function () {
+  var track = document.getElementById('storyTrack'); if (!track) return;
+  var sec = track.closest('.story'), steps = track.querySelectorAll('.step'), shots = track.querySelectorAll('.shot'), dots = track.querySelectorAll('.dot');
+  var frame = document.getElementById('spFrame'), screen = document.getElementById('spScreen'), finger = document.getElementById('finger'), fill = document.getElementById('spFill');
+  var n = steps.length, now = -1;
+  function restart(el, cls) { el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); }
+  function show(i) {
+    if (i === now) return;
+    var was = now; now = i;
+    Array.prototype.forEach.call(steps, function (e, k) { e.classList.toggle('on', k === i); });
+    Array.prototype.forEach.call(dots, function (e, k) { e.classList.toggle('on', k === i); });
+    Array.prototype.forEach.call(shots, function (e, k) { e.classList.remove('out'); if (k === i) restart(e, 'on'); else e.classList.remove('on'); });
+    if (was >= 0) { shots[was].classList.add('out'); restart(screen, 'swept'); restart(frame, 'pop'); }
+    frame.style.setProperty('--tilt', (i % 2 ? 10 : -10) + 'deg');
+    sec.style.setProperty('--accent', steps[i].dataset.accent);
+    var f = steps[i].dataset.finger.split(','), w = screen.offsetWidth, h = screen.offsetHeight;
+    finger.style.setProperty('--fx', f[1] + '%'); finger.style.setProperty('--fy', f[2] + '%');
+    finger.style.setProperty('--dx', ((f[3] - f[1]) / 100 * w) + 'px'); finger.style.setProperty('--dy', ((f[4] - f[2]) / 100 * h) + 'px');
+    finger.classList.remove('tap', 'drag'); void finger.offsetWidth; finger.classList.add(f[0]);
+  }
+  function onScroll() {
+    var r = track.getBoundingClientRect(), span = track.offsetHeight - innerHeight;
+    var p = Math.min(.9999, Math.max(0, -r.top / Math.max(1, span)));
+    fill.style.setProperty('--prog', p.toFixed(4));
+    show(Math.floor(p * n));
+  }
+  addEventListener('scroll', function () { requestAnimationFrame(onScroll); }, { passive: true });
+  addEventListener('resize', onScroll); onScroll();
+  Array.prototype.forEach.call(dots, function (d, k) {
+    d.addEventListener('click', function () {
+      var top = track.getBoundingClientRect().top + scrollY, span = track.offsetHeight - innerHeight;
+      scrollTo({ top: top + span * (k + .5) / n, behavior: 'smooth' });
+    });
+  });
 })();
 </script>
 </body>
